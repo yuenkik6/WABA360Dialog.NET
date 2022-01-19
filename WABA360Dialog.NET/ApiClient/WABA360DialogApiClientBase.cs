@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
-using Newtonsoft.Json;
 using WABA360Dialog.ApiClient.Exceptions;
 using WABA360Dialog.ApiClient.Interfaces;
 using WABA360Dialog.ApiClient.Payloads;

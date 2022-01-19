@@ -37,7 +37,7 @@ namespace WABA360Dialog.Common.Helpers
 
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 result = default;
 
