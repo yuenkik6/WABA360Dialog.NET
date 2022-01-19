@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WABA360Dialog.NET", "WABA360Dialog.NET\WABA360Dialog.NET.csproj", "{1871A81D-8AF1-4DED-920A-6D186B53C4D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WABA360Dialog.NET.Example", "WABA360Dialog.NET.Example\WABA360Dialog.NET.Example.csproj", "{B5F11316-8A53-4B04-BEA9-7DBBE5167FCB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{1871A81D-8AF1-4DED-920A-6D186B53C4D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1871A81D-8AF1-4DED-920A-6D186B53C4D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1871A81D-8AF1-4DED-920A-6D186B53C4D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5F11316-8A53-4B04-BEA9-7DBBE5167FCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5F11316-8A53-4B04-BEA9-7DBBE5167FCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5F11316-8A53-4B04-BEA9-7DBBE5167FCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5F11316-8A53-4B04-BEA9-7DBBE5167FCB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
