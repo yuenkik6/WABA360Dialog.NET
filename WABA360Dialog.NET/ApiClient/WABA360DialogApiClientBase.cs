@@ -29,44 +29,44 @@ namespace WABA360Dialog.ApiClient
             BasePath = basePath;
         }
 
-        public async Task<GetWebhookUrlResponse> GetWebhookUrlAsync()
+        public async Task<GetWebhookUrlResponse> GetWebhookUrlAsync(CancellationToken cancellationToken = default)
         {
-            return await MakeHttpRequestAsync(new GetWebhookUrlRequest());
+            return await MakeHttpRequestAsync(new GetWebhookUrlRequest(), cancellationToken);
         }
 
-        public async Task<SetWebhookUrlResponse> SetWebhookUrlAsync(string url, Dictionary<string, string> headers)
+        public async Task<SetWebhookUrlResponse> SetWebhookUrlAsync(string url, Dictionary<string, string> headers, CancellationToken cancellationToken = default)
         {
-            return await MakeHttpRequestAsync(new SetWebhookUrlRequest(url, headers));
+            return await MakeHttpRequestAsync(new SetWebhookUrlRequest(url, headers), cancellationToken);
         }
 
-        public async Task<CheckContactsResponse> CheckContactsAsync(IEnumerable<string> contacts, Blocking blocking = Blocking.no_wait, bool forceCheck = false)
+        public async Task<CheckContactsResponse> CheckContactsAsync(IEnumerable<string> contacts, Blocking blocking = Blocking.no_wait, bool forceCheck = false, CancellationToken cancellationToken = default)
         {
-            return await MakeHttpRequestAsync(new CheckContactsRequest(contacts, blocking, forceCheck));
+            return await MakeHttpRequestAsync(new CheckContactsRequest(contacts, blocking, forceCheck), cancellationToken);
         }
 
-        public async Task<SendMessageResponse> SendMessageAsync(MessageObject message)
+        public async Task<SendMessageResponse> SendMessageAsync(MessageObject message, CancellationToken cancellationToken = default)
         {
-            return await MakeHttpRequestAsync(new SendMessageRequest(message));
+            return await MakeHttpRequestAsync(new SendMessageRequest(message), cancellationToken);
         }
 
-        public async Task<SendMessageResponse> SendMessageAsync(object message)
+        public async Task<SendMessageResponse> SendMessageAsync(object message, CancellationToken cancellationToken = default)
         {
-            return await MakeHttpRequestAsync(new SendMessageDynamicRequest(message));
+            return await MakeHttpRequestAsync(new SendMessageDynamicRequest(message), cancellationToken);
         }
 
-        public async Task<GetMediaResponse> GetMediaAsync(string mediaId)
+        public async Task<GetMediaResponse> GetMediaAsync(string mediaId, CancellationToken cancellationToken = default)
         {
-            return await MakeFileDownloadHttpRequestAsync(new GetMediaRequest(mediaId));
+            return await MakeFileDownloadHttpRequestAsync(new GetMediaRequest(mediaId), cancellationToken);
         }
 
-        public async Task<UploadMediaResponse> UploadMediaAsync(byte[] fileBytes, string contentType)
+        public async Task<UploadMediaResponse> UploadMediaAsync(byte[] fileBytes, string contentType, CancellationToken cancellationToken = default)
         {
-            return await MakeHttpRequestAsync(new UploadMediaRequest(fileBytes, contentType));
+            return await MakeHttpRequestAsync(new UploadMediaRequest(fileBytes, contentType), cancellationToken);
         }
 
-        public async Task<CreateTemplateResponse> CreateTemplateAsync(CreateTemplateObject template)
+        public async Task<CreateTemplateResponse> CreateTemplateAsync(CreateTemplateObject template, CancellationToken cancellationToken = default)
         {
-            return await MakeHttpRequestAsync(new CreateTemplateRequest(template));
+            return await MakeHttpRequestAsync(new CreateTemplateRequest(template), cancellationToken);
         }
 
         public async Task<UpdateBusinessProfileResponse> UpdateBusinessProfileAsync(
@@ -74,19 +74,20 @@ namespace WABA360Dialog.ApiClient
             IEnumerable<string> websites,
             string email,
             string description,
-            string address)
+            string address,
+            CancellationToken cancellationToken = default)
         {
-            return await MakeHttpRequestAsync(new UpdateBusinessProfileRequest(vertical, websites, email, description, address));
+            return await MakeHttpRequestAsync(new UpdateBusinessProfileRequest(vertical, websites, email, description, address), cancellationToken);
         }
 
-        public async Task<UpdateProfileInfoAboutTextResponse> UpdateProfileInfoAboutTextAsync(string aboutText)
+        public async Task<UpdateProfileInfoAboutTextResponse> UpdateProfileInfoAboutTextAsync(string aboutText, CancellationToken cancellationToken = default)
         {
-            return await MakeHttpRequestAsync(new UpdateProfileInfoAboutTextRequest(aboutText));
+            return await MakeHttpRequestAsync(new UpdateProfileInfoAboutTextRequest(aboutText), cancellationToken);
         }
 
-        public async Task<UpdateProfileInfoPhotoResponse> UpdateProfileInfoPhotoAsync(byte[] fileBytes, string contentType)
+        public async Task<UpdateProfileInfoPhotoResponse> UpdateProfileInfoPhotoAsync(byte[] fileBytes, string contentType, CancellationToken cancellationToken = default)
         {
-            return await MakeHttpRequestAsync(new UpdateProfileInfoPhotoRequest(fileBytes, contentType));
+            return await MakeHttpRequestAsync(new UpdateProfileInfoPhotoRequest(fileBytes, contentType), cancellationToken);
         }
 
         protected virtual async Task<TResponse> MakeHttpRequestAsync<TResponse>(ClientApiRequestBase<TResponse> request, CancellationToken cancellationToken = default) where TResponse : ClientApiResponseBase, new()
@@ -125,7 +126,7 @@ namespace WABA360Dialog.ApiClient
 
             if (!httpResponse.IsSuccessStatusCode)
                 throw new ApiClientException(response.Error, response.Meta, urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
-            
+
             return response;
         }
 
