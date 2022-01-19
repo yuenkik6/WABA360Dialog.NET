@@ -25,7 +25,7 @@ var clientBalanceResponse = await partnerClient.GetClientBalanceAsync("client-id
 
 ```
 
-### Available Functions
+## Available Functions
 All existing API provided by 360 Dialog are wrapped as functions for corresponding client
 
 - **WABA360DialogApiClient.cs / WABA360DialogApiSandboxClient.cs** (WhatsApp API Business API)
@@ -58,7 +58,7 @@ Task<UpdateClientResponse> UpdateClientAsync(string clientId, string partnerPayl
 Task<TokenResponse> RequestOAuthTokenAsync(string username, string password, CancellationToken cancellationToken = default);
 ```
 
-### Helpers
+## Helpers
 
 -  **MessageObjectFactory.cs** for creating common **MessageObject** in WABA360DialogApiClient.SendMessage()
 ```c#
@@ -77,8 +77,37 @@ MessageObjectFactory.CreateTemplateMessage(string whatsAppId, string templateNam
 MessageObjectFactory.CreateInteractiveMessage(string whatsappId, InteractiveObject interactiveObject);
 ```
 
+## Enums
+The Enums definition, value, converters are located at these folders:
 
-### Exceptions
+```c#
+ApiClient\Payloads\Converters\...
+ApiClient\Payloads\Enums\...
+
+PartnerClient\Payloads\Converters\...
+PartnerClient\Payloads\Enums\...
+
+Common\Converters\...
+Common\Enums\...
+```
+
+However, once Facebook updated the enums string value may cause issues during JSON deserialize.
+
+## Webhook Models
+Webhook Models classes (Recommend using Newtonsoft.Json >= 13.01 for JSON deserialization):
+
+- WhatsApp API Business API
+```c#
+ApiClient\Payloads\Models\WABA360DialogWebhookPayload.cs
+```
+
+- 360Dialog Partner API
+```c#
+PartnerClient\Payloads\Models\WABA360DialogPartnerWebhookPayload.cs
+```
+
+
+## Exceptions
 Exceptions will throw when Response HTTP Status Code or Response is not success.
 
 - WhatsApp API Business API
@@ -92,7 +121,9 @@ PartnerClientException  // Throw when HTTP Response Status Code is not success, 
 PartnerClientAuthenticationException // Throw when HTTP Response Status Code is 401 like access token invalid or no credentials set.
 ```
 
-### Extendability
+
+
+## Extendability
 Feel free to extend or improve the capability of the current version of the client that cannot satisfy all your needs.
 
 Please visit these Folder for more details: 
@@ -108,7 +139,7 @@ PartnerClient\Payloads\                         // Concrete Partner API Request 
 
 
 
-### Official Documents
+## Official Documents
  - Introduction: https://docs.360dialog.com/
  - WhatsApp Business API Documents: https://docs.360dialog.com/whatsapp-api/whatsapp-api
  - Sandbox Documents: https://docs.360dialog.com/whatsapp-api/whatsapp-api/sandbox

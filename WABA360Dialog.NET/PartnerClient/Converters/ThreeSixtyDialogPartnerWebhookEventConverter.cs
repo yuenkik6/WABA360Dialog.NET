@@ -4,47 +4,47 @@ using WABA360Dialog.PartnerClient.WebhookEventModels.Enums;
 
 namespace WABA360Dialog.PartnerClient.Converters
 {
-    internal class ThreeSixtyDialogPartnerWebhookEventConverter : EnumConverter<ThreeSixtyDialogPartnerWebhookEvent>
+    internal class WABA360DialogPartnerWebhookEventConverter : EnumConverter<WABA360DialogPartnerWebhookEvent>
     {
-        protected override ThreeSixtyDialogPartnerWebhookEvent GetEnumValue(string value) =>
-            EnumStringConverter.GetThreeSixtyDialogPartnerWebhookEvent(value);
+        protected override WABA360DialogPartnerWebhookEvent GetEnumValue(string value) =>
+            EnumStringConverter.GetWABA360DialogPartnerWebhookEvent(value);
 
-        protected override string GetStringValue(ThreeSixtyDialogPartnerWebhookEvent value) =>
+        protected override string GetStringValue(WABA360DialogPartnerWebhookEvent value) =>
             value.GetString();
     }
 
     
     public static partial class EnumStringConverter
     {
-        private static readonly IReadOnlyDictionary<string, ThreeSixtyDialogPartnerWebhookEvent> ThreeSixtyDialogPartnerWebhookEventStringToEnum =
-            new Dictionary<string, ThreeSixtyDialogPartnerWebhookEvent>
+        private static readonly IReadOnlyDictionary<string, WABA360DialogPartnerWebhookEvent> WABA360DialogPartnerWebhookEventStringToEnum =
+            new Dictionary<string, WABA360DialogPartnerWebhookEvent>
             {
-                {"unknown", ThreeSixtyDialogPartnerWebhookEvent.Unknown},
-                {"channel_submitted", ThreeSixtyDialogPartnerWebhookEvent.ChannelSubmitted},
-                {"channel_live", ThreeSixtyDialogPartnerWebhookEvent.ChannelLive},
-                {"cancellation_request", ThreeSixtyDialogPartnerWebhookEvent.CancellationRequest},
-                {"cancellation_revoke", ThreeSixtyDialogPartnerWebhookEvent.CancellationRevoke},
-                {"cancellation_processed", ThreeSixtyDialogPartnerWebhookEvent.CancellationProcessed}
+                {"unknown", WABA360DialogPartnerWebhookEvent.Unknown},
+                {"channel_submitted", WABA360DialogPartnerWebhookEvent.ChannelSubmitted},
+                {"channel_live", WABA360DialogPartnerWebhookEvent.ChannelLive},
+                {"cancellation_request", WABA360DialogPartnerWebhookEvent.CancellationRequest},
+                {"cancellation_revoke", WABA360DialogPartnerWebhookEvent.CancellationRevoke},
+                {"cancellation_processed", WABA360DialogPartnerWebhookEvent.CancellationProcessed}
             };
 
-        private static readonly IReadOnlyDictionary<ThreeSixtyDialogPartnerWebhookEvent, string> ThreeSixtyDialogPartnerWebhookEventEnumToString =
-            new Dictionary<ThreeSixtyDialogPartnerWebhookEvent, string>
+        private static readonly IReadOnlyDictionary<WABA360DialogPartnerWebhookEvent, string> WABA360DialogPartnerWebhookEventEnumToString =
+            new Dictionary<WABA360DialogPartnerWebhookEvent, string>
             {
-                {ThreeSixtyDialogPartnerWebhookEvent.Unknown, "unknown"},
-                {ThreeSixtyDialogPartnerWebhookEvent.ChannelSubmitted, "channel_submitted"},
-                {ThreeSixtyDialogPartnerWebhookEvent.ChannelLive, "channel_live"},
-                {ThreeSixtyDialogPartnerWebhookEvent.CancellationRequest, "cancellation_request"},
-                {ThreeSixtyDialogPartnerWebhookEvent.CancellationRevoke, "cancellation_revoke"},
-                {ThreeSixtyDialogPartnerWebhookEvent.CancellationProcessed, "cancellation_processed"}
+                {WABA360DialogPartnerWebhookEvent.Unknown, "unknown"},
+                {WABA360DialogPartnerWebhookEvent.ChannelSubmitted, "channel_submitted"},
+                {WABA360DialogPartnerWebhookEvent.ChannelLive, "channel_live"},
+                {WABA360DialogPartnerWebhookEvent.CancellationRequest, "cancellation_request"},
+                {WABA360DialogPartnerWebhookEvent.CancellationRevoke, "cancellation_revoke"},
+                {WABA360DialogPartnerWebhookEvent.CancellationProcessed, "cancellation_processed"}
             };
         
-        public static string GetString(this ThreeSixtyDialogPartnerWebhookEvent status) =>
-            ThreeSixtyDialogPartnerWebhookEventEnumToString.TryGetValue(status, out var stringValue)
+        public static string GetString(this WABA360DialogPartnerWebhookEvent status) =>
+            WABA360DialogPartnerWebhookEventEnumToString.TryGetValue(status, out var stringValue)
                 ? stringValue
                 : "unknown";
 
-        public static ThreeSixtyDialogPartnerWebhookEvent GetThreeSixtyDialogPartnerWebhookEvent(string status) =>
-            ThreeSixtyDialogPartnerWebhookEventStringToEnum.TryGetValue(status, out var enumValue)
+        public static WABA360DialogPartnerWebhookEvent GetWABA360DialogPartnerWebhookEvent(string status) =>
+            WABA360DialogPartnerWebhookEventStringToEnum.TryGetValue(status, out var enumValue)
                 ? enumValue
                 : 0;
     }

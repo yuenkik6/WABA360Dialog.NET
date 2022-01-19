@@ -5,7 +5,7 @@ using WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects;
 
 namespace WABA360Dialog.ApiClient.Payloads.Models
 {
-    public class WebhookPayload
+    public class WABA360DialogWebhookPayload
     {
         /// <summary>
         /// Provides all the information about the contact —see contacts object.

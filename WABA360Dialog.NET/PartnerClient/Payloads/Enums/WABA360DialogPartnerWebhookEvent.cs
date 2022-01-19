@@ -3,8 +3,8 @@ using WABA360Dialog.PartnerClient.Converters;
 
 namespace WABA360Dialog.PartnerClient.WebhookEventModels.Enums
 {
-    [JsonConverter(typeof(ThreeSixtyDialogPartnerWebhookEventConverter))]
-    public enum ThreeSixtyDialogPartnerWebhookEvent
+    [JsonConverter(typeof(WABA360DialogPartnerWebhookEventConverter))]
+    public enum WABA360DialogPartnerWebhookEvent
     {
         Unknown = 0,
         ChannelSubmitted = 1,
