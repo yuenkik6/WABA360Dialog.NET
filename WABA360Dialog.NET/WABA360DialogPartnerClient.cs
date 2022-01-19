@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json;
 using WABA360Dialog.Common.Enums;
+using WABA360Dialog.Common.Helpers;
 using WABA360Dialog.PartnerClient.Exceptions;
 using WABA360Dialog.PartnerClient.Interfaces;
 using WABA360Dialog.PartnerClient.Models;
@@ -112,17 +113,17 @@ namespace WABA360Dialog
 
         public async Task<TokenResponse> RequestOAuthTokenAsync(string username, string password, CancellationToken cancellationToken = default)
         {
-            return await MakeHttpRequestNoTokenAsync(new TokenRequest(username, password), cancellationToken);
+            return await MakeHttpNoTokenRequestAsync(new TokenRequest(username, password), cancellationToken);
         }
 
-        private async Task AuthorizeClient(CancellationToken cancellationToken = default)
+        protected virtual async Task AuthorizeClient(CancellationToken cancellationToken = default)
         {
             var oauthTokenResponse = await RequestOAuthTokenAsync(_partnerInfo.Username, _partnerInfo.Password, cancellationToken);
 
             _accessToken = oauthTokenResponse.AccessToken;
         }
 
-        private async Task<TResponse> MakeHttpRequestAsync<TResponse>(PartnerApiRequestBase<TResponse> request, CancellationToken cancellationToken = default) where TResponse : PartnerApiResponseBase
+        protected virtual async Task<TResponse> MakeHttpRequestAsync<TResponse>(PartnerApiRequestBase<TResponse> request, CancellationToken cancellationToken = default) where TResponse : PartnerApiResponseBase, new()
         {
             if (string.IsNullOrEmpty(_accessToken))
                 await AuthorizeClient(cancellationToken);
@@ -155,24 +156,34 @@ namespace WABA360Dialog
             var httpResponse = await client.SendAsync(httpRequestMessage, cancellationToken);
 
             var responseAsString = await httpResponse.Content.ReadAsStringAsync();
-            var response = JsonConvert.DeserializeObject<TResponse>(responseAsString);
 
-            if (!httpResponse.IsSuccessStatusCode)
+            JsonHelper.TryDeserializeJson<TResponse>(responseAsString, out var response);
+
+            if (!httpResponse.IsSuccessStatusCode && response != null)
             {
-                if (httpResponse.StatusCode == HttpStatusCode.Unauthorized && !string.IsNullOrEmpty(_partnerInfo.Username) && !string.IsNullOrEmpty(_partnerInfo.Password))
+                // Handle Authentication Error
+                if (httpResponse.StatusCode == HttpStatusCode.Unauthorized)
                 {
-                    await AuthorizeClient(cancellationToken);
+                    if (!string.IsNullOrEmpty(_partnerInfo.Username) && !string.IsNullOrEmpty(_partnerInfo.Password))
+                    {
+                        await AuthorizeClient(cancellationToken);
 
-                    return await MakeHttpRequestAsync(request, cancellationToken);
+                        return await MakeHttpRequestAsync(request, cancellationToken);
+                    }
+
+                    throw new PartnerClientAuthenticationException(response.Meta.DeveloperMessage, "", urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync());
                 }
 
-                throw new PartnerClientRequestException(response?.ErrorDescription, requestPath, (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
+                throw new PartnerClientException(response?.ErrorDescription, urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
             }
+
+            if (response == null)
+                throw new PartnerClientException("360Dialog API Error Occured.", urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
 
             return response;
         }
 
-        private async Task<TResponse> MakeHttpRequestNoTokenAsync<TResponse>(PartnerApiRequestBase<TResponse> request, CancellationToken cancellationToken = default) where TResponse : PartnerApiResponseBase
+        protected virtual async Task<TResponse> MakeHttpNoTokenRequestAsync<TResponse>(PartnerApiRequestBase<TResponse> request, CancellationToken cancellationToken = default) where TResponse : PartnerApiResponseBase, new()
         {
             using var client = new HttpClient();
 
@@ -200,10 +211,13 @@ namespace WABA360Dialog
             var httpResponse = await client.SendAsync(httpRequestMessage, cancellationToken);
 
             var responseAsString = await httpResponse.Content.ReadAsStringAsync();
-            var response = JsonConvert.DeserializeObject<TResponse>(responseAsString);
+            JsonHelper.TryDeserializeJson<TResponse>(responseAsString, out var response);
 
-            if (!httpResponse.IsSuccessStatusCode)
-                throw new PartnerClientAuthenticationException(response?.Error, response?.ErrorDescription, requestPath, (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync());
+            if (!httpResponse.IsSuccessStatusCode && response != null)
+                throw new PartnerClientAuthenticationException(response.Error, response.ErrorDescription, urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync());
+
+            if (response == null)
+                throw new PartnerClientException("360Dialog API Error Occured.", urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
 
             return response;
         }

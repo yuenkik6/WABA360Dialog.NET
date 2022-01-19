@@ -1,10 +1,10 @@
 namespace WABA360Dialog.PartnerClient.Exceptions
 {
-    public class PartnerClientRequestException : PartnerClientExceptionBase
+    public class PartnerClientException : PartnerClientExceptionBase
     {
-        public string DeveloperMessage { get; set; }
+        public string DeveloperMessage { get; }
 
-        public PartnerClientRequestException(
+        public PartnerClientException(
             string developerMessage,
             string requestPath,
             int httpStatusCode,

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace WABA360Dialog.Common.Helpers
@@ -26,7 +27,22 @@ namespace WABA360Dialog.Common.Helpers
         public static string SerializeObjectToJson<T>(T obj) where T : new()
         {
             return obj == null ? null : JsonConvert.SerializeObject(obj, JsonSerializerSettings);
+        }
 
+        public static bool TryDeserializeJson<T>(string json, out T result) where T : new()
+        {
+            try
+            {
+                result = JsonConvert.DeserializeObject<T>(json);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                result = default;
+
+                return false;
+            }
         }
     }
 }

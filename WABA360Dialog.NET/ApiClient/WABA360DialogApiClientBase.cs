@@ -13,6 +13,7 @@ using WABA360Dialog.ApiClient.Payloads.Base;
 using WABA360Dialog.ApiClient.Payloads.Enums;
 using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects;
 using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects;
+using WABA360Dialog.Common.Helpers;
 
 namespace WABA360Dialog.ApiClient
 {
@@ -88,7 +89,7 @@ namespace WABA360Dialog.ApiClient
             return await MakeHttpRequestAsync(new UpdateProfileInfoPhotoRequest(fileBytes, contentType));
         }
 
-        private async Task<TResponse> MakeHttpRequestAsync<TResponse>(ClientApiRequestBase<TResponse> request, CancellationToken cancellationToken = default) where TResponse : ClientApiResponseBase
+        protected virtual async Task<TResponse> MakeHttpRequestAsync<TResponse>(ClientApiRequestBase<TResponse> request, CancellationToken cancellationToken = default) where TResponse : ClientApiResponseBase, new()
         {
             using var client = new HttpClient();
 
@@ -117,18 +118,18 @@ namespace WABA360Dialog.ApiClient
             var httpResponse = await client.SendAsync(httpRequestMessage, cancellationToken);
 
             var responseAsString = await httpResponse.Content.ReadAsStringAsync();
-            var response = JsonConvert.DeserializeObject<TResponse>(responseAsString);
+            JsonHelper.TryDeserializeJson<TResponse>(responseAsString, out var response);
+
+            if (response == null)
+                throw new ApiClientException(urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
 
             if (!httpResponse.IsSuccessStatusCode)
-            {
-                if (response.Error.Any(x => x.Code == 1006))
-                    throw new ApiClientException(requestPath, (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
-            }
-
+                throw new ApiClientException(response.Error, response.Meta, urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
+            
             return response;
         }
 
-        private async Task<TResponse> MakeFileDownloadHttpRequestAsync<TResponse>(ClientApiRequestBase<TResponse> request, CancellationToken cancellationToken = default) where TResponse : BinaryApiResponseBase, new()
+        protected virtual async Task<TResponse> MakeFileDownloadHttpRequestAsync<TResponse>(ClientApiRequestBase<TResponse> request, CancellationToken cancellationToken = default) where TResponse : BinaryApiResponseBase, new()
         {
             using var client = new HttpClient();
 
@@ -160,7 +161,14 @@ namespace WABA360Dialog.ApiClient
             {
                 var responseAsString = await httpResponse.Content.ReadAsStringAsync();
 
-                throw new ApiClientException(requestPath, (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
+                if (JsonHelper.TryDeserializeJson<TResponse>(responseAsString, out var response))
+                {
+                    throw new ApiClientException(response.Error, response.Meta, urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
+                }
+                else
+                {
+                    throw new ApiClientException(urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
+                }
             }
 
             var responseAsByte = await httpResponse.Content.ReadAsByteArrayAsync();

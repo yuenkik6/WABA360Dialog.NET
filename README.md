@@ -9,13 +9,14 @@ C# .NET API Wrapper Classes for 360Dialog WhatsApp Business APIs and Partner API
 ## Getting Started
 To get started, you must own an API Key managed by 360Dialog.
 
+- **WABA360DialogApiClient.cs / WABA360DialogApiSandboxClient.cs** (WhatsApp API Business API)
 ```c#
-// For WhatsApp Business API
 var client = new WABA360DialogApiClient("your-api-key");
 var createMessageResposne = await client.SendMessageAsync(MessageObjectFactory.CreateTextMessage("whatsapp-id", "Hello World!"));
+```
 
-
-// For Partner API
+- **WABA360DialogPartnerClient.cs** (360Dialog Partner API)
+```c#
 var partnerClient = new WABA360DialogPartnerClient("partner-id","access-token"));
 // or
 var partnerClient = new WABA360DialogPartnerClient(new PartnerInfo("partner-id", "username", "password")); // For auto login
@@ -24,9 +25,10 @@ var clientBalanceResponse = await partnerClient.GetClientBalanceAsync("client-id
 
 ```
 
-#### Available Functions
+### Available Functions
+All existing API provided by 360 Dialog are wrapped as functions for corresponding client
 
-WhatsApp API Business API 
+- **WABA360DialogApiClient.cs / WABA360DialogApiSandboxClient.cs** (WhatsApp API Business API)
 ```c#
 Task<GetWebhookUrlResponse> GetWebhookUrlAsync();
 Task<SetWebhookUrlResponse> SetWebhookUrlAsync(string url, Dictionary<string, string> headers);
@@ -41,7 +43,24 @@ Task<UpdateProfileInfoAboutTextResponse> UpdateProfileInfoAboutTextAsync(string 
 Task<UpdateProfileInfoPhotoResponse> UpdateProfileInfoPhotoAsync(byte[] fileBytes, string contentType);
 ```
 
-**MessageObjectFactory** for creating common **MessageObject** in SendMessage()
+- **WABA360DialogPartnerClient.cs** (360Dialog Partner API)
+```c#
+Task<CreatePartnerWhatsAppBusinessApiTemplateResponse> CreatePartnerWhatsAppBusinessApiTemplateAsync(string whatsAppBusinessApiAccountId, string name, TemplateCategory category, WhatsAppLanguage language, object components, CancellationToken cancellationToken = default);
+Task<GetClientBalanceResponse> GetClientBalanceAsync(string clientId, int fromMonth, int fromYear, CancellationToken cancellationToken = default);
+Task<GetPartnerChannelsResponse> GetPartnerChannelsAsync(int limit = 20, int offset = 0, string sort = null, object filters = null, CancellationToken cancellationToken = default);
+Task<GetPartnerClientsResponse> GetPartnerClientsAsync(int limit = 20, int offset = 0, string sort = null, object filters = null, CancellationToken cancellationToken = default);
+Task<GetPartnerWebhookUrlResponse> GetPartnerWebhookUrlAsync(CancellationToken cancellationToken = default);
+Task<GetPartnerWhatsAppBusinessApiTemplatesResponse> GetPartnerWhatsAppBusinessApiTemplatesAsync(string whatsAppBusinessApiAccountId, int limit = 20, int offset = 0, string sort = null, object filters = null, CancellationToken cancellationToken = default);
+Task<RemovePartnerWhatsAppBusinessApiTemplatesResponse> RemovePartnerWhatsAppBusinessApiTemplatesAsync(string whatsAppBusinessApiAccountId, string templateId, CancellationToken cancellationToken = default);
+Task<SetCancellationRequestOnChannelResponse> SetCancellationRequestOnChannelAsync(string clientId, string channelId, bool enabled, CancellationToken cancellationToken = default);
+Task<SetPartnerWebhookUrlResponse> SetPartnerWebhookUrlAsync(string webhookUrl, CancellationToken cancellationToken = default);
+Task<UpdateClientResponse> UpdateClientAsync(string clientId, string partnerPayload, CancellationToken cancellationToken = default);
+Task<TokenResponse> RequestOAuthTokenAsync(string username, string password, CancellationToken cancellationToken = default);
+```
+
+### Helpers
+
+-  **MessageObjectFactory.cs** for creating common **MessageObject** in WABA360DialogApiClient.SendMessage()
 ```c#
 MessageObjectFactory.CreateTextMessage(string whatsAppId, string textMessage, bool previewUrl = false);
 MessageObjectFactory.CreateImageMessageByMediaId(string whatsAppId, string mediaId, string caption);
@@ -59,22 +78,33 @@ MessageObjectFactory.CreateInteractiveMessage(string whatsappId, InteractiveObje
 ```
 
 
+### Exceptions
+Exceptions will throw when Response HTTP Status Code or Response is not success.
 
-36Dialog Partner API
+- WhatsApp API Business API
 ```c#
-Task<CreatePartnerWhatsAppBusinessApiTemplateResponse> CreatePartnerWhatsAppBusinessApiTemplateAsync(string whatsAppBusinessApiAccountId, string name, TemplateCategory category, WhatsAppLanguage language, object components, CancellationToken cancellationToken = default);
-Task<GetClientBalanceResponse> GetClientBalanceAsync(string clientId, int fromMonth, int fromYear, CancellationToken cancellationToken = default);
-Task<GetPartnerChannelsResponse> GetPartnerChannelsAsync(int limit = 20, int offset = 0, string sort = null, object filters = null, CancellationToken cancellationToken = default);
-Task<GetPartnerClientsResponse> GetPartnerClientsAsync(int limit = 20, int offset = 0, string sort = null, object filters = null, CancellationToken cancellationToken = default);
-Task<GetPartnerWebhookUrlResponse> GetPartnerWebhookUrlAsync(CancellationToken cancellationToken = default);
-Task<GetPartnerWhatsAppBusinessApiTemplatesResponse> GetPartnerWhatsAppBusinessApiTemplatesAsync(string whatsAppBusinessApiAccountId, int limit = 20, int offset = 0, string sort = null, object filters = null, CancellationToken cancellationToken = default);
-Task<RemovePartnerWhatsAppBusinessApiTemplatesResponse> RemovePartnerWhatsAppBusinessApiTemplatesAsync(string whatsAppBusinessApiAccountId, string templateId, CancellationToken cancellationToken = default);
-Task<SetCancellationRequestOnChannelResponse> SetCancellationRequestOnChannelAsync(string clientId, string channelId, bool enabled, CancellationToken cancellationToken = default);
-Task<SetPartnerWebhookUrlResponse> SetPartnerWebhookUrlAsync(string webhookUrl, CancellationToken cancellationToken = default);
-Task<UpdateClientResponse> UpdateClientAsync(string clientId, string partnerPayload, CancellationToken cancellationToken = default);
-Task<TokenResponse> RequestOAuthTokenAsync(string username, string password, CancellationToken cancellationToken = default);
+ApiClientException // Throw when Response HTTP status code is not success, use ex.ToString() / ex.Error to access detail
 ```
 
+- 360Dialog Partner API
+```c#
+PartnerClientException  // Throw when HTTP Response Status Code is not success, use ex.ToString() / ex.Message to access detail
+PartnerClientAuthenticationException // Throw when HTTP Response Status Code is 401 like access token invalid or no credentials set.
+```
+
+### Extendability
+Feel free to extend or improve the capability of the current version of the client that cannot satisfy all your needs.
+
+Please visit these Folder for more details: 
+```c#
+ApiClient\Interfaces                            // Abstract WhatsApp Business API Client class
+ApiClient\Payloads\Base                         // Abstract WhatsApp Business API Request & Response class
+ApiClient\Payloads\                             // Concrete WhatsApp Business API Request & Response class
+
+PartnerClient\Interfaces                        // Abstract Partner API Client class
+PartnerClient\Payloads\Base                     // Abstract Partner API Request & Response class
+PartnerClient\Payloads\                         // Concrete Partner API Request & Response class
+``` 
 
 
 
