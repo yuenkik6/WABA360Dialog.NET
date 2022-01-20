@@ -16,7 +16,6 @@ using WABA360Dialog.Common.Helpers;
 
 namespace WABA360Dialog.ApiClient
 {
-
     public abstract class WABA360DialogApiClientBase : IWABA360DialogApiClient
     {
         private string BasePath { get; }
@@ -63,9 +62,19 @@ namespace WABA360Dialog.ApiClient
             return await MakeHttpRequestAsync(new UploadMediaRequest(fileBytes, contentType), cancellationToken);
         }
 
+        public async Task<GetTemplateResponse> GetTemplateAsync(int limit = 1000, int offset = 0, string sort = null, CancellationToken cancellationToken = default)
+        {
+            return await MakeHttpRequestAsync(new GetTemplateRequest(limit, offset, sort), cancellationToken);
+        }
+
         public async Task<CreateTemplateResponse> CreateTemplateAsync(CreateTemplateObject template, CancellationToken cancellationToken = default)
         {
             return await MakeHttpRequestAsync(new CreateTemplateRequest(template), cancellationToken);
+        }
+
+        public async Task<DeleteTemplateResponse> DeleteTemplateAsync(string templateName, CancellationToken cancellationToken = default)
+        {
+            return await MakeHttpRequestAsync(new DeleteTemplateRequest(templateName), cancellationToken);
         }
 
         public async Task<UpdateBusinessProfileResponse> UpdateBusinessProfileAsync(

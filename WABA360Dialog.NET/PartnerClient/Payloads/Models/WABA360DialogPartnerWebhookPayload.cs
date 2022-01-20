@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using WABA360Dialog.PartnerClient.WebhookEventModels.Enums;
+using WABA360Dialog.PartnerClient.Payloads.Enums;
 
 namespace WABA360Dialog.PartnerClient.Payloads.Models
 {

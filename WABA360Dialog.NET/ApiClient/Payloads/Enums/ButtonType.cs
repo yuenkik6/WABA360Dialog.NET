@@ -8,7 +8,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
     {
         reply = 1,
         quick_reply = 2,
-        url = 3,
+        url = 3
     }
 
 }

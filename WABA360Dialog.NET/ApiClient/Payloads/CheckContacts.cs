@@ -18,10 +18,10 @@ namespace WABA360Dialog.ApiClient.Payloads
 
         [JsonProperty("contacts")]
         public IEnumerable<string> Contacts { get; }
-        
+
         [JsonProperty("blocking")]
         public Blocking Blocking { get; }
-        
+
         [JsonProperty("force_check")]
         public bool ForceCheck { get; }
     }

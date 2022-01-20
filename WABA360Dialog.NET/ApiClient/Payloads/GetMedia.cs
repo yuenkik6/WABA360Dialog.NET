@@ -10,11 +10,11 @@ namespace WABA360Dialog.ApiClient.Payloads
         {
             MediaId = mediaId;
         }
-        
+
         [JsonIgnore]
         public string MediaId { get; }
     }
-    
+
     public class GetMediaResponse : BinaryApiResponseBase
     {
     }

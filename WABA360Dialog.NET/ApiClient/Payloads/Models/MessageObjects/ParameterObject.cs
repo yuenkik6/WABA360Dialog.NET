@@ -11,7 +11,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects
         /// <summary>
         /// Required.
         /// Describes the parameter type.
-        ///  Values: text, currency, date_time, image, document, video
+        /// Values: text, currency, date_time, image, document, video
         /// The media types (image, document and video) follow the same format as those used in standard media messages, see the Media documentation for more information. Only PDF documents are currently supported for media message templates.
         /// </summary>
         [JsonProperty("type")]

@@ -9,6 +9,6 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
         text,
         video,
         image,
-        document,
+        document
     }
 }

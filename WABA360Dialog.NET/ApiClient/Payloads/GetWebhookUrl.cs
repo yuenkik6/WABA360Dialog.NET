@@ -11,12 +11,12 @@ namespace WABA360Dialog.ApiClient.Payloads
         {
         }
     }
-    
+
     public class GetWebhookUrlResponse : ClientApiResponseBase
     {
         [JsonProperty("url")]
         public string Url { get; set; }
-        
+
         [JsonProperty("headers")]
         public Dictionary<string, string> Headers { get; set; }
     }

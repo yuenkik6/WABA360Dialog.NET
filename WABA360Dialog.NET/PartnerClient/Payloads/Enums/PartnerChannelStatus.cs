@@ -22,4 +22,5 @@ namespace WABA360Dialog.PartnerClient.Payloads.Enums
         waiting_for_migration_code = 13,
         migration_code_requested = 14,
     }
+
 }

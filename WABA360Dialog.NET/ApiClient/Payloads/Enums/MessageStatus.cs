@@ -10,8 +10,8 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
         read,
         sent,
         failed,
-        deleted,
+        deleted
     }
-    
-    
+
+
 }

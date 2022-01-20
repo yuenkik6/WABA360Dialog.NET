@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using WABA360Dialog.PartnerClient.Converters;
 
-namespace WABA360Dialog.PartnerClient.WebhookEventModels.Enums
+namespace WABA360Dialog.PartnerClient.Payloads.Enums
 {
     [JsonConverter(typeof(WABA360DialogPartnerWebhookEventConverter))]
     public enum WABA360DialogPartnerWebhookEvent

@@ -5,7 +5,7 @@ using WABA360Dialog.ApiClient.Payloads.Enums;
 namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.InteractiveObjects
 {
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class ComponentObject
+    public class TemplateMessageComponentObject
     {
         /// <summary>
         /// Required.

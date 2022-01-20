@@ -21,7 +21,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.ContactObjects
 
         /// <summary>
         /// Optional.
-        ///  Contact email address(es) —see EmailObject.
+        /// Contact email address(es) —see EmailObject.
         /// </summary>
         [JsonProperty("emails")]
         public EmailObject Email { get; set; }

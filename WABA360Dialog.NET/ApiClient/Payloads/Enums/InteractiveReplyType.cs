@@ -7,6 +7,6 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
     public enum InteractiveReplyType
     {
         button_reply = 1,
-        list_reply = 2,
+        list_reply = 2
     }
 }

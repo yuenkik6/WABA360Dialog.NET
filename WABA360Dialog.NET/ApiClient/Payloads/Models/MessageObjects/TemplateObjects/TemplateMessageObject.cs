@@ -6,7 +6,7 @@ using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.InteractiveObjects;
 namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects
 {
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class TemplateObject
+    public class TemplateMessageObject
     {
         /// <summary>
         /// Required.
@@ -35,6 +35,6 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects
         /// Array of components objects containing the parameters of the message.
         /// </summary>
         [JsonProperty("components")]
-        public IEnumerable<ComponentObject> Components { get; set; }
+        public IEnumerable<TemplateMessageComponentObject> Components { get; set; }
     }
 }

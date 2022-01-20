@@ -7,9 +7,9 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
     public enum ExtendedPlaceType
     {
         CELL = 1,
-        MAIN = 2, 
-        IPHONE = 3, 
+        MAIN = 2,
+        IPHONE = 3,
         HOME = 4,
-        WORK = 5,
+        WORK = 5
     }
 }

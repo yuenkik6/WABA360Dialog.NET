@@ -8,6 +8,6 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
     {
         header = 1,
         body = 2,
-        button = 3,
+        button = 3
     }
 }

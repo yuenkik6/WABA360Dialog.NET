@@ -117,7 +117,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects
         /// Contains a template object.
         /// </summary>
         [JsonProperty("template")]
-        public TemplateObject Template { get; set; }
+        public TemplateMessageObject Template { get; set; }
 
         /// <summary>
         /// Only used with message templates.

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using WABA360Dialog.ApiClient.Payloads.Models;
 using WABA360Dialog.ApiClient.Payloads.Models.Common;
 
@@ -7,9 +6,7 @@ namespace WABA360Dialog.ApiClient.Exceptions
 {
     public class ApiClientException : ApiClientExceptionBase
     {
-        public IEnumerable<ErrorObject> Error { get; }
-        public ClientApiMeta Meta { get; }
-        
+
         public ApiClientException(IEnumerable<ErrorObject> error,
             ClientApiMeta meta,
             string requestPath,
@@ -30,5 +27,8 @@ namespace WABA360Dialog.ApiClient.Exceptions
             : base(requestPath, httpStatusCode, responseBody, requestBody)
         {
         }
+
+        public IEnumerable<ErrorObject> Error { get; }
+        public ClientApiMeta Meta { get; }
     }
 }

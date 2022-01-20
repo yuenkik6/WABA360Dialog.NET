@@ -9,6 +9,6 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
         list = 1,
         button = 2,
         product = 3,
-        product_list = 4,
+        product_list = 4
     }
 }

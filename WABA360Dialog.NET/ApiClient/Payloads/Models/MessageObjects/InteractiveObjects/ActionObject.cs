@@ -21,7 +21,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.InteractiveObje
         public IEnumerable<ButtonObject> Buttons { get; set; }
         
         /// <summary>
-        ///  Required for List Messages and Multi-Product Messages.
+        /// Required for List Messages and Multi-Product Messages.
         /// Array of SectionObject. There is a minimum of 1 and maximum of 10. See section object.
         /// </summary>
         [JsonProperty("sections")]

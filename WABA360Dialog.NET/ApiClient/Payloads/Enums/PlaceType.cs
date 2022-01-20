@@ -7,6 +7,6 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
     public enum PlaceType
     {
         HOME = 1,
-        WORK = 2,
+        WORK = 2
     }
 }

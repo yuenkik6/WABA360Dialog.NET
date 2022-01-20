@@ -3,13 +3,14 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using WABA360Dialog.Common.Helpers;
 using WABA360Dialog.PartnerClient.Payloads.Base;
+using WABA360Dialog.PartnerClient.Payloads.Enums;
 using WABA360Dialog.PartnerClient.Payloads.Models;
 
 namespace WABA360Dialog.PartnerClient.Payloads
 {
     public class GetPartnerWhatsAppBusinessApiTemplatesRequest : PartnerApiRequestBase<GetPartnerWhatsAppBusinessApiTemplatesResponse>
     {
-        public GetPartnerWhatsAppBusinessApiTemplatesRequest(string partnerId, string whatsAppBusinessApiAccountId, int limit = 20, int offset = 0, string sort = "-", object filters = null)
+        public GetPartnerWhatsAppBusinessApiTemplatesRequest(string partnerId, string whatsAppBusinessApiAccountId, int limit = 20, int offset = 0, string sort = "-", GetPartnerWhatsAppBusinessApiTemplatesFilter filters = null)
             : base($"partners/{partnerId}/waba_accounts/{whatsAppBusinessApiAccountId}/waba_templates", HttpMethod.Get)
         {
             PartnerId = partnerId;
@@ -44,7 +45,39 @@ namespace WABA360Dialog.PartnerClient.Payloads
         public string Sort { get; }
 
         [JsonIgnore]
-        public object Filters { get; set; }
+        public GetPartnerWhatsAppBusinessApiTemplatesFilter Filters { get; set; }
+    }
+    
+    
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    public class GetPartnerWhatsAppBusinessApiTemplatesFilter
+    {
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        [JsonProperty("partner_id")]
+        public string PartnerId { get; set; }
+
+        [JsonProperty("waba_account_id")]
+        public string WhatsAppBusinessApiAccountId { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("status")]
+        public TemplateStatus Status { get; set; }
+
+        [JsonProperty("language")]
+        public string Language { get; set; }
+
+        [JsonProperty("category")]
+        public string Category { get; set; }
+
+        [JsonProperty("rejected_reason")]
+        public string RejectedReason { get; set; }
+
+        [JsonProperty("namespace")]
+        public string Namespace { get; set; }
     }
 
     public class GetPartnerWhatsAppBusinessApiTemplatesResponse : PartnerApiResponseBase
@@ -69,7 +102,7 @@ namespace WABA360Dialog.PartnerClient.Payloads
         public int Total { get; set; }
 
         [JsonProperty("waba_templates")]
-        public IEnumerable<WhatsAppBusinessApiTemplate> WhatsAppBusinessApiTemplates { get; set; }
+        public IEnumerable<PartnerWhatsAppBusinessApiTemplate> WhatsAppBusinessApiTemplates { get; set; }
     }
 
 }

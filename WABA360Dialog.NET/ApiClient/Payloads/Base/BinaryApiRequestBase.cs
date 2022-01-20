@@ -13,7 +13,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Base
             FileBytes = fileBytes;
             ContentType = contentType;
         }
-        
+
         public byte[] FileBytes { get; }
         public string ContentType { get; }
 
@@ -26,6 +26,6 @@ namespace WABA360Dialog.ApiClient.Payloads.Base
             return byteArrayContent;
         }
     }
-    
-    
+
+
 }

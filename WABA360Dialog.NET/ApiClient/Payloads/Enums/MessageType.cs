@@ -23,14 +23,18 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
 
     internal class MessageTypeConverter : EnumConverter<MessageType>
     {
-        protected override MessageType GetEnumValue(string value) =>
-            EnumStringConverter.GetMessageType(value);
+        protected override MessageType GetEnumValue(string value)
+        {
+            return EnumStringConverter.GetMessageType(value);
+        }
 
-        protected override string GetStringValue(MessageType value) =>
-            value.GetString();
+        protected override string GetStringValue(MessageType value)
+        {
+            return value.GetString();
+        }
     }
 
-    public static partial class EnumStringConverter
+    public static class EnumStringConverter
     {
         private static readonly IReadOnlyDictionary<string, MessageType> MessageTypeStringToEnum =
             new Dictionary<string, MessageType>
@@ -46,9 +50,9 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
                 { "text", MessageType.text },
                 { "video", MessageType.video },
                 { "interactive", MessageType.interactive },
-                { "hsm", MessageType.hsm },
+                { "hsm", MessageType.hsm }
             };
-        
+
         private static readonly IReadOnlyDictionary<MessageType, string> MessageTypeEnumToString =
             new Dictionary<MessageType, string>
             {
@@ -62,17 +66,21 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
                 { MessageType.text, "text" },
                 { MessageType.video, "video" },
                 { MessageType.interactive, "interactive" },
-                { MessageType.hsm, "hsm" },
+                { MessageType.hsm, "hsm" }
             };
 
-        public static string GetString(this MessageType status) =>
-            MessageTypeEnumToString.TryGetValue(status, out var stringValue)
+        public static string GetString(this MessageType status)
+        {
+            return MessageTypeEnumToString.TryGetValue(status, out var stringValue)
                 ? stringValue
                 : "unknown";
+        }
 
-        public static MessageType GetMessageType(string status) =>
-            MessageTypeStringToEnum.TryGetValue(status, out var enumValue)
+        public static MessageType GetMessageType(string status)
+        {
+            return MessageTypeStringToEnum.TryGetValue(status, out var enumValue)
                 ? enumValue
                 : 0;
+        }
     }
 }

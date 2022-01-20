@@ -4,10 +4,6 @@ namespace WABA360Dialog.ApiClient.Exceptions
 {
     public abstract class ApiClientExceptionBase : Exception
     {
-        public string RequestPath { get; }
-        public string RequestBody { get; }
-        public int HttpStatusCode { get; }
-        public string ResponseBody { get; }
 
         public ApiClientExceptionBase(
             string requestPath,
@@ -20,6 +16,11 @@ namespace WABA360Dialog.ApiClient.Exceptions
             ResponseBody = responseBody;
             RequestBody = requestBody;
         }
+
+        public string RequestPath { get; }
+        public string RequestBody { get; }
+        public int HttpStatusCode { get; }
+        public string ResponseBody { get; }
 
         public override string ToString()
         {

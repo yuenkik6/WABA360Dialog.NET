@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects;
+using WABA360Dialog.Common.Enums;
 using WABA360Dialog.PartnerClient.Payloads.Enums;
 
 namespace WABA360Dialog.PartnerClient.Payloads.Models
 {
-    public class WhatsAppBusinessApiTemplate
+    public class PartnerWhatsAppBusinessApiTemplate
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -23,13 +25,13 @@ namespace WABA360Dialog.PartnerClient.Payloads.Models
         public TemplateStatus Status { get; set; }
 
         [JsonProperty("language")]
-        public string Language { get; set; }
+        public WhatsAppLanguage Language { get; set; }
 
         [JsonProperty("category")]
-        public string Category { get; set; }
+        public TemplateCategory Category { get; set; }
 
         [JsonProperty("components")]
-        public IEnumerable<object> Components { get; set; }
+        public IEnumerable<TemplateComponentObject> Components { get; set; }
 
         [JsonProperty("rejected_reason")]
         public string RejectedReason { get; set; }

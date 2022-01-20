@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects;
 using WABA360Dialog.Common.Enums;
 using WABA360Dialog.Common.Helpers;
 using WABA360Dialog.PartnerClient.Exceptions;
@@ -49,12 +50,11 @@ namespace WABA360Dialog
             _accessToken = accessToken;
         }
 
-        public async Task<CreatePartnerWhatsAppBusinessApiTemplateResponse> CreatePartnerWhatsAppBusinessApiTemplateAsync(
-            string whatsAppBusinessApiAccountId,
+        public async Task<CreatePartnerWhatsAppBusinessApiTemplateResponse> CreatePartnerWhatsAppBusinessApiTemplateAsync(string whatsAppBusinessApiAccountId,
             string name,
             TemplateCategory category,
             WhatsAppLanguage language,
-            object components,
+            TemplateComponentObject components,
             CancellationToken cancellationToken = default)
         {
             return await MakeHttpRequestAsync(new CreatePartnerWhatsAppBusinessApiTemplateRequest(_partnerInfo.PartnerId,
@@ -70,12 +70,12 @@ namespace WABA360Dialog
             return await MakeHttpRequestAsync(new GetClientBalanceRequest(_partnerInfo.PartnerId, clientId, fromMonth, fromYear), cancellationToken);
         }
 
-        public async Task<GetPartnerChannelsResponse> GetPartnerChannelsAsync(int limit = 20, int offset = 0, string sort = null, object filters = null, CancellationToken cancellationToken = default)
+        public async Task<GetPartnerChannelsResponse> GetPartnerChannelsAsync(int limit = 20, int offset = 0, string sort = null, GetPartnerChannelsFilter filters = null, CancellationToken cancellationToken = default)
         {
             return await MakeHttpRequestAsync(new GetPartnerChannelsRequest(_partnerInfo.PartnerId, limit, offset, sort, filters), cancellationToken);
         }
 
-        public async Task<GetPartnerClientsResponse> GetPartnerClientsAsync(int limit = 20, int offset = 0, string sort = null, object filters = null, CancellationToken cancellationToken = default)
+        public async Task<GetPartnerClientsResponse> GetPartnerClientsAsync(int limit = 20, int offset = 0, string sort = null, GetPartnerClientsFilter filters = null, CancellationToken cancellationToken = default)
         {
             return await MakeHttpRequestAsync(new GetPartnerClientsRequest(_partnerInfo.PartnerId, limit, offset, sort, filters), cancellationToken);
         }
@@ -85,7 +85,7 @@ namespace WABA360Dialog
             return await MakeHttpRequestAsync(new GetPartnerWebhookUrlRequest(_partnerInfo.PartnerId), cancellationToken);
         }
 
-        public async Task<GetPartnerWhatsAppBusinessApiTemplatesResponse> GetPartnerWhatsAppBusinessApiTemplatesAsync(string whatsAppBusinessApiAccountId, int limit = 20, int offset = 0, string sort = null, object filters = null, CancellationToken cancellationToken = default)
+        public async Task<GetPartnerWhatsAppBusinessApiTemplatesResponse> GetPartnerWhatsAppBusinessApiTemplatesAsync(string whatsAppBusinessApiAccountId, int limit = 1000, int offset = 0, string sort = null, GetPartnerWhatsAppBusinessApiTemplatesFilter filters = null, CancellationToken cancellationToken = default)
         {
             return await MakeHttpRequestAsync(new GetPartnerWhatsAppBusinessApiTemplatesRequest(_partnerInfo.PartnerId, whatsAppBusinessApiAccountId, limit, offset, sort, filters), cancellationToken);
         }

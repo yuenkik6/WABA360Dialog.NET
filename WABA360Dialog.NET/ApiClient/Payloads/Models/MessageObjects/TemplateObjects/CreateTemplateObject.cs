@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.InteractiveObjects;
 using WABA360Dialog.Common.Enums;
 using WABA360Dialog.PartnerClient.Payloads.Enums;
 
@@ -34,12 +35,11 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects
         /// Array of components objects containing the parameters of the message.
         /// </summary>
         [JsonProperty("components")]
-        public IEnumerable<CreateTemplateComponentObject> Components { get; set; }
+        public IEnumerable<TemplateComponentObject> Components { get; set; }
     }
 
-
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class CreateTemplateComponentObject
+    public class TemplateComponentObject
     {
         [JsonProperty("type")]
         public TemplateComponentType Type { get; set; }
@@ -54,7 +54,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects
         public object Example { get; set; }
 
         [JsonProperty("buttons")]
-        public string Buttons { get; set; }
+        public IEnumerable<TemplateButtonObject> Buttons { get; set; }
     }
 
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
@@ -73,7 +73,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects
         public object Example { get; set; }
 
         [JsonProperty("phone_number")]
-        public object PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
     }
 
 }

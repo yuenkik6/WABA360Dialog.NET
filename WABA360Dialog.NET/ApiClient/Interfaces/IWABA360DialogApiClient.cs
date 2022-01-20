@@ -17,14 +17,16 @@ namespace WABA360Dialog.ApiClient.Interfaces
         Task<SendMessageResponse> SendMessageAsync(object message, CancellationToken cancellationToken = default);
         Task<GetMediaResponse> GetMediaAsync(string mediaId, CancellationToken cancellationToken = default);
         Task<UploadMediaResponse> UploadMediaAsync(byte[] fileBytes, string contentType, CancellationToken cancellationToken = default);
+        Task<GetTemplateResponse> GetTemplateAsync(int limit = 1000, int offset = 0, string sort = null, CancellationToken cancellationToken = default);
         Task<CreateTemplateResponse> CreateTemplateAsync(CreateTemplateObject template, CancellationToken cancellationToken = default);
+        Task<DeleteTemplateResponse> DeleteTemplateAsync(string templateName, CancellationToken cancellationToken = default);
 
         Task<UpdateBusinessProfileResponse> UpdateBusinessProfileAsync(
             IEnumerable<string> vertical,
             IEnumerable<string> websites,
             string email,
             string description,
-            string address, 
+            string address,
             CancellationToken cancellationToken = default);
 
         Task<UpdateProfileInfoAboutTextResponse> UpdateProfileInfoAboutTextAsync(string aboutText, CancellationToken cancellationToken = default);

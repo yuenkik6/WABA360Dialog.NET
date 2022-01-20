@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using Newtonsoft.Json;
+using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects;
 using WABA360Dialog.Common.Enums;
 using WABA360Dialog.PartnerClient.Payloads.Base;
 using WABA360Dialog.PartnerClient.Payloads.Enums;
@@ -16,7 +17,7 @@ namespace WABA360Dialog.PartnerClient.Payloads
             string whatsAppBusinessApiAccountId,
             string name,
             TemplateCategory category,
-            object components,
+            TemplateComponentObject components,
             WhatsAppLanguage language
         )
             : base($"partners/{partnerId}/waba_accounts/{whatsAppBusinessApiAccountId}/waba_templates", HttpMethod.Post)
@@ -42,7 +43,7 @@ namespace WABA360Dialog.PartnerClient.Payloads
         public TemplateCategory Category { get; }
 
         [JsonProperty("components")]
-        public object Components { get; }
+        public TemplateComponentObject Components { get; }
 
         [JsonProperty("language")]
         public WhatsAppLanguage Language { get; }

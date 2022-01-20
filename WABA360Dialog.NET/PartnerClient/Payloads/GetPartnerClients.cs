@@ -3,13 +3,14 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using WABA360Dialog.Common.Helpers;
 using WABA360Dialog.PartnerClient.Payloads.Base;
+using WABA360Dialog.PartnerClient.Payloads.Enums;
 using WABA360Dialog.PartnerClient.Payloads.Models;
 
 namespace WABA360Dialog.PartnerClient.Payloads
 {
     public class GetPartnerClientsRequest : PartnerApiRequestBase<GetPartnerClientsResponse>
     {
-        public GetPartnerClientsRequest(string partnerId, int limit = 20, int offset = 0, string sort = "-", object filters = null) : base($"partners/{partnerId}/clients", HttpMethod.Get)
+        public GetPartnerClientsRequest(string partnerId, int limit = 20, int offset = 0, string sort = "-", GetPartnerClientsFilter filters = null) : base($"partners/{partnerId}/clients", HttpMethod.Get)
         {
             PartnerId = partnerId;
             Limit = limit;
@@ -39,9 +40,25 @@ namespace WABA360Dialog.PartnerClient.Payloads
         public string Sort { get; }
 
         [JsonIgnore]
-        public object Filters { get; set; }
+        public GetPartnerClientsFilter Filters { get; }
     }
-    
+
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
+    public class GetPartnerClientsFilter
+    {
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("status")]
+        public ClientStatus Status { get; set; }
+
+        [JsonProperty("organisation")]
+        public string Organisation { get; set; }
+    }
+
     public class GetPartnerClientsResponse : PartnerApiResponseBase
     {
         [JsonProperty("count")]

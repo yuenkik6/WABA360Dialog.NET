@@ -18,7 +18,7 @@ namespace WABA360Dialog.NET.Example.Controllers.Requests
         string TemplateNamespace,
         string TemplateName,
         WhatsAppLanguage Language,
-        List<ComponentObject> Components);
+        List<TemplateMessageComponentObject> Components);
 
     public record SetWabaWebhookRequest(string Url, string HeaderName, string HeaderValue);
 

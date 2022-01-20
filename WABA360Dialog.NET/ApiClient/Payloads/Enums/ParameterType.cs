@@ -11,6 +11,6 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
         date_time = 3,
         image = 4,
         document = 5,
-        video = 6,
+        video = 6
     }
 }

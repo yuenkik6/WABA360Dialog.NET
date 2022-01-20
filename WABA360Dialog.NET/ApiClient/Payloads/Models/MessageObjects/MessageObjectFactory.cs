@@ -178,13 +178,13 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects
             };
         }
 
-        public static MessageObject CreateTemplateMessage(string whatsAppId, string templateNamespace, string templateName, WhatsAppLanguage language, List<ComponentObject> components)
+        public static MessageObject CreateTemplateMessage(string whatsAppId, string templateNamespace, string templateName, WhatsAppLanguage language, List<TemplateMessageComponentObject> components)
         {
             return new MessageObject
             {
                 To = whatsAppId,
                 Type = MessageType.template,
-                Template = new TemplateObject()
+                Template = new TemplateMessageObject()
                 {
                     Namespace = templateNamespace,
                     Name = templateName,

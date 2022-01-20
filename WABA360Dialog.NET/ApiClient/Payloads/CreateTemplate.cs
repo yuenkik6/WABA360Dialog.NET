@@ -5,7 +5,6 @@ using System.Text;
 using Newtonsoft.Json;
 using WABA360Dialog.ApiClient.Payloads.Base;
 using WABA360Dialog.ApiClient.Payloads.Enums;
-using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.InteractiveObjects;
 using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects;
 using WABA360Dialog.Common.Helpers;
 
@@ -23,7 +22,7 @@ namespace WABA360Dialog.ApiClient.Payloads
         public override HttpContent ToHttpContent()
         {
             var payload = JsonHelper.SerializeObjectToJson(Template);
-            
+
             var content = new StringContent(payload, Encoding.UTF8, "application/json");
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
@@ -60,7 +59,6 @@ namespace WABA360Dialog.ApiClient.Payloads
         /// Array of components objects containing the parameters of the message.
         /// </summary>
         [JsonProperty("components")]
-        public IEnumerable<ComponentObject> Components { get; set; }
-        
+        public IEnumerable<TemplateComponentObject> Components { get; set; }
     }
 }

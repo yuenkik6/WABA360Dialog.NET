@@ -13,7 +13,7 @@ namespace WABA360Dialog.PartnerClient.Payloads.Models
         public string ClientId { get; set; }
 
         [JsonProperty("account_mode")]
-        public string AccountMode { get; set; }
+        public AccountMode AccountMode { get; set; }
 
         [JsonProperty("billing_started_at")]
         public DateTime? BillingStartedAt { get; set; }
