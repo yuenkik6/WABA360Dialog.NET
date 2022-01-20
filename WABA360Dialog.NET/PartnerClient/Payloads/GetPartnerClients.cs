@@ -53,10 +53,16 @@ namespace WABA360Dialog.PartnerClient.Payloads
         public string Name { get; set; }
 
         [JsonProperty("status")]
-        public ClientStatus Status { get; set; }
+        public ClientStatus? Status { get; set; }
 
         [JsonProperty("organisation")]
         public string Organisation { get; set; }
+        
+        [JsonProperty("contact_info.email")]
+        public string ContactInfoEmail { get; set; }
+        
+        [JsonProperty("partner_payload")]
+        public string PartnerPayload{ get; set; }
     }
 
     public class GetPartnerClientsResponse : PartnerApiResponseBase

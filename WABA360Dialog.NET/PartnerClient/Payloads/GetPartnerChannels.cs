@@ -54,13 +54,24 @@ namespace WABA360Dialog.PartnerClient.Payloads
         public string ClientId { get; set; }
 
         [JsonProperty("account_mode")]
-        public AccountMode AccountMode { get; set; }
+        public AccountMode? AccountMode { get; set; }
 
         [JsonProperty("status")]
-        public PartnerChannelStatus Status { get; set; }
+        public PartnerChannelStatus? Status { get; set; }
+
+        [JsonProperty("client.contact_info.email")]
+        public string ClientContactInfoEmail { get; set; }
+
+        [JsonProperty("setup_info.phone_number")]
+        public string SetupInfoPhoneNumber { get; set; }
+
+        [JsonProperty("waba_account.id")]
+        public string WhatsAppBusinessApiAccountId { get; set; }
+        
+        [JsonProperty("waba_account.fb_account_status")]
+        public FacebookAccountStatus? WhatsAppBusinessApiAccountFacebookAccountStatus { get; set; }
     }
 
-    
     public class GetPartnerChannelsResponse : PartnerApiResponseBase
     {
         [JsonProperty("count")]
