@@ -6,7 +6,7 @@
         <PackageId>WABA360Dialog.NET</PackageId>
         <Title>WABA360Dialog.NET</Title>
         <RootNamespace>WABA360Dialog</RootNamespace>
-        <PackageVersion>1.0.0-beta.3</PackageVersion>
+        <PackageVersion>1.0.0-beta.4</PackageVersion>
         <Authors>Alex Yuen</Authors>
         <Description>C# .NET Client API Wrapper Classes for 360Dialog WhatsApp Business API and Partner API</Description>
         <PackageTags>360dialog;wrapper;whatsapp;waba;c#</PackageTags>
