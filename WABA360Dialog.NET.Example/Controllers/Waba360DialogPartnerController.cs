@@ -9,15 +9,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Serilog;
-using WABA360Dialog.ApiClient.Payloads.Enums;
-using WABA360Dialog.ApiClient.Payloads.Models;
-using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects;
 using WABA360Dialog.NET.Example.Controllers.Requests;
 using WABA360Dialog.PartnerClient.Converters;
 using WABA360Dialog.PartnerClient.Models;
 using WABA360Dialog.PartnerClient.Payloads;
 using WABA360Dialog.PartnerClient.Payloads.Models;
-using GetClientBalanceRequest = WABA360Dialog.NET.Example.Controllers.Requests.GetClientBalanceRequest;
 
 namespace WABA360Dialog.NET.Example.Controllers
 {
@@ -53,7 +49,7 @@ namespace WABA360Dialog.NET.Example.Controllers
         }
 
         [HttpPost("set-webhook")]
-        public async Task<ActionResult<SetPartnerWebhookUrlResponse>> SetPartnerWebhook([FromBody] SetPartnerWebhookRequest request)
+        public async Task<ActionResult<SetPartnerWebhookUrlResponse>> SetPartnerWebhook([FromBody] Requests.SetPartnerWebhookRequest request)
         {
             var client = new WABA360DialogPartnerClient(new PartnerInfo(_configuration["WABA360Dialog:PartnerId"]), _configuration["WABA360Dialog:PartnerAccessToken"]);
 
@@ -62,8 +58,26 @@ namespace WABA360Dialog.NET.Example.Controllers
             return Ok(response);
         }
 
+        [HttpPost("get-partner-clients")]
+        public async Task<ActionResult<GetClientBalanceResponse>> GetPartnerClients([FromBody] Requests.GetPartnerClientsRequest request)
+        {
+            var client = new WABA360DialogPartnerClient(new PartnerInfo(_configuration["WABA360Dialog:PartnerId"]), _configuration["WABA360Dialog:PartnerAccessToken"]);
+            var response = await client.GetPartnerClientsAsync(request.Limit, request.Offset, request.Sort, request.Filters);
+
+            return Ok(response);
+        }
+
+        [HttpPost("get-partner-channels")]
+        public async Task<ActionResult<GetClientBalanceResponse>> GetPartnerChannels([FromBody] Requests.GetPartnerChannelsRequest request)
+        {
+            var client = new WABA360DialogPartnerClient(new PartnerInfo(_configuration["WABA360Dialog:PartnerId"]), _configuration["WABA360Dialog:PartnerAccessToken"]);
+            var response = await client.GetPartnerChannelsAsync(request.Limit, request.Offset, request.Sort, request.Filters);
+
+            return Ok(response);
+        }
+
         [HttpPost("get-client-balance")]
-        public async Task<ActionResult<GetClientBalanceResponse>> GetClientBalance([FromBody] GetClientBalanceRequest request)
+        public async Task<ActionResult<GetClientBalanceResponse>> GetClientBalance([FromBody] Requests.GetClientBalanceRequest request)
         {
             var client = new WABA360DialogPartnerClient(new PartnerInfo(_configuration["WABA360Dialog:PartnerId"]), _configuration["WABA360Dialog:PartnerAccessToken"]);
             var response = await client.GetClientBalanceAsync(request.ClientId, request.FromMonth, request.FromYear);

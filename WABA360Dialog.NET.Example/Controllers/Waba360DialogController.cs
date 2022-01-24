@@ -71,11 +71,9 @@ namespace WABA360Dialog.NET.Example.Controllers
         public async Task<ActionResult<SendMessageResponse>> SendImage([FromBody] SendMediaMessageRequest request)
         {
             var client = new WABA360DialogApiClient(_configuration["WABA360Dialog:ChannelKey"]);
-
-
+            
             var response = await client.SendMessageAsync(MessageObjectFactory.CreateImageMessageByLink(request.WhatsappId, request.Link, request.Caption));
-
-
+            
             return Ok(response);
         }
 
@@ -83,10 +81,8 @@ namespace WABA360Dialog.NET.Example.Controllers
         public async Task<ActionResult<SendMessageResponse>> SendDocument([FromBody] SendDocumentMessageRequest request)
         {
             var client = new WABA360DialogApiClient(_configuration["WABA360Dialog:ChannelKey"]);
-
-
+            
             var response = await client.SendMessageAsync(MessageObjectFactory.CreateDocumentMessageByLink(request.WhatsappId, request.Filename, request.Link, request.Caption));
-
 
             return Ok(response);
         }
@@ -95,11 +91,9 @@ namespace WABA360Dialog.NET.Example.Controllers
         public async Task<ActionResult<SendMessageResponse>> SendSticker([FromBody] SendNoCaptionMediaMessageRequest request)
         {
             var client = new WABA360DialogApiClient(_configuration["WABA360Dialog:ChannelKey"]);
-
-
+            
             var response = await client.SendMessageAsync(MessageObjectFactory.CreateStickerMessageByLink(request.WhatsappId, request.Link));
-
-
+            
             return Ok(response);
         }
 

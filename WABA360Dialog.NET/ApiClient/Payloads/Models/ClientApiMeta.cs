@@ -9,5 +9,14 @@ namespace WABA360Dialog.ApiClient.Payloads.Models
 
         [JsonProperty("version")]
         public string Version { get; set; }
+        
+        [JsonProperty("success")]
+        public bool? Success { get; set; }
+
+        [JsonProperty("http_code")]
+        public int? HttpCode { get; set; }
+
+        [JsonProperty("developer_message")]
+        public string DeveloperMessage { get; set; }
     }
 }
