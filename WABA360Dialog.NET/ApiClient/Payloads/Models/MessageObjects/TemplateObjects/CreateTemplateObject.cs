@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using WABA360Dialog.ApiClient.Payloads.Enums;
 using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.InteractiveObjects;
 using WABA360Dialog.Common.Enums;
 using WABA360Dialog.PartnerClient.Payloads.Enums;

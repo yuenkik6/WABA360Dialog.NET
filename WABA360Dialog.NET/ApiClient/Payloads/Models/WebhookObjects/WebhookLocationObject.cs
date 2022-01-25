@@ -31,5 +31,12 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
         /// </summary>
         [JsonProperty("address")]
         public string Address { get; set; }
+        
+        /// <summary>
+        /// Optional.
+        /// Url of the location.
+        /// </summary>
+        [JsonProperty("url")]
+        public string Url { get; set; }
     }
 }

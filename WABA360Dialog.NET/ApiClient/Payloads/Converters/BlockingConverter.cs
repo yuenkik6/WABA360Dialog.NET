@@ -17,7 +17,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Converters
         }
     }
 
-    public static class EnumStringConverter
+    public static partial class EnumStringConverter
     {
         private static readonly IReadOnlyDictionary<string, Blocking> BlockingStringToEnum =
             new Dictionary<string, Blocking>

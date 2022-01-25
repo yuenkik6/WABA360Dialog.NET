@@ -34,7 +34,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
         }
     }
 
-    public static class EnumStringConverter
+    public static partial class EnumStringConverter
     {
         private static readonly IReadOnlyDictionary<string, MessageType> MessageTypeStringToEnum =
             new Dictionary<string, MessageType>

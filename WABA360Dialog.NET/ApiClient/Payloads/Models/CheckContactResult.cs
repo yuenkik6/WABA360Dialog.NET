@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using WABA360Dialog.ApiClient.Payloads.Enums;
 
 namespace WABA360Dialog.ApiClient.Payloads.Models
 {
@@ -11,6 +12,6 @@ namespace WABA360Dialog.ApiClient.Payloads.Models
         public string WaId { get; set; }
 
         [JsonProperty("status")]
-        public string Status { get; set; }
+        public ContactStatus Status { get; set; }
     }
 }

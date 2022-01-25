@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects;
+using WABA360Dialog.ApiClient.Payloads.Enums;
 using WABA360Dialog.Common.Converters.Base;
 
-namespace WABA360Dialog.ApiClient.Payloads.Models.Converters
+namespace WABA360Dialog.ApiClient.Payloads.Converters
 {
     internal class TemplateButtonTypeConverter : EnumConverter<TemplateButtonType>
     {

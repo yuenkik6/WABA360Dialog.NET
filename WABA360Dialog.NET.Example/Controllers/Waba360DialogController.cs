@@ -52,7 +52,7 @@ namespace WABA360Dialog.NET.Example.Controllers
         {
             var client = new WABA360DialogApiClient(_configuration["WABA360Dialog:ChannelKey"]);
 
-            var checkContactsResponse = await client.CheckContactsAsync(new[] { request.PhoneNumber }, Blocking.wait);
+            CheckContactsResponse checkContactsResponse = await client.CheckContactsAsync(new[] { request.PhoneNumber }, Blocking.wait);
 
             return Ok(checkContactsResponse);
         }
