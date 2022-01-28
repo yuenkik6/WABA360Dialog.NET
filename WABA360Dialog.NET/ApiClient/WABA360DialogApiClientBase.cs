@@ -187,8 +187,8 @@ namespace WABA360Dialog.ApiClient
             var result = new TResponse
             {
                 FileBytes = responseAsByte,
-                ContentType = httpResponse.Content.Headers.ContentType?.MediaType,
-                Filename = httpResponse.Content.Headers.ContentDisposition?.FileName,
+                ContentType = httpResponse.Content.Headers.ContentType,
+                Filename = httpResponse.Content.Headers.ContentDisposition,
                 ContentLength = httpResponse.Content.Headers.ContentLength ?? 0,
             };
             

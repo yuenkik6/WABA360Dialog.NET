@@ -50,22 +50,22 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
         public WebhookTextObject Text { get; set; }
 
         [JsonProperty("audio")]
-        public WebhookAudioObject WebhookAudioObject { get; set; }
+        public WebhookMediaObject WebhookAudioObject { get; set; }
 
         [JsonProperty("document")]
-        public WebhookDocumentObject WebhookDocumentObject { get; set; }
+        public WebhookMediaObject WebhookDocumentObject { get; set; }
 
         [JsonProperty("image")]
-        public WebhookImageObject WebhookImageObject { get; set; }
+        public WebhookMediaObject WebhookImageObject { get; set; }
 
         [JsonProperty("location")]
-        public WebhookLocationObject LocationObject { get; set; }
+        public WebhookMediaObject LocationObject { get; set; }
 
         [JsonProperty("video")]
-        public WebhookVideoObject WebhookVideoObject { get; set; }
+        public WebhookMediaObject WebhookVideoObject { get; set; }
 
         [JsonProperty("voice")]
-        public WebhookVoiceObject WebhookVoiceObject { get; set; }
+        public WebhookMediaObject WebhookVoiceObject { get; set; }
 
         [JsonProperty("system")]
         public WebhookSystemObject WebhookSystemObject { get; set; }
