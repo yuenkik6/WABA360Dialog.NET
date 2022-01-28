@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.ContactObjects;
 using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.InteractiveObjects;
+using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.LocationObjects;
 using WABA360Dialog.Common.Enums;
 using WABA360Dialog.PartnerClient.Payloads;
 
@@ -14,7 +16,9 @@ namespace WABA360Dialog.NET.Example.Controllers.Requests
     public record SendNoCaptionMediaMessageRequest(string WhatsappId, string Link);
 
     public record SendDocumentMessageRequest(string WhatsappId, string Link, string Filename, string Caption);
-
+    public record SendContact(string WhatsappId, ContactObject ContactObject);
+    public record SendLocationMessageRequest(string WhatsappId, double longitude, double latitude, string name = null, string address = null);
+    
     public record SendTemplateMessageRequest(string WhatsappId,
         string TemplateNamespace,
         string TemplateName,

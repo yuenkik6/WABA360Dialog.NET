@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using WABA360Dialog.ApiClient.Payloads.Enums;
+using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.ContactObjects;
 using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.InteractiveObjects;
+using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.LocationObjects;
 using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.MediaObjects;
 using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects;
 using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TextObjects;
@@ -202,6 +205,34 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects
                 To = whatsappId,
                 Type = MessageType.interactive,
                 Interactive = interactiveObject
+            };
+        }
+
+        public static MessageObject CreateLocationMessage(string whatsappId, double latitude, double longitude, string name = null, string address = null)
+        {
+            return new MessageObject
+            {
+                RecipientType = "individual",
+                To = whatsappId,
+                Type = MessageType.location,
+                Location = new LocationObject()
+                {
+                    Latitude = latitude,
+                    Longitude = longitude,
+                    Name = name,
+                    Address = address,
+                }
+            };
+        }
+
+        public static MessageObject CreateContactsMessage(string whatsappId, ContactObject contact)
+        {
+            return new MessageObject
+            {
+                RecipientType = "individual",
+                To = whatsappId,
+                Type = MessageType.contacts,
+                Contacts = contact
             };
         }
     }

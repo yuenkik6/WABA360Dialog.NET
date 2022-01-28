@@ -11,7 +11,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
         text = 1,
         audio = 2,
         video = 3,
-        contact = 4,
+        contacts = 4,
         document = 5,
         image = 6,
         location = 7,
@@ -41,7 +41,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
             {
                 { "unknown", MessageType.unknown },
                 { "audio", MessageType.audio },
-                { "contact", MessageType.contact },
+                { "contacts", MessageType.contacts },
                 { "document", MessageType.document },
                 { "image", MessageType.image },
                 { "location", MessageType.location },
@@ -57,7 +57,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
             new Dictionary<MessageType, string>
             {
                 { MessageType.audio, "audio" },
-                { MessageType.contact, "contact" },
+                { MessageType.contacts, "contacts" },
                 { MessageType.document, "document" },
                 { MessageType.image, "image" },
                 { MessageType.location, "location" },

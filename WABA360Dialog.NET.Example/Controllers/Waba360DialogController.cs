@@ -17,6 +17,7 @@ using WABA360Dialog.ApiClient.Payloads;
 using WABA360Dialog.ApiClient.Payloads.Enums;
 using WABA360Dialog.ApiClient.Payloads.Models;
 using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects;
+using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.LocationObjects;
 using WABA360Dialog.NET.Example.Controllers.Requests;
 using SendMessageRequest = WABA360Dialog.NET.Example.Controllers.Requests.SendMessageRequest;
 
@@ -117,6 +118,44 @@ namespace WABA360Dialog.NET.Example.Controllers
             var client = new WABA360DialogApiClient(_configuration["WABA360Dialog:ChannelKey"]);
 
             var response = await client.SendMessageAsync(MessageObjectFactory.CreateInteractiveMessage(request.WhatsappId, request.InteractiveObject));
+
+            return Ok(response);
+        }
+
+        [HttpPost("message/send-location")]
+        public async Task<ActionResult<SendMessageResponse>> SendLocation([FromBody] SendLocationMessageRequest request)
+        {
+            var client = new WABA360DialogApiClient(_configuration["WABA360Dialog:ChannelKey"]);
+
+            var response = await client.SendMessageAsync(new MessageObject
+            {
+                RecipientType = "individual",
+                To = request.WhatsappId,
+                Type = MessageType.location,
+                Location = new LocationObject()
+                {
+                    Longitude = request.longitude,
+                    Latitude = request.latitude,
+                    Name = request.name,
+                    Address = request.address,
+                }
+            });
+
+            return Ok(response);
+        }
+
+        [HttpPost("message/send-contact")]
+        public async Task<ActionResult<SendMessageResponse>> SendContact([FromBody] SendContact request)
+        {
+            var client = new WABA360DialogApiClient(_configuration["WABA360Dialog:ChannelKey"]);
+
+            var response = await client.SendMessageAsync(new MessageObject
+            {
+                RecipientType = "individual",
+                To = request.WhatsappId,
+                Type = MessageType.contacts,
+                Contacts = request.ContactObject
+            });
 
             return Ok(response);
         }

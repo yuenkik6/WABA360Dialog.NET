@@ -17,7 +17,7 @@ var createMessageResposne = await client.SendMessageAsync(MessageObjectFactory.C
 
 - **WABA360DialogPartnerClient.cs** (360Dialog Partner API)
 ```c#
-var partnerClient = new WABA360DialogPartnerClient("partner-id","access-token"));
+var partnerClient = new WABA360DialogPartnerClient(new PartnerInfo("partner-id"),"access-token"));
 // or
 var partnerClient = new WABA360DialogPartnerClient(new PartnerInfo("partner-id", "username", "password")); // For auto login
 
@@ -77,6 +77,8 @@ MessageObjectFactory.CreateStickerMessageByMediaId(string whatsAppId, string med
 MessageObjectFactory.CreateStickerMessageByLink(string whatsAppId, string stickerLink, ProviderObject provider = null);
 MessageObjectFactory.CreateTemplateMessage(string whatsAppId, string templateNamespace, string templateName, WhatsAppLanguage language, List<ComponentObject> components);
 MessageObjectFactory.CreateInteractiveMessage(string whatsappId, InteractiveObject interactiveObject);
+MessageObjectFactory.CreateLocationMessage(string whatsappId, double latitude, double longitude, string name = null, string address = null);
+MessageObjectFactory.CreateContactsMessage(string whatsappId, ContactObject contact);
 ```
 
 ## Enums

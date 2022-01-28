@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using WABA360Dialog.ApiClient.Payloads.Enums;
+using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.ContactObjects;
 
 namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
 {
@@ -69,6 +70,9 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
 
         [JsonProperty("system")]
         public WebhookSystemObject WebhookSystemObject { get; set; }
+
+        [JsonProperty("contacts")]
+        public ContactObject WebhookContactObject { get; set; }
 
         [JsonProperty("interactive")]
         public WebhookInteractiveObject Interactive { get; set; }

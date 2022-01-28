@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.ContactObjects
 {
@@ -10,7 +11,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.ContactObjects
         /// Full contact address(es) —see AddressObject.
         /// </summary>
         [JsonProperty("addresses")]
-        public AddressObject Address { get; set; }
+        public IEnumerable<AddressObject> Address { get; set; }
 
         /// <summary>
         /// Optional.
@@ -24,7 +25,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.ContactObjects
         /// Contact email address(es) —see EmailObject.
         /// </summary>
         [JsonProperty("emails")]
-        public EmailObject Email { get; set; }
+        public IEnumerable<EmailObject> Email { get; set; }
 
         /// <summary>
         /// Required.
@@ -42,16 +43,17 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.ContactObjects
 
         /// <summary>
         /// Optional.
+        /// Optional.
         /// Contact phone number(s) —see PhoneObject.
         /// </summary>
         [JsonProperty("phones")]
-        public PhoneObject Phones { get; set; }
+        public IEnumerable<PhoneObject> Phones { get; set; }
 
         /// <summary>
         /// Optional.
         /// Contact URL(s) —see UrlObject.
         /// </summary>
         [JsonProperty("urls")]
-        public UrlObject Urls { get; set; }
+        public IEnumerable<UrlObject> Urls { get; set; }
     }
 }
