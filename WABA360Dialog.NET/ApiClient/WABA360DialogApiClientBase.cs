@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Mime;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -182,10 +183,16 @@ namespace WABA360Dialog.ApiClient
 
             var responseAsByte = await httpResponse.Content.ReadAsByteArrayAsync();
 
-            return new TResponse
+
+            var result = new TResponse
             {
-                FileBytes = responseAsByte
+                FileBytes = responseAsByte,
+                ContentType = httpResponse.Content.Headers.ContentType?.MediaType,
+                Filename = httpResponse.Content.Headers.ContentDisposition?.FileName,
+                ContentLength = httpResponse.Content.Headers.ContentLength ?? 0,
             };
+            
+            return result;
         }
     }
 }

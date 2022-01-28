@@ -20,9 +20,11 @@ namespace WABA360Dialog.NET.Example.Controllers.Requests
         string TemplateName,
         WhatsAppLanguage Language,
         List<TemplateMessageComponentObject> Components);
+    
+    public record SendInteractiveMessageRequest(string WhatsappId, InteractiveObject InteractiveObject);
+    public record GetMediaByIdRequest(string MediaId);
 
     public record SetWabaWebhookRequest(string Url, string HeaderName, string HeaderValue);
-
     public record SetPartnerWebhookRequest(string Url);
 
     public record GetClientBalanceRequest(string ClientId, int FromMonth, int FromYear);

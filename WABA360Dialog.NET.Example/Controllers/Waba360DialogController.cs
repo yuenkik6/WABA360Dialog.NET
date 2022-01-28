@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Serilog;
+using WABA360Dialog.ApiClient.Exceptions;
 using WABA360Dialog.ApiClient.Payloads;
 using WABA360Dialog.ApiClient.Payloads.Enums;
 using WABA360Dialog.ApiClient.Payloads.Models;
@@ -71,9 +75,9 @@ namespace WABA360Dialog.NET.Example.Controllers
         public async Task<ActionResult<SendMessageResponse>> SendImage([FromBody] SendMediaMessageRequest request)
         {
             var client = new WABA360DialogApiClient(_configuration["WABA360Dialog:ChannelKey"]);
-            
+
             var response = await client.SendMessageAsync(MessageObjectFactory.CreateImageMessageByLink(request.WhatsappId, request.Link, request.Caption));
-            
+
             return Ok(response);
         }
 
@@ -81,7 +85,7 @@ namespace WABA360Dialog.NET.Example.Controllers
         public async Task<ActionResult<SendMessageResponse>> SendDocument([FromBody] SendDocumentMessageRequest request)
         {
             var client = new WABA360DialogApiClient(_configuration["WABA360Dialog:ChannelKey"]);
-            
+
             var response = await client.SendMessageAsync(MessageObjectFactory.CreateDocumentMessageByLink(request.WhatsappId, request.Filename, request.Link, request.Caption));
 
             return Ok(response);
@@ -91,9 +95,9 @@ namespace WABA360Dialog.NET.Example.Controllers
         public async Task<ActionResult<SendMessageResponse>> SendSticker([FromBody] SendNoCaptionMediaMessageRequest request)
         {
             var client = new WABA360DialogApiClient(_configuration["WABA360Dialog:ChannelKey"]);
-            
+
             var response = await client.SendMessageAsync(MessageObjectFactory.CreateStickerMessageByLink(request.WhatsappId, request.Link));
-            
+
             return Ok(response);
         }
 
@@ -103,6 +107,27 @@ namespace WABA360Dialog.NET.Example.Controllers
             var client = new WABA360DialogApiClient(_configuration["WABA360Dialog:ChannelKey"]);
 
             var response = await client.SendMessageAsync(MessageObjectFactory.CreateTemplateMessage(request.WhatsappId, request.TemplateNamespace, request.TemplateName, request.Language, request.Components));
+
+            return Ok(response);
+        }
+
+        [HttpPost("message/send-interactive")]
+        public async Task<ActionResult<SendMessageResponse>> SendInteractive([FromBody] SendInteractiveMessageRequest request)
+        {
+            var client = new WABA360DialogApiClient(_configuration["WABA360Dialog:ChannelKey"]);
+
+            var response = await client.SendMessageAsync(MessageObjectFactory.CreateInteractiveMessage(request.WhatsappId, request.InteractiveObject));
+
+            return Ok(response);
+        }
+
+
+        [HttpPost("get-media")]
+        public async Task<ActionResult<GetMediaResponse>> GetMedia([FromBody] GetMediaByIdRequest request)
+        {
+            var client = new WABA360DialogApiClient(_configuration["WABA360Dialog:ChannelKey"]);
+
+            var response = await client.GetMediaAsync(request.MediaId);
 
             return Ok(response);
         }
