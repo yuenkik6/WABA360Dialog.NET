@@ -68,6 +68,9 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
         [JsonProperty("voice")]
         public WebhookMediaObject WebhookVoiceObject { get; set; }
 
+        [JsonProperty("sticker")]
+        public WebhookMediaObject WebhookStickerObject { get; set; }
+
         [JsonProperty("system")]
         public WebhookSystemObject WebhookSystemObject { get; set; }
 
