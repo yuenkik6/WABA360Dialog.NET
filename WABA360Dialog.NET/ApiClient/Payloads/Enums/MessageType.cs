@@ -18,7 +18,9 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
         sticker = 8,
         template = 9,
         interactive = 10,
-        hsm = 11
+        button = 11,
+        hsm = 12,
+        
     }
 
     internal class MessageTypeConverter : EnumConverter<MessageType>
@@ -50,6 +52,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
                 { "text", MessageType.text },
                 { "video", MessageType.video },
                 { "interactive", MessageType.interactive },
+                { "button", MessageType.button },
                 { "hsm", MessageType.hsm }
             };
 
@@ -66,6 +69,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
                 { MessageType.text, "text" },
                 { MessageType.video, "video" },
                 { MessageType.interactive, "interactive" },
+                { MessageType.button, "button" },
                 { MessageType.hsm, "hsm" }
             };
 

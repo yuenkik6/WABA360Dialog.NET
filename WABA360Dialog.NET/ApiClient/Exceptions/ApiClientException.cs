@@ -13,7 +13,7 @@ namespace WABA360Dialog.ApiClient.Exceptions
             int httpStatusCode,
             string requestBody,
             string responseBody)
-            : base(requestPath, httpStatusCode, responseBody, requestBody)
+            : base(requestPath, httpStatusCode, requestBody, responseBody)
         {
             Error = error;
             Meta = meta;
@@ -24,7 +24,7 @@ namespace WABA360Dialog.ApiClient.Exceptions
             int httpStatusCode,
             string requestBody,
             string responseBody)
-            : base(requestPath, httpStatusCode, responseBody, requestBody)
+            : base(requestPath, httpStatusCode, requestBody, responseBody)
         {
         }
 

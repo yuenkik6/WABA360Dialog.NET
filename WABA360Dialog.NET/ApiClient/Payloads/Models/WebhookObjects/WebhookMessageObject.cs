@@ -79,5 +79,8 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
 
         [JsonProperty("interactive")]
         public WebhookInteractiveObject Interactive { get; set; }
+        
+        [JsonProperty("button")]
+        public WebhookTemplateButtonReplyObject Button { get; set; }
     }
 }

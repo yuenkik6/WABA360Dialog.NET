@@ -11,7 +11,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects
         /// <summary>
         /// Required.
         /// Describes the parameter type.
-        /// Values: text, currency, date_time, image, document, video
+        /// Values: text, currency, date_time, image, document, video & payload
         /// The media types (image, document and video) follow the same format as those used in standard media messages, see the Media documentation for more information. Only PDF documents are currently supported for media message templates.
         /// </summary>
         [JsonProperty("type")]
@@ -23,6 +23,20 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects
         /// </summary>
         [JsonProperty("text")]
         public string Text { get; set; }
+        
+        /// <summary>
+        /// Required when type is set to payload for quick_reply buttons.
+        /// Developer-defined payload that will be returned when the button is clicked in addition to the display text on the button.
+        /// </summary>
+        [JsonProperty("payload")]
+        public string Payload { get; set; }
+
+        /// <summary>
+        /// Required when type is set to image.
+        /// The media object containing image.
+        /// </summary>
+        [JsonProperty("image")]
+        public MediaObject Image { get; set; }
 
         /// <summary>
         /// Required when type is set to audio.

@@ -31,6 +31,6 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
         /// - referral_conversion: indicates that the conversation originated from a free entry point. These conversations are always user-initiated.
         /// </summary>
         [JsonProperty("category")]
-        public bool Category { get; set; }
+        public string Category { get; set; }
     }
 }

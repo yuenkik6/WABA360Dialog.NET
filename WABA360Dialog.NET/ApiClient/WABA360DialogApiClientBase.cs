@@ -130,11 +130,18 @@ namespace WABA360Dialog.ApiClient
             var responseAsString = await httpResponse.Content.ReadAsStringAsync();
             JsonHelper.TryDeserializeJson<TResponse>(responseAsString, out var response);
 
-            if (response == null)
-                throw new ApiClientException(urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
+            if (!httpResponse.IsSuccessStatusCode || response == null)
+            {
+                if (!string.IsNullOrWhiteSpace(responseAsString))
+                {
+                    JsonHelper.TryDeserializeJson<ErrorClientApiResponse>(responseAsString, out var errorResponse);
+                    if (errorResponse != null)
+                        throw new ApiClientException(errorResponse.Error, errorResponse.Meta, urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
+                }
 
-            if (!httpResponse.IsSuccessStatusCode)
-                throw new ApiClientException(response.Error, response.Meta, urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
+                throw new ApiClientException(urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
+            }
+
 
             return response;
         }
@@ -181,8 +188,21 @@ namespace WABA360Dialog.ApiClient
                 }
             }
 
-            var responseAsByte = await httpResponse.Content.ReadAsByteArrayAsync();
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                var responseAsString = await httpResponse.Content.ReadAsStringAsync();
+                if (!string.IsNullOrWhiteSpace(responseAsString))
+                {
+                    JsonHelper.TryDeserializeJson<ErrorClientApiResponse>(responseAsString, out var errorResponse);
+                    if (errorResponse != null)
+                        throw new ApiClientException(errorResponse.Error, errorResponse.Meta, urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
+                }
 
+                throw new ApiClientException(urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
+            }
+
+
+            var responseAsByte = await httpResponse.Content.ReadAsByteArrayAsync();
 
             var result = new TResponse
             {
@@ -191,7 +211,7 @@ namespace WABA360Dialog.ApiClient
                 ContentDisposition = httpResponse.Content.Headers.ContentDisposition,
                 ContentLength = httpResponse.Content.Headers.ContentLength ?? 0,
             };
-            
+
             return result;
         }
     }

@@ -14,4 +14,8 @@ namespace WABA360Dialog.ApiClient.Payloads.Base
         [JsonProperty("meta")]
         public ClientApiMeta Meta { get; set; }
     }
+    
+    public class ErrorClientApiResponse : ClientApiResponseBase
+    {
+    }
 }

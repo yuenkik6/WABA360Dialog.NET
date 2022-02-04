@@ -24,6 +24,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Converters
                 { "image", ParameterType.image },
                 { "document", ParameterType.document },
                 { "video", ParameterType.video },
+                { "payload", ParameterType.payload },
             };
 
 
@@ -35,6 +36,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Converters
                 { ParameterType.date_time, "date_time" },
                 { ParameterType.image, "image" },
                 { ParameterType.document, "document" },
+                { ParameterType.payload, "payload" },
             };
 
         public static string GetString(this ParameterType status) =>

@@ -31,6 +31,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Converters
                 { TemplateComponentType.BODY, "BODY" },
                 { TemplateComponentType.HEADER, "HEADER" },
                 { TemplateComponentType.FOOTER, "FOOTER" },
+                { TemplateComponentType.BUTTONS, "BUTTONS" },
             };
 
         public static string GetString(this TemplateComponentType status) =>

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using WABA360Dialog.ApiClient.Payloads.Enums;
 
 namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
 {
@@ -8,12 +9,12 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
         /// button_reply, list_reply
         /// </summary>
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public InteractiveReplyType Type { get; set; }
 
         [JsonProperty("button_reply")]
         public WebhookButtonReplyObject ButtonReply { get; set; }
 
         [JsonProperty("list_reply")]
-        public WebhookButtonReplyObject ListReply { get; set; }
+        public WebhookReplyListObject ListReply { get; set; }
     }
 }

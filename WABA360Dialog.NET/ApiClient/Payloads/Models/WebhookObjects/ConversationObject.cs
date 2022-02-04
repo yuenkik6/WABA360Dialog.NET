@@ -10,6 +10,10 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
         [JsonProperty("id")]
         public string Id { get; set; }
 
+
+        [JsonProperty("expiration_timestamp")]
+        public long ExpirationTimestamp { get; set; }
+
         /// <summary>
         /// Describes where the conversation originated from. See origin object for more information.
         /// </summary>
