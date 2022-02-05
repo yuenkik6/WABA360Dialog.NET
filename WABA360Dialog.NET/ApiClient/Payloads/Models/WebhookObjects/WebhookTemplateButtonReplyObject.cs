@@ -4,7 +4,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
 {
     public class WebhookTemplateButtonReplyObject
     {
-        [JsonProperty("id")]
+        [JsonProperty("payload")]
         public string Payload { get; set; }
         
         [JsonProperty("text")]
