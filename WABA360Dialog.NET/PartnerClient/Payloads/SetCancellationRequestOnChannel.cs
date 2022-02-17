@@ -9,7 +9,7 @@ namespace WABA360Dialog.PartnerClient.Payloads
 {
     public class SetCancellationRequestOnChannelRequest : PartnerApiRequestBase<SetCancellationRequestOnChannelResponse>
     {
-        public SetCancellationRequestOnChannelRequest(string partnerId, string clientId, string channelId, bool enabled) : base($"partners/{partnerId}/clients/{clientId}/channels/{channelId}/control/cancellation_request", HttpMethod.Get)
+        public SetCancellationRequestOnChannelRequest(string partnerId, string clientId, string channelId, bool enabled) : base($"partners/{partnerId}/clients/{clientId}/channels/{channelId}/control/cancellation_request", HttpMethod.Post)
         {
             PartnerId = partnerId;
             ClientId = clientId;

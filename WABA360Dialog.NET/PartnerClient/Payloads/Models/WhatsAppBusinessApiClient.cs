@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using WABA360Dialog.PartnerClient.Payloads.Enums;
 
 namespace WABA360Dialog.PartnerClient.Payloads.Models
@@ -30,13 +31,13 @@ namespace WABA360Dialog.PartnerClient.Payloads.Models
         public string PartnerPayload { get; set; }
 
         [JsonProperty("created_at")]
-        public string CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         [JsonProperty("created_by")]
         public CreatedBy CreatedBy { get; set; }
 
         [JsonProperty("modified_at")]
-        public string ModifiedAt { get; set; }
+        public DateTime ModifiedAt { get; set; }
 
         [JsonProperty("modified_by")]
         public ModifiedBy ModifiedBy { get; set; }

@@ -84,6 +84,11 @@ namespace WABA360Dialog
         {
             return await MakeHttpRequestAsync(new GetPartnerWebhookUrlRequest(_partnerInfo.PartnerId), cancellationToken);
         }
+        
+        public async Task<SetPartnerWebhookUrlResponse> SetPartnerWebhookUrlAsync(string webhookUrl, CancellationToken cancellationToken = default)
+        {
+            return await MakeHttpRequestAsync(new SetPartnerWebhookUrlRequest(_partnerInfo.PartnerId, webhookUrl), cancellationToken);
+        }
 
         public async Task<GetPartnerWhatsAppBusinessApiTemplatesResponse> GetPartnerWhatsAppBusinessApiTemplatesAsync(string whatsAppBusinessApiAccountId, int limit = 1000, int offset = 0, string sort = null, GetPartnerWhatsAppBusinessApiTemplatesFilter filters = null, CancellationToken cancellationToken = default)
         {
@@ -100,14 +105,34 @@ namespace WABA360Dialog
             return await MakeHttpRequestAsync(new SetCancellationRequestOnChannelRequest(_partnerInfo.PartnerId, clientId, channelId, enabled), cancellationToken);
         }
 
-        public async Task<SetPartnerWebhookUrlResponse> SetPartnerWebhookUrlAsync(string webhookUrl, CancellationToken cancellationToken = default)
-        {
-            return await MakeHttpRequestAsync(new SetPartnerWebhookUrlRequest(_partnerInfo.PartnerId, webhookUrl), cancellationToken);
-        }
-
         public async Task<UpdateClientResponse> UpdateClientAsync(string clientId, string partnerPayload, CancellationToken cancellationToken = default)
         {
             return await MakeHttpRequestAsync(new UpdateClientRequest(_partnerInfo.PartnerId, clientId, partnerPayload), cancellationToken);
+        }
+
+        public async Task<GetApiKeyByChannelResponse> GetApiKeyByChannelAsync(string clientId, CancellationToken cancellationToken = default)
+        {
+            return await MakeHttpRequestAsync(new GetApiKeyByChannelRequest(_partnerInfo.PartnerId, clientId), cancellationToken);
+        }
+
+        public async Task<CreateApiKeyByChannelResponse> CreateApiKeyByChannelAsync(string clientId, CancellationToken cancellationToken = default)
+        {
+            return await MakeHttpRequestAsync(new CreateApiKeyByChannelRequest(_partnerInfo.PartnerId, clientId), cancellationToken);
+        }
+
+        public async Task<GetPartnerPublicDataResponse> GetPartnerPublicDataAsync(CancellationToken cancellationToken = default)
+        {
+            return await MakeHttpRequestAsync(new GetPartnerPublicDataRequest(_partnerInfo.PartnerId), cancellationToken);
+        }
+
+        public async Task<PatchPartnerPublicDataResponse> PatchPartnerPublicDataAsync(string webhookUrl, string partnerRedirectUrl, CancellationToken cancellationToken = default)
+        {
+            return await MakeHttpRequestAsync(new PatchPartnerPublicDataRequest(_partnerInfo.PartnerId, webhookUrl, partnerRedirectUrl), cancellationToken);
+        }
+
+        public async Task<DeleteApiKeyByChannelResponse> DeleteApiKeyByChannelAsync(string clientId, CancellationToken cancellationToken = default)
+        {
+            return await MakeHttpRequestAsync(new DeleteApiKeyByChannelRequest(_partnerInfo.PartnerId, clientId), cancellationToken);
         }
 
         public async Task<TokenResponse> RequestOAuthTokenAsync(string username, string password, CancellationToken cancellationToken = default)

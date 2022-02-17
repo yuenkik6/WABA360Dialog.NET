@@ -46,6 +46,12 @@ namespace WABA360Dialog.PartnerClient.Payloads
         [JsonProperty("estimated_template_cost")]
         public decimal EstimatedTemplateCost { get; set; }
 
+        [JsonProperty("bi_price_for_currency_and_client_country")]
+        public decimal BiPriceForCurrencyAndClientCountry { get; set; }
+
+        [JsonProperty("ui_price_for_currency_and_client_country")]
+        public decimal UiPriceForCurrencyAndClientCountry { get; set; }
+
         [JsonProperty("usage")]
         public IEnumerable<Usage> Usage { get; set; }
     }
