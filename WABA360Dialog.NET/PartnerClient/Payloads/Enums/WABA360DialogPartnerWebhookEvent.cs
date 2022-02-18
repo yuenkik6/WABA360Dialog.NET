@@ -12,5 +12,8 @@ namespace WABA360Dialog.PartnerClient.Payloads.Enums
         CancellationRequest = 3,
         CancellationRevoke = 4,
         CancellationProcessed = 5,
+        ChannelCreated = 6,
+        ChannelRunning = 7,
+        ChannelReady = 8,
     }
 }

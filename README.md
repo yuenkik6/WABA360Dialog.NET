@@ -30,19 +30,21 @@ All existing API provided by 360 Dialog are wrapped as functions for correspondi
 
 - **WABA360DialogApiClient.cs / WABA360DialogApiSandboxClient.cs** (WhatsApp API Business API)
 ```c#
-Task<GetWebhookUrlResponse> GetWebhookUrlAsync();
-Task<SetWebhookUrlResponse> SetWebhookUrlAsync(string url, Dictionary<string, string> headers);
-Task<CheckContactsResponse> CheckContactsAsync(IEnumerable<string> contacts, Blocking blocking = Blocking.no_wait, bool forceCheck = false);
-Task<SendMessageResponse> SendMessageAsync(MessageObject message);
-Task<SendMessageResponse> SendMessageAsync(object message);
-Task<GetMediaResponse> GetMediaAsync(string mediaId);
-Task<UploadMediaResponse> UploadMediaAsync(byte[] fileBytes, string contentType);
+Task<GetWebhookUrlResponse> GetWebhookUrlAsync(CancellationToken cancellationToken = default);
+Task<SetWebhookUrlResponse> SetWebhookUrlAsync(string url, Dictionary<string, string> headers, CancellationToken cancellationToken = default);
+Task<CheckContactsResponse> CheckContactsAsync(IEnumerable<string> contacts, Blocking blocking = Blocking.no_wait, bool forceCheck = false, CancellationToken cancellationToken = default);
+Task<SendMessageResponse> SendMessageAsync(MessageObject message, CancellationToken cancellationToken = default);
+Task<SendMessageResponse> SendMessageAsync(object message, CancellationToken cancellationToken = default);
+Task<GetMediaResponse> GetMediaAsync(string mediaId, CancellationToken cancellationToken = default);
+Task<UploadMediaResponse> UploadMediaAsync(byte[] fileBytes, string contentType, CancellationToken cancellationToken = default);
 Task<GetTemplateResponse> GetTemplateAsync(int limit = 1000, int offset = 0, string sort = null, CancellationToken cancellationToken = default);
 Task<CreateTemplateResponse> CreateTemplateAsync(CreateTemplateObject template, CancellationToken cancellationToken = default);
 Task<DeleteTemplateResponse> DeleteTemplateAsync(string templateName, CancellationToken cancellationToken = default);
-Task<UpdateBusinessProfileResponse> UpdateBusinessProfileAsync(IEnumerable<string> vertical, IEnumerable<string> websites, string email, string description, string address);
-Task<UpdateProfileInfoAboutTextResponse> UpdateProfileInfoAboutTextAsync(string aboutText);
-Task<UpdateProfileInfoPhotoResponse> UpdateProfileInfoPhotoAsync(byte[] fileBytes, string contentType);
+Task<UpdateBusinessProfileResponse> UpdateBusinessProfileAsync(IEnumerable<string> vertical, IEnumerable<string> websites, string email, string description, string address, CancellationToken cancellationToken = default);
+Task<UpdateProfileInfoAboutTextResponse> UpdateProfileInfoAboutTextAsync(string aboutText, CancellationToken cancellationToken = default);
+Task<UpdateProfileInfoPhotoResponse> UpdateProfileInfoPhotoAsync(byte[] fileBytes, string contentType, CancellationToken cancellationToken = default);
+Task<CheckPhoneNumberResponse> CheckPhoneNumberAsync(CancellationToken cancellationToken = default);
+Task<HealthCheckResponse> HealthCheckAsync(CancellationToken cancellationToken = default);
 ```
 
 - **WABA360DialogPartnerClient.cs** (360Dialog Partner API)
@@ -133,6 +135,25 @@ PartnerClientAuthenticationException // Throw when HTTP Response Status Code is 
 ```
 
 
+## Example
+Run **WABA360Dialog.NET.Example** with your Api Key and Partner Id, Token. It Include Swagger UI for you to test certain APIs.
+
+You can either set the api key / partner secret through `appsetting.json` or Swagger UI
+1. `appsetting.json`
+    Example:
+    ```json
+    {
+        "WABA360Dialog": {
+            "ChannelApiKey": "",
+            "PartnerId": "",
+            "PartnerToken": ""
+        }
+    }
+    ```
+
+2. Swagger UI > Authorize
+    
+    Set `360Dialog Channel ApiKey`, `Partner Id` & `Partner Token` 
 
 ## Extendability
 Feel free to extend or improve the capability of the current version of the client that cannot satisfy all your needs.

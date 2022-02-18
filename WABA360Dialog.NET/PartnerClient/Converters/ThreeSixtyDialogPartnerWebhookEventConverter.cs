@@ -12,32 +12,37 @@ namespace WABA360Dialog.PartnerClient.Converters
         protected override string GetStringValue(WABA360DialogPartnerWebhookEvent value) =>
             value.GetString();
     }
-
     
     public static partial class EnumStringConverter
     {
         private static readonly IReadOnlyDictionary<string, WABA360DialogPartnerWebhookEvent> WABA360DialogPartnerWebhookEventStringToEnum =
             new Dictionary<string, WABA360DialogPartnerWebhookEvent>
             {
-                {"unknown", WABA360DialogPartnerWebhookEvent.Unknown},
-                {"channel_submitted", WABA360DialogPartnerWebhookEvent.ChannelSubmitted},
-                {"channel_live", WABA360DialogPartnerWebhookEvent.ChannelLive},
-                {"cancellation_request", WABA360DialogPartnerWebhookEvent.CancellationRequest},
-                {"cancellation_revoke", WABA360DialogPartnerWebhookEvent.CancellationRevoke},
-                {"cancellation_processed", WABA360DialogPartnerWebhookEvent.CancellationProcessed}
+                { "unknown", WABA360DialogPartnerWebhookEvent.Unknown },
+                { "channel_submitted", WABA360DialogPartnerWebhookEvent.ChannelSubmitted },
+                { "channel_live", WABA360DialogPartnerWebhookEvent.ChannelLive },
+                { "cancellation_request", WABA360DialogPartnerWebhookEvent.CancellationRequest },
+                { "cancellation_revoke", WABA360DialogPartnerWebhookEvent.CancellationRevoke },
+                { "cancellation_processed", WABA360DialogPartnerWebhookEvent.CancellationProcessed },
+                { "channel_created", WABA360DialogPartnerWebhookEvent.ChannelCreated },
+                { "channel_running", WABA360DialogPartnerWebhookEvent.ChannelRunning },
+                { "channel_ready", WABA360DialogPartnerWebhookEvent.ChannelReady },
             };
 
         private static readonly IReadOnlyDictionary<WABA360DialogPartnerWebhookEvent, string> WABA360DialogPartnerWebhookEventEnumToString =
             new Dictionary<WABA360DialogPartnerWebhookEvent, string>
             {
-                {WABA360DialogPartnerWebhookEvent.Unknown, "unknown"},
-                {WABA360DialogPartnerWebhookEvent.ChannelSubmitted, "channel_submitted"},
-                {WABA360DialogPartnerWebhookEvent.ChannelLive, "channel_live"},
-                {WABA360DialogPartnerWebhookEvent.CancellationRequest, "cancellation_request"},
-                {WABA360DialogPartnerWebhookEvent.CancellationRevoke, "cancellation_revoke"},
-                {WABA360DialogPartnerWebhookEvent.CancellationProcessed, "cancellation_processed"}
+                { WABA360DialogPartnerWebhookEvent.Unknown, "unknown" },
+                { WABA360DialogPartnerWebhookEvent.ChannelSubmitted, "channel_submitted" },
+                { WABA360DialogPartnerWebhookEvent.ChannelLive, "channel_live" },
+                { WABA360DialogPartnerWebhookEvent.CancellationRequest, "cancellation_request" },
+                { WABA360DialogPartnerWebhookEvent.CancellationRevoke, "cancellation_revoke" },
+                { WABA360DialogPartnerWebhookEvent.CancellationProcessed, "cancellation_processed" },
+                { WABA360DialogPartnerWebhookEvent.ChannelCreated, "channel_created" },
+                { WABA360DialogPartnerWebhookEvent.ChannelRunning, "channel_running" },
+                { WABA360DialogPartnerWebhookEvent.ChannelReady, "channel_ready" },
             };
-        
+
         public static string GetString(this WABA360DialogPartnerWebhookEvent status) =>
             WABA360DialogPartnerWebhookEventEnumToString.TryGetValue(status, out var stringValue)
                 ? stringValue
@@ -48,5 +53,4 @@ namespace WABA360Dialog.PartnerClient.Converters
                 ? enumValue
                 : 0;
     }
-
 }

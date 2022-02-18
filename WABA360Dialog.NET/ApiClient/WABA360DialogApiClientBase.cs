@@ -99,6 +99,16 @@ namespace WABA360Dialog.ApiClient
             return await MakeHttpRequestAsync(new UpdateProfileInfoPhotoRequest(fileBytes, contentType), cancellationToken);
         }
 
+        public async Task<CheckPhoneNumberResponse> CheckPhoneNumberAsync(CancellationToken cancellationToken = default)
+        {
+            return await MakeHttpRequestAsync(new CheckPhoneNumberRequest(), cancellationToken);
+        }
+        
+        public async Task<HealthCheckResponse> HealthCheckAsync(CancellationToken cancellationToken = default)
+        {
+            return await MakeHttpRequestAsync(new HealthCheckRequest(), cancellationToken);
+        }
+
         protected virtual async Task<TResponse> MakeHttpRequestAsync<TResponse>(ClientApiRequestBase<TResponse> request, CancellationToken cancellationToken = default) where TResponse : ClientApiResponseBase, new()
         {
             using var client = new HttpClient();

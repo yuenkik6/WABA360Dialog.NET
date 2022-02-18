@@ -1,15 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Serilog;
@@ -34,14 +28,75 @@ namespace WABA360Dialog.NET.Example
                 .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services
                 .AddControllers()
-                .AddNewtonsoftJson(options =>
-                {
-                    options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
-                });
+                .AddNewtonsoftJson(options => { options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc; });
             services
-                .AddSwaggerGen(options => { options.SwaggerDoc("v1", new OpenApiInfo { Title = "WABA360Dialog.NET.Example", Version = "v1" }); })
+                .AddSwaggerGen(options =>
+                {
+                    options.SwaggerDoc("v1", new OpenApiInfo { Title = "WABA360Dialog.NET.Example", Version = "v1" });
+                    options.AddSecurityDefinition("360Dialog Channel ApiKey", new OpenApiSecurityScheme()
+                    {
+                        In = ParameterLocation.Header,
+                        Name = "360DialogChannelApiKey",
+                        Description = "WABA 360Dialog Channel Api Key",
+                    });
+                    options.AddSecurityDefinition("Partner Id", new OpenApiSecurityScheme
+                    {
+                        In = ParameterLocation.Header,
+                        Name = "PartnerId",
+                        Description = "Partner Id",
+                    });
+
+                    options.AddSecurityDefinition("Partner Token", new OpenApiSecurityScheme
+                    {
+                        In = ParameterLocation.Header,
+                        Description = "Partner Token",
+                        Name = "PartnerToken",
+                    });
+
+                    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                    {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "360Dialog Channel ApiKey"
+                                }
+                            },
+
+                            new string[] { }
+                        },
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Partner Id"
+                                }
+                            },
+
+                            new string[] { }
+                        },
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Partner Token"
+                                }
+                            },
+
+                            new string[] { }
+                        },
+                    });
+                })
                 .AddSwaggerGenNewtonsoftSupport();
         }
 

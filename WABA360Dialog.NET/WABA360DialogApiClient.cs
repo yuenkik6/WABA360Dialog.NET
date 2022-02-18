@@ -4,9 +4,9 @@ namespace WABA360Dialog
 {
     public class WABA360DialogApiClient : WABA360DialogApiClientBase
     {
-        private const string SandboxClientPath =  "https://waba.360dialog.io/";
+        private const string BasePath =  "https://waba.360dialog.io/";
         
-        public WABA360DialogApiClient(string apiKey) : base(apiKey, SandboxClientPath)
+        public WABA360DialogApiClient(string apiKey) : base(apiKey, BasePath)
         {
         }
     }
