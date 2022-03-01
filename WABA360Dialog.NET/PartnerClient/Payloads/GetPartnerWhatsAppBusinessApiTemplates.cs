@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 using Newtonsoft.Json;
+using WABA360Dialog.Common.Enums;
 using WABA360Dialog.Common.Helpers;
 using WABA360Dialog.PartnerClient.Payloads.Base;
 using WABA360Dialog.PartnerClient.Payloads.Enums;
@@ -68,7 +69,7 @@ namespace WABA360Dialog.PartnerClient.Payloads
         public TemplateStatus Status { get; set; }
 
         [JsonProperty("language")]
-        public string Language { get; set; }
+        public WhatsAppLanguage Language { get; set; }
 
         [JsonProperty("category")]
         public string Category { get; set; }

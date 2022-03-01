@@ -67,7 +67,7 @@ namespace WABA360Dialog.PartnerClient.Payloads
         public TemplateStatus Status { get; set; }
 
         [JsonProperty("language")]
-        public string Language { get; set; }
+        public WhatsAppLanguage Language { get; set; }
 
         [JsonProperty("category")]
         public TemplateCategory Category { get; set; }

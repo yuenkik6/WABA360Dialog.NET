@@ -69,7 +69,7 @@ Task<TokenResponse> RequestOAuthTokenAsync(string username, string password, Can
 
 ## Helpers
 
--  **MessageObjectFactory.cs** for creating common **MessageObject** in WABA360DialogApiClient.SendMessage()
+-  **MessageObjectFactory.cs** is a simple factory for creating common **MessageObject** used in WABA360DialogApiClient.SendMessage()
 ```c#
 MessageObjectFactory.CreateTextMessage(string whatsAppId, string textMessage, bool previewUrl = false);
 MessageObjectFactory.CreateImageMessageByMediaId(string whatsAppId, string mediaId, string caption);
