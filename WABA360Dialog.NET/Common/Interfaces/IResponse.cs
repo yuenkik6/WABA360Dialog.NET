@@ -8,11 +8,13 @@ namespace WABA360Dialog.Common.Interfaces
     public interface IPartnerApiResponse
     {
         PartnerApiMeta Meta { get; }
+        string ResponseBody { get; }
     }
 
     public interface IClientApiResponse
     {
         ClientApiMeta Meta { get; }
         IEnumerable<ErrorObject> Error { get; }
+        string ResponseBody { get; }
     }
 }

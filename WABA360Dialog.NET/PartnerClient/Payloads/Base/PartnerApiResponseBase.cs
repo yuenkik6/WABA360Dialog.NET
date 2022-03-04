@@ -23,5 +23,11 @@ namespace WABA360Dialog.PartnerClient.Payloads.Base
         /// </summary>
         [JsonProperty("error_description")]
         public string ErrorDescription { get; set; }
+        
+        /// <summary>
+        /// Http Response Body, for Debug Purpose
+        /// </summary>
+        [JsonIgnore]
+        public string ResponseBody { get; set; }
     }
 }

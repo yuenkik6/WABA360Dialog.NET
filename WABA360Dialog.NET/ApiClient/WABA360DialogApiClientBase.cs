@@ -152,6 +152,7 @@ namespace WABA360Dialog.ApiClient
                 throw new ApiClientException(urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
             }
 
+            response.ResponseBody = responseAsString;
 
             return response;
         }

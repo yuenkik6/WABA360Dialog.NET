@@ -13,6 +13,12 @@ namespace WABA360Dialog.ApiClient.Payloads.Base
 
         [JsonProperty("meta")]
         public ClientApiMeta Meta { get; set; }
+        
+        /// <summary>
+        /// Http Response Body, for Debug Purpose
+        /// </summary>
+        [JsonIgnore]
+        public string ResponseBody { get; set; }
     }
     
     public class ErrorClientApiResponse : ClientApiResponseBase

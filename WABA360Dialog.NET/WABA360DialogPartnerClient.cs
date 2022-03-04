@@ -203,7 +203,9 @@ namespace WABA360Dialog
 
             if (response == null)
                 throw new PartnerClientException("360Dialog API Error Occured.", urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
-
+            
+            response.ResponseBody = responseAsString;
+                
             return response;
         }
 
