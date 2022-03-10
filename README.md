@@ -67,6 +67,9 @@ Task<DeleteApiKeyByChannelResponse> DeleteApiKeyByChannelAsync(string clientId, 
 Task<TokenResponse> RequestOAuthTokenAsync(string username, string password, CancellationToken cancellationToken = default);
 ```
 
+- All Response type now have **Response Body** field for recording http response body from 360Dialog
+```public string ResponseBody { get; set; }```
+
 ## Helpers
 
 -  **MessageObjectFactory.cs** is a simple factory for creating common **MessageObject** used in WABA360DialogApiClient.SendMessage()

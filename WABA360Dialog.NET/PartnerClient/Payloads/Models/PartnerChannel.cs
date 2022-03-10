@@ -20,6 +20,15 @@ namespace WABA360Dialog.PartnerClient.Payloads.Models
 
         [JsonProperty("terminated_at")]
         public DateTime? TerminatedAt { get; set; }
+        
+        [JsonProperty("created_at")]
+        public DateTime CreatedAt { get; set; }
+        
+        [JsonProperty("current_limit")]
+        public string CurrentLimit { get; set; }
+        
+        [JsonProperty("current_quality_rating")]
+        public string CurrentQualityRating { get; set; }
 
         [JsonProperty("status")]
         public PartnerChannelStatus Status { get; set; }
