@@ -20,6 +20,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
         interactive = 10,
         button = 11,
         hsm = 12,
+        voice = 13, // webhook
         
     }
 
@@ -53,7 +54,8 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
                 { "video", MessageType.video },
                 { "interactive", MessageType.interactive },
                 { "button", MessageType.button },
-                { "hsm", MessageType.hsm }
+                { "hsm", MessageType.hsm },
+                { "voice", MessageType.voice }
             };
 
         private static readonly IReadOnlyDictionary<MessageType, string> MessageTypeEnumToString =
@@ -70,7 +72,8 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
                 { MessageType.video, "video" },
                 { MessageType.interactive, "interactive" },
                 { MessageType.button, "button" },
-                { MessageType.hsm, "hsm" }
+                { MessageType.hsm, "hsm" },
+                { MessageType.voice, "voice" }
             };
 
         public static string GetString(this MessageType status)
