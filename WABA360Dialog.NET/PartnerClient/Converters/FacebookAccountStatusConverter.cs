@@ -24,6 +24,8 @@ namespace WABA360Dialog.PartnerClient.Converters
                 { "rejected", FacebookAccountStatus.rejected },
                 { "pending_submission", FacebookAccountStatus.pending_submission },
                 { "failed", FacebookAccountStatus.failed },
+                { "pending", FacebookAccountStatus.pending },
+                { "pending_need_more_info", FacebookAccountStatus.pending_need_more_info },
             };
 
         private static readonly IReadOnlyDictionary<FacebookAccountStatus, string> FacebookAccountStatusEnumToString =
@@ -35,6 +37,8 @@ namespace WABA360Dialog.PartnerClient.Converters
                 { FacebookAccountStatus.rejected, "rejected" },
                 { FacebookAccountStatus.pending_submission, "pending_submission" },
                 { FacebookAccountStatus.failed, "failed" },
+                { FacebookAccountStatus.pending, "pending" },
+                { FacebookAccountStatus.pending_need_more_info, "pending_need_more_info" },
             };
 
         public static string GetString(this FacebookAccountStatus status) =>

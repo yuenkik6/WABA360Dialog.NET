@@ -10,6 +10,9 @@ namespace WABA360Dialog.PartnerClient.Payloads.Models
         [JsonProperty("name")]
         public string Name { get; set; }
 
+        [JsonProperty("partner_payload")]
+        public string PartnerPayload { get; set; }
+        
         [JsonProperty("contact_info")]
         public ClientContactInfo ContactInfo { get; set; }
     }

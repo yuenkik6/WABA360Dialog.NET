@@ -57,17 +57,9 @@ namespace WABA360Dialog.NET.Example.Controllers
 
             return Ok();
         }
-
-        public record SetPartnerWebhookRequest(string Url);
-
-        [HttpPost]
-        public async Task<SetPartnerWebhookUrlResponse> SetPartnerWebhook([FromBody] SetPartnerWebhookRequest request)
-        {
-            return await _client.SetPartnerWebhookUrlAsync(request.Url);
-        }
-
+        
         public record GetPartnerClientsRequest(int Limit = 20, int Offset = 0, string Sort = null, GetPartnerClientsFilter Filters = null);
-
+        
         [HttpPost]
         public async Task<GetPartnerClientsResponse> GetPartnerClients([FromBody] GetPartnerClientsRequest request)
         {

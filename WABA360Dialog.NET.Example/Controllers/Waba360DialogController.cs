@@ -198,5 +198,11 @@ namespace WABA360Dialog.NET.Example.Controllers
 
             return await _client.SetWebhookUrlAsync(request.Url, dict);
         }
+        
+        [HttpPost]
+        public async Task<GetWebhookUrlResponse> GetWebhook()
+        {
+            return await _client.GetWebhookUrlAsync();
+        }
     }
 }

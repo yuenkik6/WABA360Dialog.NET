@@ -12,5 +12,7 @@ namespace WABA360Dialog.PartnerClient.Payloads.Enums
         rejected = 3,
         pending_submission = 4,
         failed = 5,
+        pending = 6,
+        pending_need_more_info = 7,
     }
 }

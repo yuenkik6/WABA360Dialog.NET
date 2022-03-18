@@ -44,5 +44,11 @@ namespace WABA360Dialog.PartnerClient.Payloads.Models
 
         [JsonProperty("integration")]
         public Integration Integration { get; set; }
+        
+        [JsonProperty("has_inbox")]
+        public bool? HasInbox { get; set; }
+        
+        [JsonProperty("is_oba")]
+        public bool? IsOba { get; set; }
     }
 }
