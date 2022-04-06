@@ -144,26 +144,19 @@ namespace WABA360Dialog.NET.Example.Controllers
                 Contacts = request.ContactObject
             });
         }
-
-        public record GetMediaByIdRequest(string MediaId);
-
-        public record UploadMediaRequest(IFormFile File, string ContentType);
+        
+        public record UploadMediaRequest(IFormFile File);
 
         [HttpPost]
-        public async Task<UploadMediaResponse> UploadMedia([FromBody] UploadMediaRequest request)
+        public async Task<UploadMediaResponse> UploadMedia([FromForm] UploadMediaRequest request)
         {
             await using var ms = new MemoryStream();
             await request.File.CopyToAsync(ms);
-
-            return await _client.UploadMediaAsync(ms.ToArray(), request.ContentType);
+            
+            return await _client.UploadMediaAsync(ms.ToArray(), request.File.ContentType);
         }
 
-        [HttpPost]
-        public async Task<GetMediaResponse> GetMedia([FromBody] GetMediaByIdRequest request)
-        {
-            return await _client.GetMediaAsync(request.MediaId);
-        }
-
+        public record GetMediaByIdRequest(string MediaId);
         [HttpPost]
         public async Task<ActionResult> GetMediaFile([FromBody] GetMediaByIdRequest request)
         {
