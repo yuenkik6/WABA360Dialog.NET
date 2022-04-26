@@ -18,9 +18,9 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
         public IEnumerable<string> Mentions { get; set; }
         
         [JsonProperty("forwarded")]
-        public bool Forwarded { get; set; }
+        public bool? Forwarded { get; set; }
         
         [JsonProperty("frequently_forwarded")]
-        public bool FrequentlyForwarded { get; set; }
+        public bool? FrequentlyForwarded { get; set; }
     }
 }

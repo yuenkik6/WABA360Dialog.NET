@@ -23,6 +23,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Converters
                 { "sent", MessageStatus.sent },
                 { "failed", MessageStatus.failed },
                 { "deleted", MessageStatus.deleted },
+                { "warning", MessageStatus.warning },
             };
 
 
@@ -34,6 +35,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Converters
                 { MessageStatus.sent, "sent" },
                 { MessageStatus.failed, "failed" },
                 { MessageStatus.deleted, "deleted" },
+                { MessageStatus.warning, "warning" },
             };
 
         public static string GetString(this MessageStatus status) =>

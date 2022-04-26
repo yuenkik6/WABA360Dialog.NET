@@ -2,7 +2,7 @@
 
 namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
 {
-    public class WebhookReplyListObject
+    public class WebhookListReplyObject
     {
         [JsonProperty("id")]
         public string Id { get; set; }

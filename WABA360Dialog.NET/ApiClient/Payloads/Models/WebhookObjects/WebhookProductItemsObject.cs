@@ -14,7 +14,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
         /// Number of items purchased.
         /// </summary>
         [JsonProperty("quantity")]
-        public decimal Quantity { get; set; }
+        public int Quantity { get; set; }
 
         /// <summary>
         /// Unitary price of the items.

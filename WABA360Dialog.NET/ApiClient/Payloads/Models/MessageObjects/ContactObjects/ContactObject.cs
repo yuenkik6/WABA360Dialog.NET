@@ -11,7 +11,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.ContactObjects
         /// Full contact address(es) —see AddressObject.
         /// </summary>
         [JsonProperty("addresses")]
-        public IEnumerable<AddressObject> Address { get; set; }
+        public IEnumerable<AddressObject> Addresses { get; set; }
 
         /// <summary>
         /// Optional.
@@ -25,14 +25,14 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.ContactObjects
         /// Contact email address(es) —see EmailObject.
         /// </summary>
         [JsonProperty("emails")]
-        public IEnumerable<EmailObject> Email { get; set; }
+        public IEnumerable<EmailObject> Emails { get; set; }
 
         /// <summary>
         /// Required.
         /// Full contact name — see NameObject.
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public NameObject Name { get; set; }
 
         /// <summary>
         /// Optional.
@@ -40,7 +40,13 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.ContactObjects
         /// </summary>
         [JsonProperty("org")]
         public OrgObject Org { get; set; }
-
+        
+        /// <summary>
+        /// Messaging contact information
+        /// </summary>
+        [JsonProperty("ims")]
+        public IEnumerable<ImsObject> Ims { get; set; }
+        
         /// <summary>
         /// Optional.
         /// Optional.

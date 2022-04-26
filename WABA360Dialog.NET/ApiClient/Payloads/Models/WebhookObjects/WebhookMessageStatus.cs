@@ -21,7 +21,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
 
         /// <summary>
         /// Status of a message.
-        /// Values: read, delivered, sent, failed, deleted
+        /// Values: read, delivered, sent, failed, deleted, warming
         /// </summary>
         [JsonProperty("status")]
         public MessageStatus Status { get; set; }
@@ -34,10 +34,9 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
 
         /// <summary>
         /// The type of entity this status object is about. Currently, the only available option is "message".
-        /// This object is only available for the On-Premises implementation of the API. Cloud API developers will not receive this field.
         /// </summary>
         [JsonProperty("type")]
-        public MessageType Type { get; set; }
+        public MessageType? Type { get; set; }
 
         /// <summary>
         /// When there are any out-of-band errors that occur in the normal operation of the application, the errors array provides a description of the error.

@@ -5,6 +5,12 @@ using WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects;
 
 namespace WABA360Dialog.ApiClient.Payloads.Models
 {
+    /// <summary>
+    /// Received Messages Notifications
+    /// When you receive an inboud message, a notification is sent to the Webhook URL you set in the application settings.
+    /// This document goes over the inbound messages you can receive and provides examples.
+    /// https://developers.facebook.com/docs/whatsapp/on-premises/webhooks/components
+    /// </summary>
     public class WABA360DialogWebhookPayload
     {
         /// <summary>

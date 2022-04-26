@@ -17,6 +17,11 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
         location = 7,
         sticker = 8,
         voice = 9,
+        interactive = 10,
+        button = 11,
+        order = 12,
+        system = 13,
+        ephemeral = 14,
     }
 
     internal class WebhookMessageTypeConverter : EnumConverter<MessageType>
@@ -47,6 +52,11 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
                 { "location", WebhookMessageType.location },
                 { "sticker", WebhookMessageType.sticker },
                 { "voice", WebhookMessageType.voice },
+                { "interactive", WebhookMessageType.interactive },
+                { "button", WebhookMessageType.button },
+                { "order", WebhookMessageType.order },
+                { "system", WebhookMessageType.system },
+                { "ephemeral", WebhookMessageType.ephemeral },
             };
 
         private static readonly IReadOnlyDictionary<WebhookMessageType, string> WebhookMessageTypeEnumToString =
@@ -61,6 +71,12 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
                 { WebhookMessageType.image, "image" },
                 { WebhookMessageType.location, "location" },
                 { WebhookMessageType.sticker, "sticker" },
+                { WebhookMessageType.voice, "voice" },
+                { WebhookMessageType.interactive, "interactive" },
+                { WebhookMessageType.button, "button" },
+                { WebhookMessageType.order, "order" },
+                { WebhookMessageType.system, "system" },
+                { WebhookMessageType.ephemeral, "ephemeral" },
             };
 
         public static string GetString(this WebhookMessageType status)
