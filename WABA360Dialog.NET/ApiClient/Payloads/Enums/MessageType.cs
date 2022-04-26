@@ -20,8 +20,6 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
         interactive = 10,
         button = 11,
         hsm = 12,
-        voice = 13, // webhook
-        
     }
 
     internal class MessageTypeConverter : EnumConverter<MessageType>
@@ -55,7 +53,6 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
                 { "interactive", MessageType.interactive },
                 { "button", MessageType.button },
                 { "hsm", MessageType.hsm },
-                { "voice", MessageType.voice }
             };
 
         private static readonly IReadOnlyDictionary<MessageType, string> MessageTypeEnumToString =
@@ -73,7 +70,6 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
                 { MessageType.interactive, "interactive" },
                 { MessageType.button, "button" },
                 { MessageType.hsm, "hsm" },
-                { MessageType.voice, "voice" }
             };
 
         public static string GetString(this MessageType status)

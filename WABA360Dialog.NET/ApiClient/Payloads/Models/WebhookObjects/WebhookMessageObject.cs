@@ -42,10 +42,10 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
 
         /// <summary>
         /// Message type.
-        /// Supported values are: audio, contacts, document, image, location, text, unknown, video, voice
+        /// Supported values are: audio, contacts, document, image, location, text, video, voice, unknown
         /// </summary>
         [JsonProperty("type")]
-        public MessageType Type { get; set; }
+        public WebhookMessageType Type { get; set; }
 
         [JsonProperty("text")]
         public WebhookTextObject Text { get; set; }

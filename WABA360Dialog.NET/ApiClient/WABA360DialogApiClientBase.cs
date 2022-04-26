@@ -24,6 +24,9 @@ namespace WABA360Dialog.ApiClient
 
         protected WABA360DialogApiClientBase(string apiKey, string basePath)
         {
+            if (string.IsNullOrWhiteSpace(apiKey))
+                throw new ArgumentNullException(nameof(apiKey), "API Key cannot be null.");
+            
             _apiKey = apiKey;
             BasePath = basePath;
         }
@@ -103,7 +106,7 @@ namespace WABA360Dialog.ApiClient
         {
             return await MakeHttpRequestAsync(new CheckPhoneNumberRequest(), cancellationToken);
         }
-        
+
         public async Task<HealthCheckResponse> HealthCheckAsync(CancellationToken cancellationToken = default)
         {
             return await MakeHttpRequestAsync(new HealthCheckRequest(), cancellationToken);
@@ -145,6 +148,7 @@ namespace WABA360Dialog.ApiClient
                 if (!string.IsNullOrWhiteSpace(responseAsString))
                 {
                     JsonHelper.TryDeserializeJson<ErrorClientApiResponse>(responseAsString, out var errorResponse);
+
                     if (errorResponse != null)
                         throw new ApiClientException(errorResponse.Error, errorResponse.Meta, urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
                 }
@@ -202,9 +206,11 @@ namespace WABA360Dialog.ApiClient
             if (!httpResponse.IsSuccessStatusCode)
             {
                 var responseAsString = await httpResponse.Content.ReadAsStringAsync();
+
                 if (!string.IsNullOrWhiteSpace(responseAsString))
                 {
                     JsonHelper.TryDeserializeJson<ErrorClientApiResponse>(responseAsString, out var errorResponse);
+
                     if (errorResponse != null)
                         throw new ApiClientException(errorResponse.Error, errorResponse.Meta, urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
                 }

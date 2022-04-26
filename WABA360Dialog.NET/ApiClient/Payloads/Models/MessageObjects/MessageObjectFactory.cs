@@ -208,6 +208,55 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects
             };
         }
 
+        public static MessageObject CreateSingleProductMessage(string whatsappId, string bodyText, string footerText, string catalogId, string productRetailerId)
+        {
+            var productMessageInteractiveObject = new InteractiveObject()
+            {
+                Type = InteractiveType.product,
+            };
+
+            if (!string.IsNullOrWhiteSpace(bodyText)) productMessageInteractiveObject.Body = new TextBodyObject() { Text = bodyText };
+            if (!string.IsNullOrWhiteSpace(footerText)) productMessageInteractiveObject.Footer = new TextFooterObject() { Text = footerText };
+
+            productMessageInteractiveObject.Action = new ActionObject()
+            {
+                CatalogId = catalogId,
+                ProductRetailerId = productRetailerId
+            };
+
+            return new MessageObject
+            {
+                RecipientType = "individual",
+                To = whatsappId,
+                Type = MessageType.interactive,
+                Interactive = productMessageInteractiveObject
+            };
+        }
+
+        public static MessageObject CreateMultiProductMessage(string whatsappId, string bodyText, string footerText, IEnumerable<SectionObject> productSections)
+        {
+            var multiProductMessageInteractiveObject = new InteractiveObject()
+            {
+                Type = InteractiveType.product_list,
+            };
+
+            if (!string.IsNullOrWhiteSpace(bodyText)) multiProductMessageInteractiveObject.Body = new TextBodyObject() { Text = bodyText };
+            if (!string.IsNullOrWhiteSpace(footerText)) multiProductMessageInteractiveObject.Footer = new TextFooterObject() { Text = footerText };
+
+            multiProductMessageInteractiveObject.Action = new ActionObject()
+            {
+                Sections = productSections
+            };
+            
+            return new MessageObject
+            {
+                RecipientType = "individual",
+                To = whatsappId,
+                Type = MessageType.interactive,
+                Interactive = multiProductMessageInteractiveObject
+            };
+        }
+
         public static MessageObject CreateLocationMessage(string whatsappId, double latitude, double longitude, string name = null, string address = null)
         {
             return new MessageObject
