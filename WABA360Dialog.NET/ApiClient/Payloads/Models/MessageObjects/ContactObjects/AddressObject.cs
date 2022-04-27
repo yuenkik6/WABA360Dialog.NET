@@ -53,6 +53,6 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.ContactObjects
         /// Standard Values: HOME, WORK
         /// </summary>
         [JsonProperty("type")]
-        public PlaceType Type { get; set; }
+        public PlaceType? Type { get; set; }
     }
 }

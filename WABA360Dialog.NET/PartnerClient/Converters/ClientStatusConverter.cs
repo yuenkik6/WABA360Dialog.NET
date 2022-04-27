@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using WABA360Dialog.Common.Converters.Base;
+using WABA360Dialog.PartnerClient.Payloads.Enums;
 
-namespace WABA360Dialog.PartnerClient.Payloads.Enums
+namespace WABA360Dialog.PartnerClient.Converters
 {
     internal class ClientStatusConverter : EnumConverter<ClientStatus>
     {
