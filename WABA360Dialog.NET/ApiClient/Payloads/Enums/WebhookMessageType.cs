@@ -24,14 +24,14 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
         ephemeral = 14,
     }
 
-    internal class WebhookMessageTypeConverter : EnumConverter<MessageType>
+    internal class WebhookMessageTypeConverter : EnumConverter<WebhookMessageType>
     {
-        protected override MessageType GetEnumValue(string value)
+        protected override WebhookMessageType GetEnumValue(string value)
         {
-            return EnumStringConverter.GetMessageType(value);
+            return EnumStringConverter.GetWebhookMessageType(value);
         }
 
-        protected override string GetStringValue(MessageType value)
+        protected override string GetStringValue(WebhookMessageType value)
         {
             return value.GetString();
         }

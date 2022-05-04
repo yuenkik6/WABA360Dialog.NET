@@ -51,9 +51,14 @@ namespace WABA360Dialog.NET.Example.Controllers
             var payload = JsonConvert.DeserializeObject<WABA360DialogWebhookPayload>(payloadString);
             Log.Information($"Contacts: {payload?.Contacts?.Count() ?? 0}, Messages: {payload?.Messages?.Count() ?? 0}.");
 
-            return Ok();
+            return Ok(payload);
         }
-
+        
+        [HttpPost]
+        public ActionResult WebhookObject([FromBody] WABA360DialogWebhookPayload webhookPayload)
+        {
+            return Ok(webhookPayload);
+        }
 
         public record CheckContactRequest(string PhoneNumber);
 

@@ -36,7 +36,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
         /// The type of entity this status object is about. Currently, the only available option is "message".
         /// </summary>
         [JsonProperty("type")]
-        public MessageType? Type { get; set; }
+        public string Type { get; set; }
 
         /// <summary>
         /// When there are any out-of-band errors that occur in the normal operation of the application, the errors array provides a description of the error.

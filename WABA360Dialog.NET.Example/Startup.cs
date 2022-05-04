@@ -32,7 +32,12 @@ namespace WABA360Dialog.NET.Example
 
             services
                 .AddControllers()
-                .AddNewtonsoftJson(options => { options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc; });
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+                    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                });
+            
             services
                 .AddSwaggerGen(options =>
                 {

@@ -41,15 +41,15 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
             new Dictionary<string, MessageType>
             {
                 { "unknown", MessageType.unknown },
+                { "text", MessageType.text },
                 { "audio", MessageType.audio },
+                { "video", MessageType.video },
                 { "contacts", MessageType.contacts },
                 { "document", MessageType.document },
                 { "image", MessageType.image },
                 { "location", MessageType.location },
                 { "sticker", MessageType.sticker },
                 { "template", MessageType.template },
-                { "text", MessageType.text },
-                { "video", MessageType.video },
                 { "interactive", MessageType.interactive },
                 { "button", MessageType.button },
                 { "hsm", MessageType.hsm },
@@ -58,15 +58,16 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
         private static readonly IReadOnlyDictionary<MessageType, string> MessageTypeEnumToString =
             new Dictionary<MessageType, string>
             {
+                { MessageType.unknown, "unknown" },
+                { MessageType.text, "text" },
                 { MessageType.audio, "audio" },
+                { MessageType.video, "video" },
                 { MessageType.contacts, "contacts" },
                 { MessageType.document, "document" },
                 { MessageType.image, "image" },
                 { MessageType.location, "location" },
                 { MessageType.sticker, "sticker" },
                 { MessageType.template, "template" },
-                { MessageType.text, "text" },
-                { MessageType.video, "video" },
                 { MessageType.interactive, "interactive" },
                 { MessageType.button, "button" },
                 { MessageType.hsm, "hsm" },

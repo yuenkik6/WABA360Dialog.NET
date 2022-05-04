@@ -18,7 +18,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.ContactObjects
         /// Standard Values: CELL, MAIN, IPHONE, HOME, WORK
         /// </summary>
         [JsonProperty("type")]
-        public ExtendedPlaceType? Type { get; set; }
+        public string Type { get; set; }
 
         /// <summary>
         /// Optional.
