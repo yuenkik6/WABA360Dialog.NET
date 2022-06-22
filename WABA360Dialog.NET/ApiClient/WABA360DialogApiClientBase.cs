@@ -188,21 +188,7 @@ namespace WABA360Dialog.ApiClient
             httpRequestMessage.Headers.Add("D360-API-KEY", _apiKey);
 
             var httpResponse = await client.SendAsync(httpRequestMessage, cancellationToken);
-
-            if (!httpResponse.IsSuccessStatusCode)
-            {
-                var responseAsString = await httpResponse.Content.ReadAsStringAsync();
-
-                if (JsonHelper.TryDeserializeJson<TResponse>(responseAsString, out var response))
-                {
-                    throw new ApiClientException(response.Error, response.Meta, urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
-                }
-                else
-                {
-                    throw new ApiClientException(urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
-                }
-            }
-
+            
             if (!httpResponse.IsSuccessStatusCode)
             {
                 var responseAsString = await httpResponse.Content.ReadAsStringAsync();

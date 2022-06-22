@@ -161,6 +161,15 @@ namespace WABA360Dialog.NET.Example.Controllers
             return await _client.UploadMediaAsync(ms.ToArray(), request.File.ContentType);
         }
 
+        public record GetTemplatesRequest(int Limit = 1000, int Offset = 0);
+        [HttpPost]
+        public async Task<GetTemplateResponse> GetTemplates([FromBody] GetTemplatesRequest request)
+        {
+            var response = await _client.GetTemplateAsync(request.Limit, request.Offset);
+
+            return response;
+        }
+        
         public record GetMediaByIdRequest(string MediaId);
         [HttpPost]
         public async Task<ActionResult> GetMediaFile([FromBody] GetMediaByIdRequest request)
