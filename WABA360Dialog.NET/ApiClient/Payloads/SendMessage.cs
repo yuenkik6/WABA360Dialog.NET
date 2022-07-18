@@ -54,6 +54,9 @@ namespace WABA360Dialog.ApiClient.Payloads
     
     public class SendMessageResponse : ClientApiResponseBase
     {
+        [JsonProperty("contacts")]
+        public IEnumerable<SendMessageContactResult> Contacts { get; set; }
+        
         [JsonProperty("messages")]
         public IEnumerable<SendMessageResult> CreatedMessages { get; set; }
     }
