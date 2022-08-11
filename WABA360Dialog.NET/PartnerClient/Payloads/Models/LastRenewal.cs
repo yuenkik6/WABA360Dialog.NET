@@ -9,6 +9,6 @@ namespace WABA360Dialog.PartnerClient.Payloads.Models
         public DateTime Date { get; set; }
 
         [JsonProperty("amount")]
-        public int Amount { get; set; }
+        public decimal Amount { get; set; }
     }
 }

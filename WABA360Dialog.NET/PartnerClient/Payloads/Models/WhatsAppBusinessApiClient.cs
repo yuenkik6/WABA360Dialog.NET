@@ -14,6 +14,9 @@ namespace WABA360Dialog.PartnerClient.Payloads.Models
 
         [JsonProperty("status")]
         public ClientStatus Status { get; set; }
+        
+        [JsonProperty("max_channels")]
+        public int MaxChannels { get; set; }
 
         [JsonProperty("organisation")]
         public string Organisation { get; set; }

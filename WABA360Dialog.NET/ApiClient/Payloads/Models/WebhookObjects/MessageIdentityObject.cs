@@ -14,7 +14,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
         /// Timestamp of when the WhatsApp Business API client detected the user potentially changed.
         /// </summary>
         [JsonProperty("created_timestamp")]
-        public int CreatedTimestamp { get; set; }
+        public long CreatedTimestamp { get; set; }
 
         /// <summary>
         /// Identifier for the latest user_identity_changed system notification.
