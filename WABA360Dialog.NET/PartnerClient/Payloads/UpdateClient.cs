@@ -15,6 +15,7 @@ namespace WABA360Dialog.PartnerClient.Payloads
             PartnerId = partnerId;
             ClientId = clientId;
             PartnerPayload = partnerPayload;
+            MaxChannels = maxChannels;
         }
 
         [JsonIgnore]
@@ -40,6 +41,9 @@ namespace WABA360Dialog.PartnerClient.Payloads
 
         [JsonProperty("status")]
         public ClientStatus Status { get; set; }
+        
+        [JsonProperty("max_channels")]
+        public int MaxChannels { get; set; }
 
         [JsonProperty("organisation")]
         public string Organisation { get; set; }
@@ -67,5 +71,8 @@ namespace WABA360Dialog.PartnerClient.Payloads
 
         [JsonProperty("modified_by")]
         public ModifiedBy ModifiedBy { get; set; }
+        
+        [JsonProperty("suspicious")]
+        public bool Suspicious { get; set; }
     }
 }

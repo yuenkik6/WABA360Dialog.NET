@@ -82,6 +82,14 @@ namespace WABA360Dialog.NET.Example.Controllers
             return await _client.GetClientBalanceAsync(request.ClientId, request.FromMonth, request.FromYear);
         }
 
+        public record UpdateClientRequest(string ClientId, string PartnerPayload, int? MaxChannels);
+        
+        [HttpPost]
+        public async Task<UpdateClientResponse> UpdateClient([FromBody] UpdateClientRequest request)
+        {
+            return await _client.UpdateClientAsync(request.ClientId, request.PartnerPayload, request.MaxChannels);
+        }
+        
         [HttpPost]
         public async Task<GetPartnerPublicDataResponse> GetPartnerPublicData()
         {

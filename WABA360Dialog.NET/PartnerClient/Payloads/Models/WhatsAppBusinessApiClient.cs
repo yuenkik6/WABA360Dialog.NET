@@ -44,5 +44,8 @@ namespace WABA360Dialog.PartnerClient.Payloads.Models
 
         [JsonProperty("modified_by")]
         public ModifiedBy ModifiedBy { get; set; }
+        
+        [JsonProperty("suspicious")]
+        public bool Suspicious { get; set; }
     }
 }
