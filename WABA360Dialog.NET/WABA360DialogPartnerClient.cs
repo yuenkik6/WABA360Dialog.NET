@@ -105,9 +105,9 @@ namespace WABA360Dialog
             return await MakeHttpRequestAsync(new SetCancellationRequestOnChannelRequest(_partnerInfo.PartnerId, clientId, channelId, enabled), cancellationToken);
         }
 
-        public async Task<UpdateClientResponse> UpdateClientAsync(string clientId, string partnerPayload, CancellationToken cancellationToken = default)
+        public async Task<UpdateClientResponse> UpdateClientAsync(string clientId, string partnerPayload, int? maxChannels = null, CancellationToken cancellationToken = default)
         {
-            return await MakeHttpRequestAsync(new UpdateClientRequest(_partnerInfo.PartnerId, clientId, partnerPayload), cancellationToken);
+            return await MakeHttpRequestAsync(new UpdateClientRequest(_partnerInfo.PartnerId, clientId, partnerPayload, maxChannels), cancellationToken);
         }
 
         public async Task<GetApiKeyByChannelResponse> GetApiKeyByChannelAsync(string clientId, CancellationToken cancellationToken = default)

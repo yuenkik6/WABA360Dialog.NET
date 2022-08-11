@@ -9,7 +9,7 @@ namespace WABA360Dialog.PartnerClient.Payloads
 {
     public class UpdateClientRequest : PartnerApiRequestBase<UpdateClientResponse>
     {
-        public UpdateClientRequest(string partnerId, string clientId, string partnerPayload)
+        public UpdateClientRequest(string partnerId, string clientId, string partnerPayload, int? maxChannels = null)
             : base($"partners/{partnerId}/clients/{clientId}", new HttpMethod("PATCH"))
         {
             PartnerId = partnerId;
@@ -25,6 +25,9 @@ namespace WABA360Dialog.PartnerClient.Payloads
 
         [JsonProperty("partner_payload")]
         public string PartnerPayload { get; set; }
+        
+        [JsonProperty("max_channels")]
+        public int? MaxChannels { get; set; }
     }
 
     public class UpdateClientResponse : PartnerApiResponseBase

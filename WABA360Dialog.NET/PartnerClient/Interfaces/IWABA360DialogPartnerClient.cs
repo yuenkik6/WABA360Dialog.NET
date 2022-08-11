@@ -18,7 +18,7 @@ namespace WABA360Dialog.PartnerClient.Interfaces
         Task<GetPartnerWhatsAppBusinessApiTemplatesResponse> GetPartnerWhatsAppBusinessApiTemplatesAsync(string whatsAppBusinessApiAccountId, int limit = 1000, int offset = 0, string sort = null, GetPartnerWhatsAppBusinessApiTemplatesFilter filters = null, CancellationToken cancellationToken = default);
         Task<RemovePartnerWhatsAppBusinessApiTemplatesResponse> RemovePartnerWhatsAppBusinessApiTemplatesAsync(string whatsAppBusinessApiAccountId, string templateId, CancellationToken cancellationToken = default);
         Task<SetCancellationRequestOnChannelResponse> SetCancellationRequestOnChannelAsync(string clientId, string channelId, bool enabled, CancellationToken cancellationToken = default);
-        Task<UpdateClientResponse> UpdateClientAsync(string clientId, string partnerPayload, CancellationToken cancellationToken = default);
+        Task<UpdateClientResponse> UpdateClientAsync(string clientId, string partnerPayload, int? maxChannels = null, CancellationToken cancellationToken = default);
         Task<GetApiKeyByChannelResponse> GetApiKeyByChannelAsync(string clientId, CancellationToken cancellationToken = default);
         Task<CreateApiKeyByChannelResponse> CreateApiKeyByChannelAsync(string clientId, CancellationToken cancellationToken = default);
         Task<GetPartnerPublicDataResponse> GetPartnerPublicDataAsync(CancellationToken cancellationToken = default);
