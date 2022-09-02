@@ -16,7 +16,7 @@ namespace WABA360Dialog.PartnerClient.Payloads
             string partnerId,
             string whatsAppBusinessApiAccountId,
             string name,
-            TemplateCategory category,
+            string category,
             TemplateComponentObject components,
             WhatsAppLanguage language
         )
@@ -40,7 +40,7 @@ namespace WABA360Dialog.PartnerClient.Payloads
         public string Name { get; }
 
         [JsonProperty("category")]
-        public TemplateCategory Category { get; }
+        public string Category { get; }
 
         [JsonProperty("components")]
         public TemplateComponentObject Components { get; }
@@ -70,7 +70,7 @@ namespace WABA360Dialog.PartnerClient.Payloads
         public WhatsAppLanguage Language { get; set; }
 
         [JsonProperty("category")]
-        public TemplateCategory Category { get; set; }
+        public string Category { get; set; }
 
         [JsonProperty("components")]
         public IEnumerable<object> Components { get; set; }

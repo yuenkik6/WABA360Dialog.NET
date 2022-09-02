@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using WABA360Dialog.ApiClient.Payloads.Enums;
-using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.InteractiveObjects;
 using WABA360Dialog.Common.Enums;
-using WABA360Dialog.PartnerClient.Payloads.Enums;
 
 namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects
 {
@@ -15,7 +13,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects
         /// The type of message template.
         /// </summary>
         [JsonProperty("category")]
-        public TemplateCategory Category { get; set; }
+        public string Category { get; set; }
 
         /// <summary>
         /// Required.

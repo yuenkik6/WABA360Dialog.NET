@@ -13,7 +13,6 @@ using WABA360Dialog.PartnerClient.Interfaces;
 using WABA360Dialog.PartnerClient.Models;
 using WABA360Dialog.PartnerClient.Payloads;
 using WABA360Dialog.PartnerClient.Payloads.Base;
-using WABA360Dialog.PartnerClient.Payloads.Enums;
 
 namespace WABA360Dialog
 {
@@ -52,7 +51,7 @@ namespace WABA360Dialog
 
         public async Task<CreatePartnerWhatsAppBusinessApiTemplateResponse> CreatePartnerWhatsAppBusinessApiTemplateAsync(string whatsAppBusinessApiAccountId,
             string name,
-            TemplateCategory category,
+            string category,
             WhatsAppLanguage language,
             TemplateComponentObject components,
             CancellationToken cancellationToken = default)

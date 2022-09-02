@@ -17,6 +17,7 @@ using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects;
 using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.ContactObjects;
 using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.InteractiveObjects;
 using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.LocationObjects;
+using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects;
 using WABA360Dialog.Common.Enums;
 
 namespace WABA360Dialog.NET.Example.Controllers
@@ -166,6 +167,15 @@ namespace WABA360Dialog.NET.Example.Controllers
         public async Task<GetTemplateResponse> GetTemplates([FromBody] GetTemplatesRequest request)
         {
             var response = await _client.GetTemplateAsync(request.Limit, request.Offset);
+
+            return response;
+        }
+        
+        public record CreateTemplateExampleRequest(CreateTemplateObject TemplateObject);
+        [HttpPost]
+        public async Task<CreateTemplateResponse> CreateTemplate([FromBody] CreateTemplateExampleRequest request)
+        {
+            var response = await _client.CreateTemplateAsync(request.TemplateObject);
 
             return response;
         }

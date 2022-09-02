@@ -28,7 +28,7 @@ namespace WABA360Dialog.PartnerClient.Payloads.Models
         public WhatsAppLanguage Language { get; set; }
 
         [JsonProperty("category")]
-        public TemplateCategory Category { get; set; }
+        public string Category { get; set; }
 
         [JsonProperty("components")]
         public IEnumerable<TemplateComponentObject> Components { get; set; }

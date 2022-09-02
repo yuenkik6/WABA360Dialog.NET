@@ -63,7 +63,7 @@ namespace WABA360Dialog.ApiClient.Payloads
         public TemplateStatus Status { get; set; }
 
         [JsonProperty("category")]
-        public TemplateCategory Category { get; set; }
+        public string Category { get; set; }
 
         [JsonProperty("rejected_reason")]
         public string RejectedReason { get; set; }
