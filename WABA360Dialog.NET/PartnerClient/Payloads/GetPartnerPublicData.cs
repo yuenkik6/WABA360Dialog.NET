@@ -39,6 +39,12 @@ namespace WABA360Dialog.PartnerClient.Payloads
         [JsonProperty("payment_plan")]
         public object PaymentPlan { get; set; }
 
+        [JsonProperty("blocked_new_submission")]
+        public bool BlockedNewSubmission { get; set; }
+        
+        [JsonProperty("country")]
+        public string Country { get; set; }
+        
         [JsonProperty("payment_required")]
         public bool PaymentRequired { get; set; }
 
