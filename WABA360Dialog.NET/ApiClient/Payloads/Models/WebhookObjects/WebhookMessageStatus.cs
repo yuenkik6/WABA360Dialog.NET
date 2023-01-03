@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using WABA360Dialog.ApiClient.Payloads.Enums;
 using WABA360Dialog.ApiClient.Payloads.Models.Common;
@@ -14,8 +15,9 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
         public string Id { get; set; }
 
         /// <summary>
-        /// WhatsApp ID of recipient
+        /// (Obsolete) WhatsApp ID of recipient. On January 10 2023 release, it will be removed from the statuses object and replace with message.recipient_id / Message.RecipientId
         /// </summary>
+        [Obsolete("On release v2.45, it will be removed from the statuses object")]
         [JsonProperty("recipient_id")]
         public string RecipientId { get; set; }
 
@@ -26,6 +28,12 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
         [JsonProperty("status")]
         public MessageStatus Status { get; set; }
 
+        /// <summary>
+        /// Information about the incoming message, including WhatsApp ID of recipient
+        /// </summary>
+        [JsonProperty("message")]
+        public WebhookMessageStatusRecipient Message { get; set; }
+        
         /// <summary>
         /// Timestamp of the status message.
         /// </summary>
@@ -55,6 +63,5 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
         /// </summary>
         [JsonProperty("pricing")]
         public PricingObject Pricing { get; set; }
-
     }
 }

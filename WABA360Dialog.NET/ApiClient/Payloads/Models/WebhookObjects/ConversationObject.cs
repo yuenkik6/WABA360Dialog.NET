@@ -10,7 +10,9 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.WebhookObjects
         [JsonProperty("id")]
         public string Id { get; set; }
 
-
+        /// <summary>
+        /// Timestamp when the current ongoing conversation expires. This field is only present on "message sent" webhooks.
+        /// </summary>
         [JsonProperty("expiration_timestamp")]
         public long ExpirationTimestamp { get; set; }
 
