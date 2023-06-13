@@ -9,5 +9,6 @@ namespace WABA360Dialog.ApiClient.Payloads.Enums
         PHONE_NUMBER = 1,
         URL = 2,
         QUICK_REPLY = 3,
+        OTP = 4,
     }
 }

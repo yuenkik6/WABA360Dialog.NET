@@ -21,6 +21,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Converters
                 { "PHONE_NUMBER", TemplateButtonType.PHONE_NUMBER },
                 { "URL", TemplateButtonType.URL },
                 { "QUICK_REPLY", TemplateButtonType.QUICK_REPLY },
+                { "OTP", TemplateButtonType.OTP },
             };
 
 
@@ -30,6 +31,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Converters
                 { TemplateButtonType.PHONE_NUMBER, "PHONE_NUMBER" },
                 { TemplateButtonType.URL, "URL" },
                 { TemplateButtonType.QUICK_REPLY, "QUICK_REPLY" },
+                { TemplateButtonType.OTP, "OTP" },
             };
 
         public static string GetString(this TemplateButtonType status) =>

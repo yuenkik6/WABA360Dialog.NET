@@ -54,6 +54,12 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects
 
         [JsonProperty("buttons")]
         public IEnumerable<TemplateButtonObject> Buttons { get; set; }
+
+        [JsonProperty("add_security_recommendation")]
+        public bool AddSecurityRecommendation { get; set; }
+
+        [JsonProperty("code_expiration_minutes")]
+        public int CodeExpirationMinutes { get; set; }
     }
 
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
@@ -73,6 +79,17 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects
 
         [JsonProperty("phone_number")]
         public string PhoneNumber { get; set; }
-    }
 
+        [JsonProperty("otp_type")]
+        public string OtpType { get; set; }
+
+        [JsonProperty("autofill_text")]
+        public string AutofillText { get; set; }
+
+        [JsonProperty("package_name")]
+        public string PackageName { get; set; }
+
+        [JsonProperty("signature_hash")]
+        public string SignatureHash { get; set; }
+    }
 }
