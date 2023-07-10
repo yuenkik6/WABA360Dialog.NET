@@ -1,7 +1,7 @@
 # WABA360Dialog.NET
-C# .NET API Wrapper Classes for 360Dialog WhatsApp Business APIs and Partner APIs
+C# .NET API Wrapper Classes for 360Dialog WhatsApp Business APIs (On-Premises) and Partner APIs
 
- - 360Dialog WhatsApp Business API Client
+ - 360Dialog WhatsApp Business API (On-Premises) Client
  - 360Dialog WhatsApp Business API Sandbox Client
  - 360Dialog Partner API
  - Webhook Models
@@ -28,7 +28,7 @@ var clientBalanceResponse = await partnerClient.GetClientBalanceAsync("client-id
 ## Available Functions
 All existing API provided by 360 Dialog are wrapped as functions for corresponding client
 
-- **WABA360DialogApiClient.cs / WABA360DialogApiSandboxClient.cs** (WhatsApp API Business API)
+- **WABA360DialogApiClient.cs / WABA360DialogApiSandboxClient.cs** (WhatsApp API Business API (On-Premises))
 ```c#
 Task<GetWebhookUrlResponse> GetWebhookUrlAsync(CancellationToken cancellationToken = default);
 Task<SetWebhookUrlResponse> SetWebhookUrlAsync(string url, Dictionary<string, string> headers, CancellationToken cancellationToken = default);
