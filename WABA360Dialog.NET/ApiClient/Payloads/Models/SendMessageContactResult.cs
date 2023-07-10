@@ -1,5 +1,4 @@
 using Newtonsoft.Json;
-using WABA360Dialog.ApiClient.Payloads.Enums;
 
 namespace WABA360Dialog.ApiClient.Payloads.Models
 {

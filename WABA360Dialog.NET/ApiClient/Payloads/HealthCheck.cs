@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Net.Http;
+﻿using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WABA360Dialog.ApiClient.Payloads.Base;
-using WABA360Dialog.ApiClient.Payloads.Enums;
-using WABA360Dialog.ApiClient.Payloads.Models;
 
 namespace WABA360Dialog.ApiClient.Payloads
 {

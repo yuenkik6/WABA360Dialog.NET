@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using WABA360Dialog.ApiClient.Payloads.Enums;
-using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects;
 
 namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.InteractiveObjects
 {
@@ -38,5 +37,21 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.InteractiveObje
         /// </summary>
         [JsonProperty("parameters")]
         public IEnumerable<ParameterObject> Parameters { get; set; }
+        
+        /// <summary>
+        /// Optional.
+        /// Set to true if you want the template to include the string, For your security, do not share this code. Set to false to exclude the string.
+        /// </summary>
+        [JsonProperty("add_security_recommendation")]
+        public bool? AddSecurityRecommendation { get; set; }
+
+        /// <summary>
+        /// Optional.
+        /// Indicates number of minutes the password or code is valid.
+        /// If omitted, the code expiration warning will not be displayed in the delivered message.
+        /// Minimum 1, maximum 90.
+        /// </summary>
+        [JsonProperty("code_expiration_minutes")]
+        public int? CodeExpirationMinutes { get; set; }
     }
 }

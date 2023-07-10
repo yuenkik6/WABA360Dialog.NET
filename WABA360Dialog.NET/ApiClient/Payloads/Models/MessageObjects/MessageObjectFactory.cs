@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using WABA360Dialog.ApiClient.Payloads.Enums;
 using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.ContactObjects;
 using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.InteractiveObjects;

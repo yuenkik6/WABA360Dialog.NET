@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Net.Http;
+﻿using System.Net.Http;
 using Newtonsoft.Json;
 using WABA360Dialog.PartnerClient.Payloads.Base;
-using WABA360Dialog.PartnerClient.Payloads.Models;
 
 namespace WABA360Dialog.PartnerClient.Payloads
 {
