@@ -1,3 +1,4 @@
+using System.Net.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -6,6 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Serilog;
+using WABA360Dialog.ApiClient.Interfaces;
+using WABA360Dialog.PartnerClient.Interfaces;
+using WABA360Dialog.PartnerClient.Models;
 
 namespace WABA360Dialog.NET.Example
 {
@@ -28,6 +32,9 @@ namespace WABA360Dialog.NET.Example
                 .CreateLogger();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            
+            services.AddSingleton<IWABA360DialogApiClient>(new WABA360DialogApiClient(Configuration["WABA360Dialog:ChannelApiKey"], new HttpClient()));
+            services.AddSingleton<IWABA360DialogPartnerClient>(new WABA360DialogPartnerClient(new PartnerInfo(Configuration["WABA360Dialog:PartnerId"]), Configuration["WABA360Dialog:PartnerToken"], new HttpClient()));
 
             services
                 .AddControllers()
