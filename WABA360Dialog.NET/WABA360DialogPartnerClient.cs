@@ -16,12 +16,13 @@ using WABA360Dialog.PartnerClient.Payloads.Base;
 
 namespace WABA360Dialog
 {
-    public class WABA360DialogPartnerClient : IWABA360DialogPartnerClient
+    public class WABA360DialogPartnerClient : IWABA360DialogPartnerClient, IDisposable
     {
         private const string BasePath = "https://hub.360dialog.io/api/v2/";
 
         private readonly PartnerInfo _partnerInfo;
         private string _accessToken;
+        protected readonly HttpClient HttpClient;
 
         public WABA360DialogPartnerClient(PartnerInfo partnerInfo)
         {
@@ -32,6 +33,21 @@ namespace WABA360Dialog
                 throw new ArgumentException("Partner Info cannot be null.");
 
             _partnerInfo = partnerInfo;
+
+            HttpClient = new HttpClient();
+        }
+
+        public WABA360DialogPartnerClient(PartnerInfo partnerInfo, HttpClient httpClient)
+        {
+            if (partnerInfo == null)
+                throw new ArgumentNullException(nameof(partnerInfo), "Partner Info cannot be null.");
+
+            if (string.IsNullOrEmpty(partnerInfo.PartnerId) || string.IsNullOrEmpty(partnerInfo.Username) || string.IsNullOrEmpty(partnerInfo.Password))
+                throw new ArgumentException("Partner Info cannot be null.");
+
+            _partnerInfo = partnerInfo;
+
+            HttpClient = httpClient;
         }
 
         public WABA360DialogPartnerClient(PartnerInfo partnerInfo, string accessToken)
@@ -47,6 +63,25 @@ namespace WABA360Dialog
 
             _partnerInfo = partnerInfo;
             _accessToken = accessToken;
+            
+            HttpClient = new HttpClient();
+        }
+
+        public WABA360DialogPartnerClient(PartnerInfo partnerInfo, string accessToken, HttpClient httpClient)
+        {
+            if (partnerInfo == null)
+                throw new ArgumentNullException(nameof(partnerInfo), "Partner Info cannot be null.");
+
+            if (string.IsNullOrEmpty(partnerInfo.PartnerId))
+                throw new ArgumentNullException(nameof(partnerInfo.PartnerId), "Partner ID cannot be null.");
+
+            if (string.IsNullOrEmpty(accessToken))
+                throw new ArgumentNullException(nameof(accessToken), "Access Token cannot be null.");
+
+            _partnerInfo = partnerInfo;
+            _accessToken = accessToken;
+
+            HttpClient = httpClient;
         }
 
         public async Task<CreatePartnerWhatsAppBusinessApiTemplateResponse> CreatePartnerWhatsAppBusinessApiTemplateAsync(string whatsAppBusinessApiAccountId,
@@ -83,7 +118,7 @@ namespace WABA360Dialog
         {
             return await MakeHttpRequestAsync(new GetPartnerWebhookUrlRequest(_partnerInfo.PartnerId), cancellationToken);
         }
-        
+
         public async Task<SetPartnerWebhookUrlResponse> SetPartnerWebhookUrlAsync(string webhookUrl, CancellationToken cancellationToken = default)
         {
             return await MakeHttpRequestAsync(new SetPartnerWebhookUrlRequest(_partnerInfo.PartnerId, webhookUrl), cancellationToken);
@@ -151,8 +186,6 @@ namespace WABA360Dialog
             if (string.IsNullOrEmpty(_accessToken))
                 await AuthorizeClient(cancellationToken);
 
-            using var client = new HttpClient();
-
             var requestPath = BasePath + request.MethodName;
             var urlBuilder = new UriBuilder(requestPath);
 
@@ -176,7 +209,7 @@ namespace WABA360Dialog
 
             httpRequestMessage.Headers.Add("Authorization", $"Bearer {_accessToken}");
 
-            var httpResponse = await client.SendAsync(httpRequestMessage, cancellationToken);
+            var httpResponse = await HttpClient.SendAsync(httpRequestMessage, cancellationToken);
 
             var responseAsString = await httpResponse.Content.ReadAsStringAsync();
 
@@ -202,9 +235,9 @@ namespace WABA360Dialog
 
             if (response == null)
                 throw new PartnerClientException("360Dialog API Error Occured.", urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
-            
+
             response.ResponseBody = responseAsString;
-                
+
             return response;
         }
 
@@ -245,6 +278,11 @@ namespace WABA360Dialog
                 throw new PartnerClientException("360Dialog API Error Occured.", urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
 
             return response;
+        }
+
+        public void Dispose()
+        {
+            HttpClient.Dispose();
         }
     }
 }

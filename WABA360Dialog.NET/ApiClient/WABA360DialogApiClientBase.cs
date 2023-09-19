@@ -16,18 +16,20 @@ using WABA360Dialog.Common.Helpers;
 
 namespace WABA360Dialog.ApiClient
 {
-    public abstract class WABA360DialogApiClientBase : IWABA360DialogApiClient
+    public abstract class WABA360DialogApiClientBase : IWABA360DialogApiClient, IDisposable
     {
         private string BasePath { get; }
         private readonly string _apiKey;
+        protected readonly HttpClient HttpClient;
 
-        protected WABA360DialogApiClientBase(string apiKey, string basePath)
+        protected WABA360DialogApiClientBase(string apiKey, string basePath, HttpClient httpClient)
         {
             if (string.IsNullOrWhiteSpace(apiKey))
                 throw new ArgumentNullException(nameof(apiKey), "API Key cannot be null.");
-            
+
             _apiKey = apiKey;
             BasePath = basePath;
+            HttpClient = httpClient;
         }
 
         public async Task<GetWebhookUrlResponse> GetWebhookUrlAsync(CancellationToken cancellationToken = default)
@@ -119,8 +121,6 @@ namespace WABA360Dialog.ApiClient
 
         protected virtual async Task<TResponse> MakeHttpRequestAsync<TResponse>(ClientApiRequestBase<TResponse> request, CancellationToken cancellationToken = default) where TResponse : ClientApiResponseBase, new()
         {
-            using var client = new HttpClient();
-
             var requestPath = BasePath + request.MethodName;
             var urlBuilder = new UriBuilder(requestPath);
 
@@ -143,7 +143,7 @@ namespace WABA360Dialog.ApiClient
 
             httpRequestMessage.Headers.Add("D360-API-KEY", _apiKey);
 
-            var httpResponse = await client.SendAsync(httpRequestMessage, cancellationToken);
+            var httpResponse = await HttpClient.SendAsync(httpRequestMessage, cancellationToken);
 
             var responseAsString = await httpResponse.Content.ReadAsStringAsync();
             JsonHelper.TryDeserializeJson<TResponse>(responseAsString, out var response);
@@ -168,8 +168,6 @@ namespace WABA360Dialog.ApiClient
 
         protected virtual async Task<TResponse> MakeFileDownloadHttpRequestAsync<TResponse>(ClientApiRequestBase<TResponse> request, CancellationToken cancellationToken = default) where TResponse : BinaryApiResponseBase, new()
         {
-            using var client = new HttpClient();
-
             var requestPath = BasePath + request.MethodName;
             var urlBuilder = new UriBuilder(requestPath);
 
@@ -192,8 +190,8 @@ namespace WABA360Dialog.ApiClient
 
             httpRequestMessage.Headers.Add("D360-API-KEY", _apiKey);
 
-            var httpResponse = await client.SendAsync(httpRequestMessage, cancellationToken);
-            
+            var httpResponse = await HttpClient.SendAsync(httpRequestMessage, cancellationToken);
+
             if (!httpResponse.IsSuccessStatusCode)
             {
                 var responseAsString = await httpResponse.Content.ReadAsStringAsync();
@@ -209,7 +207,6 @@ namespace WABA360Dialog.ApiClient
                 throw new ApiClientException(urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
             }
 
-
             var responseAsByte = await httpResponse.Content.ReadAsByteArrayAsync();
 
             var result = new TResponse
@@ -221,6 +218,11 @@ namespace WABA360Dialog.ApiClient
             };
 
             return result;
+        }
+
+        public void Dispose()
+        {
+            HttpClient.Dispose();
         }
     }
 }
