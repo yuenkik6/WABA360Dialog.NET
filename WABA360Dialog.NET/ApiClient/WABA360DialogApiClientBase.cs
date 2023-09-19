@@ -16,7 +16,7 @@ using WABA360Dialog.Common.Helpers;
 
 namespace WABA360Dialog.ApiClient
 {
-    public abstract class WABA360DialogApiClientBase : IWABA360DialogApiClient
+    public abstract class WABA360DialogApiClientBase : IWABA360DialogApiClient, IDisposable
     {
         private string BasePath { get; }
         private readonly string _apiKey;
@@ -212,6 +212,11 @@ namespace WABA360Dialog.ApiClient
             };
 
             return result;
+        }
+
+        public void Dispose()
+        {
+            HttpClient.Dispose();
         }
     }
 }

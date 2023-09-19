@@ -16,7 +16,7 @@ using WABA360Dialog.PartnerClient.Payloads.Base;
 
 namespace WABA360Dialog
 {
-    public class WABA360DialogPartnerClient : IWABA360DialogPartnerClient
+    public class WABA360DialogPartnerClient : IWABA360DialogPartnerClient, IDisposable
     {
         private const string BasePath = "https://hub.360dialog.io/api/v2/";
 
@@ -278,6 +278,11 @@ namespace WABA360Dialog
                 throw new PartnerClientException("360Dialog API Error Occured.", urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
 
             return response;
+        }
+
+        public void Dispose()
+        {
+            HttpClient.Dispose();
         }
     }
 }
