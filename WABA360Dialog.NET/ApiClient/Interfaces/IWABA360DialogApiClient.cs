@@ -15,6 +15,7 @@ namespace WABA360Dialog.ApiClient.Interfaces
         Task<CheckContactsResponse> CheckContactsAsync(IEnumerable<string> contacts, Blocking blocking = Blocking.no_wait, bool forceCheck = false, CancellationToken cancellationToken = default);
         Task<SendMessageResponse> SendMessageAsync(MessageObject message, CancellationToken cancellationToken = default);
         Task<SendMessageResponse> SendMessageAsync(object message, CancellationToken cancellationToken = default);
+        Task<MarkMessagesAsReadResponse> MarkMessagesAsReadAsync(string messageId, CancellationToken cancellationToken = default);
         Task<GetMediaResponse> GetMediaAsync(string mediaId, CancellationToken cancellationToken = default);
         Task<UploadMediaResponse> UploadMediaAsync(byte[] fileBytes, string contentType, CancellationToken cancellationToken = default);
         Task<GetTemplateResponse> GetTemplateAsync(int limit = 1000, int offset = 0, string sort = null, CancellationToken cancellationToken = default);

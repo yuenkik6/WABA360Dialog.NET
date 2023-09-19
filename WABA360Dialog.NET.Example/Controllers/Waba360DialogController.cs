@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -63,6 +64,7 @@ namespace WABA360Dialog.NET.Example.Controllers
 
         public record CheckContactRequest(string PhoneNumber);
 
+        [Obsolete]
         [HttpPost]
         public async Task<CheckContactsResponse> CheckContact([FromBody] CheckContactRequest request)
         {
@@ -160,6 +162,13 @@ namespace WABA360Dialog.NET.Example.Controllers
             await request.File.CopyToAsync(ms);
             
             return await _client.UploadMediaAsync(ms.ToArray(), request.File.ContentType);
+        }
+
+        public record MarkMessagesAsReadRequest(string MessageId);
+        [HttpPost]
+        public async Task<MarkMessagesAsReadResponse> MarkMessagesAsRead([FromForm] MarkMessagesAsReadRequest request)
+        {
+            return await _client.MarkMessagesAsReadAsync(request.MessageId);
         }
 
         public record GetTemplatesRequest(int Limit = 1000, int Offset = 0);

@@ -8,30 +8,26 @@ namespace WABA360Dialog.PartnerClient.Payloads
 {
     public class GetClientBalanceRequest : PartnerApiRequestBase<GetClientBalanceResponse>
     {
-        public GetClientBalanceRequest(string partnerId, string clientId, int fromMonth, int fromYear) : base($"partners/{partnerId}/clients/{clientId}/info/balance", HttpMethod.Get)
+        public GetClientBalanceRequest(string partnerId, string clientId, string granularity, long startDate, long endDate)
+            : base($"partners/{partnerId}/clients/{clientId}/info/balance", HttpMethod.Get)
         {
             PartnerId = partnerId;
             ClientId = clientId;
             QueryParams = new Dictionary<string, string>
             {
-                ["from_month"] = fromMonth.ToString(),
-                ["from_year"] = fromYear.ToString(),
+                ["start_date"] = startDate.ToString(),
+                ["end_date"] = endDate.ToString(),
+                ["granularity"] = granularity,
             };
         }
 
         [JsonIgnore]
         public string PartnerId { get; }
-        
+
         [JsonIgnore]
         public string ClientId { get; }
-        
-        [JsonIgnore]
-        public int FromMonth { get; }
-        
-        [JsonIgnore]
-        public int FromYear { get; }
     }
-    
+
     public class GetClientBalanceResponse : PartnerApiResponseBase
     {
         [JsonProperty("balance")]
@@ -46,6 +42,9 @@ namespace WABA360Dialog.PartnerClient.Payloads
         [JsonProperty("estimated_template_cost")]
         public decimal EstimatedTemplateCost { get; set; }
 
+        [JsonProperty("granularity")]
+        public string Granularity { get; set; }
+
         [JsonProperty("bi_price_for_currency_and_client_country")]
         public decimal BiPriceForCurrencyAndClientCountry { get; set; }
 
@@ -55,5 +54,4 @@ namespace WABA360Dialog.PartnerClient.Payloads
         [JsonProperty("usage")]
         public IEnumerable<Usage> Usage { get; set; }
     }
-
 }

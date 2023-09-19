@@ -64,9 +64,9 @@ namespace WABA360Dialog
                 language), cancellationToken);
         }
 
-        public async Task<GetClientBalanceResponse> GetClientBalanceAsync(string clientId, int fromMonth, int fromYear, CancellationToken cancellationToken = default)
+        public async Task<GetClientBalanceResponse> GetClientBalanceAsync(string clientId, string granularity, long startDate, long endDate, CancellationToken cancellationToken = default)
         {
-            return await MakeHttpRequestAsync(new GetClientBalanceRequest(_partnerInfo.PartnerId, clientId, fromMonth, fromYear), cancellationToken);
+            return await MakeHttpRequestAsync(new GetClientBalanceRequest(_partnerInfo.PartnerId, clientId, granularity, startDate, endDate), cancellationToken);
         }
 
         public async Task<GetPartnerChannelsResponse> GetPartnerChannelsAsync(int limit = 20, int offset = 0, string sort = null, GetPartnerChannelsFilter filters = null, CancellationToken cancellationToken = default)

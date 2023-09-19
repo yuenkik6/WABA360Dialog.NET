@@ -40,6 +40,7 @@ namespace WABA360Dialog.ApiClient
             return await MakeHttpRequestAsync(new SetWebhookUrlRequest(url, headers), cancellationToken);
         }
 
+        [Obsolete]
         public async Task<CheckContactsResponse> CheckContactsAsync(IEnumerable<string> contacts, Blocking blocking = Blocking.no_wait, bool forceCheck = false, CancellationToken cancellationToken = default)
         {
             return await MakeHttpRequestAsync(new CheckContactsRequest(contacts, blocking, forceCheck), cancellationToken);
@@ -48,6 +49,11 @@ namespace WABA360Dialog.ApiClient
         public async Task<SendMessageResponse> SendMessageAsync(MessageObject message, CancellationToken cancellationToken = default)
         {
             return await MakeHttpRequestAsync(new SendMessageRequest(message), cancellationToken);
+        }
+
+        public async Task<MarkMessagesAsReadResponse> MarkMessagesAsReadAsync(string messageId, CancellationToken cancellationToken = default)
+        {
+            return await MakeHttpRequestAsync(new MarkMessagesAsReadRequest(messageId), cancellationToken);
         }
 
         public async Task<SendMessageResponse> SendMessageAsync(object message, CancellationToken cancellationToken = default)

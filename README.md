@@ -35,6 +35,7 @@ Task<SetWebhookUrlResponse> SetWebhookUrlAsync(string url, Dictionary<string, st
 Task<CheckContactsResponse> CheckContactsAsync(IEnumerable<string> contacts, Blocking blocking = Blocking.no_wait, bool forceCheck = false, CancellationToken cancellationToken = default);
 Task<SendMessageResponse> SendMessageAsync(MessageObject message, CancellationToken cancellationToken = default);
 Task<SendMessageResponse> SendMessageAsync(object message, CancellationToken cancellationToken = default);
+Task<MarkMessagesAsReadResponse> MarkMessagesAsReadAsync(string messageId, CancellationToken cancellationToken = default);
 Task<GetMediaResponse> GetMediaAsync(string mediaId, CancellationToken cancellationToken = default);
 Task<UploadMediaResponse> UploadMediaAsync(byte[] fileBytes, string contentType, CancellationToken cancellationToken = default);
 Task<GetTemplateResponse> GetTemplateAsync(int limit = 1000, int offset = 0, string sort = null, CancellationToken cancellationToken = default);
@@ -50,7 +51,7 @@ Task<HealthCheckResponse> HealthCheckAsync(CancellationToken cancellationToken =
 - **WABA360DialogPartnerClient.cs** (360Dialog Partner API)
 ```c#
 Task<CreatePartnerWhatsAppBusinessApiTemplateResponse> CreatePartnerWhatsAppBusinessApiTemplateAsync(string whatsAppBusinessApiAccountId, string name, string category, WhatsAppLanguage language, TemplateComponentObject components, CancellationToken cancellationToken = default);
-Task<GetClientBalanceResponse> GetClientBalanceAsync(string clientId, int fromMonth, int fromYear, CancellationToken cancellationToken = default);
+Task<GetClientBalanceResponse> GetClientBalanceAsync(string clientId, string granularity, long startDate, long endDate, CancellationToken cancellationToken = default);
 Task<GetPartnerChannelsResponse> GetPartnerChannelsAsync(int limit = 20, int offset = 0, string sort = null, GetPartnerChannelsFilter filters = null, CancellationToken cancellationToken = default);
 Task<GetPartnerClientsResponse> GetPartnerClientsAsync(int limit = 20, int offset = 0, string sort = null, GetPartnerClientsFilter filters = null, CancellationToken cancellationToken = default);
 Task<GetPartnerWebhookUrlResponse> GetPartnerWebhookUrlAsync(CancellationToken cancellationToken = default);
