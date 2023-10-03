@@ -74,12 +74,12 @@ namespace WABA360Dialog.NET.Example.Controllers
             return await _client.GetPartnerChannelsAsync(request.Limit, request.Offset, request.Sort, request.Filters);
         }
 
-        public record GetClientBalanceRequest(string ClientId, string Granularity, long StartDate, long EndDate);
+        public record GetClientBalanceRequest(string ClientId, long? StartDate, long? EndDate, string Granularity = "month");
 
         [HttpPost]
         public async Task<ActionResult<GetClientBalanceResponse>> GetClientBalance([FromBody] GetClientBalanceRequest request)
         {
-            return await _client.GetClientBalanceAsync(request.ClientId, request.Granularity, request.StartDate, request.EndDate);
+            return await _client.GetClientBalanceAsync(request.ClientId, request.StartDate, request.EndDate, request.Granularity);
         }
 
         public record UpdateClientRequest(string ClientId, string PartnerPayload, int? MaxChannels);

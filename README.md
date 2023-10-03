@@ -21,7 +21,7 @@ var partnerClient = new WABA360DialogPartnerClient(new PartnerInfo("partner-id")
 // or
 var partnerClient = new WABA360DialogPartnerClient(new PartnerInfo("partner-id", "username", "password")); // For auto login
 
-var clientBalanceResponse = await partnerClient.GetClientBalanceAsync("client-id", 1, 2022);
+var clientBalanceResponse = await partnerClient.GetClientBalanceAsync("client-id", 1696118400, 1698796799, "month");
 
 ```
 
@@ -51,7 +51,7 @@ Task<HealthCheckResponse> HealthCheckAsync(CancellationToken cancellationToken =
 - **WABA360DialogPartnerClient.cs** (360Dialog Partner API)
 ```c#
 Task<CreatePartnerWhatsAppBusinessApiTemplateResponse> CreatePartnerWhatsAppBusinessApiTemplateAsync(string whatsAppBusinessApiAccountId, string name, string category, WhatsAppLanguage language, TemplateComponentObject components, CancellationToken cancellationToken = default);
-Task<GetClientBalanceResponse> GetClientBalanceAsync(string clientId, string granularity, long startDate, long endDate, CancellationToken cancellationToken = default);
+Task<GetClientBalanceResponse> GetClientBalanceAsync(string clientId, string clientId, long? startDate, long? endDate, string granularity, CancellationToken cancellationToken = default);
 Task<GetPartnerChannelsResponse> GetPartnerChannelsAsync(int limit = 20, int offset = 0, string sort = null, GetPartnerChannelsFilter filters = null, CancellationToken cancellationToken = default);
 Task<GetPartnerClientsResponse> GetPartnerClientsAsync(int limit = 20, int offset = 0, string sort = null, GetPartnerClientsFilter filters = null, CancellationToken cancellationToken = default);
 Task<GetPartnerWebhookUrlResponse> GetPartnerWebhookUrlAsync(CancellationToken cancellationToken = default);

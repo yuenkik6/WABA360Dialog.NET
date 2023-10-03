@@ -8,17 +8,22 @@ namespace WABA360Dialog.PartnerClient.Payloads
 {
     public class GetClientBalanceRequest : PartnerApiRequestBase<GetClientBalanceResponse>
     {
-        public GetClientBalanceRequest(string partnerId, string clientId, string granularity, long startDate, long endDate)
+        public GetClientBalanceRequest(string partnerId, string clientId, long? startDate, long? endDate, string granularity)
             : base($"partners/{partnerId}/clients/{clientId}/info/balance", HttpMethod.Get)
         {
             PartnerId = partnerId;
             ClientId = clientId;
-            QueryParams = new Dictionary<string, string>
-            {
-                ["start_date"] = startDate.ToString(),
-                ["end_date"] = endDate.ToString(),
-                ["granularity"] = granularity,
-            };
+
+            QueryParams = new Dictionary<string, string>();
+
+            if (startDate.HasValue)
+                QueryParams["start_date"] = startDate.ToString();
+
+            if (endDate.HasValue)
+                QueryParams["end_date"] = endDate.ToString();
+
+            if (!string.IsNullOrEmpty(granularity))
+                QueryParams["granularity"] = granularity;
         }
 
         [JsonIgnore]

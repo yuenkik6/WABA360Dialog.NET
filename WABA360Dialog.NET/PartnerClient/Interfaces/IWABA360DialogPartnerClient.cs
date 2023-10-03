@@ -9,7 +9,7 @@ namespace WABA360Dialog.PartnerClient.Interfaces
     public interface IWABA360DialogPartnerClient
     {
         Task<CreatePartnerWhatsAppBusinessApiTemplateResponse> CreatePartnerWhatsAppBusinessApiTemplateAsync(string whatsAppBusinessApiAccountId, string name, string category, WhatsAppLanguage language, TemplateComponentObject components, CancellationToken cancellationToken = default);
-        Task<GetClientBalanceResponse> GetClientBalanceAsync(string clientId, string granularity, long startDate, long endDate, CancellationToken cancellationToken = default);
+        Task<GetClientBalanceResponse> GetClientBalanceAsync(string clientId, long? startDate, long? endDate, string granularity, CancellationToken cancellationToken = default);
         Task<GetPartnerChannelsResponse> GetPartnerChannelsAsync(int limit = 20, int offset = 0, string sort = null, GetPartnerChannelsFilter filters = null, CancellationToken cancellationToken = default);
         Task<GetPartnerClientsResponse> GetPartnerClientsAsync(int limit = 20, int offset = 0, string sort = null, GetPartnerClientsFilter filters = null, CancellationToken cancellationToken = default);
         Task<GetPartnerWebhookUrlResponse> GetPartnerWebhookUrlAsync(CancellationToken cancellationToken = default);
