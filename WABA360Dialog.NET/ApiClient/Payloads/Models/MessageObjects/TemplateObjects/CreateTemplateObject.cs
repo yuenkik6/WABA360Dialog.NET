@@ -52,6 +52,12 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects
         [JsonProperty("example")]
         public object Example { get; set; }
 
+        [JsonProperty("add_security_recommendation")]
+        public bool? AddSecurityRecommendation { get; set; }
+        
+        [JsonProperty("code_expiration_minutes")]
+        public int? CodeExpirationMinutes { get; set; }
+
         [JsonProperty("buttons")]
         public IEnumerable<TemplateButtonObject> Buttons { get; set; }
     }
