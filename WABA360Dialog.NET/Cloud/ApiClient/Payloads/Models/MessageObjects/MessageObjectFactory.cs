@@ -1,20 +1,15 @@
 ﻿using System.Collections.Generic;
-using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.ContactObjects;
-using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.InteractiveObjects;
-using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.MediaObjects;
 using WABA360Dialog.Common.Enums;
 using WABA360Dialog.NET.ApiClient.Payloads.Base.Models;
+using ONPREM = WABA360Dialog.ApiClient.Payloads.Models.MessageObjects;
 
-namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects
+namespace WABA360Dialog.Cloud.ApiClient.Payloads.Models.MessageObjects
 {
 	public static class MessageObjectFactory
-    {
-        public static MessageObject CreateTextMessage(string whatsAppId, string textMessage, bool previewUrl = false)
+	{
+        public static MessageObject CreateTextMessage(string whatsAppId, string textMessage)
         {
-            var messageObject = AbstractMessageObjectFactory.CreateTextMessage<MessageObject>(whatsAppId, textMessage);
-            messageObject.PreviewUrl = previewUrl;
-
-            return messageObject;
+           return AbstractMessageObjectFactory.CreateTextMessage<MessageObject>(whatsAppId, textMessage);
         }
 
         public static MessageObject CreateImageMessageByMediaId(string whatsAppId, string mediaId, string caption)
@@ -22,7 +17,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects
             return AbstractMessageObjectFactory.CreateImageMessageByMediaId<MessageObject>(whatsAppId, mediaId, caption);
         }
 
-        public static MessageObject CreateImageMessageByLink(string whatsAppId, string imageLink, string caption, ProviderObject provider = null)
+        public static MessageObject CreateImageMessageByLink(string whatsAppId, string imageLink, string caption, ONPREM.MediaObjects.ProviderObject provider = null)
         {
             return AbstractMessageObjectFactory.CreateImageMessageByLink<MessageObject>(whatsAppId, imageLink, caption, provider);
         }
@@ -32,7 +27,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects
             return AbstractMessageObjectFactory.CreateVideoMessageByMediaId<MessageObject>(whatsAppId, mediaId, caption);
         }
 
-        public static MessageObject CreateVideoMessageByLink(string whatsAppId, string imageLink, string caption, ProviderObject provider = null)
+        public static MessageObject CreateVideoMessageByLink(string whatsAppId, string imageLink, string caption, ONPREM.MediaObjects.ProviderObject provider = null)
         {
             return AbstractMessageObjectFactory.CreateVideoMessageByLink<MessageObject>(whatsAppId, imageLink, caption, provider);
         }
@@ -42,7 +37,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects
             return AbstractMessageObjectFactory.CreateDocumentMessageByMediaId<MessageObject>(whatsAppId, fileName, mediaId, caption);
         }
 
-        public static MessageObject CreateDocumentMessageByLink(string whatsAppId, string fileName, string documentLink, string caption, ProviderObject provider = null)
+        public static MessageObject CreateDocumentMessageByLink(string whatsAppId, string fileName, string documentLink, string caption, ONPREM.MediaObjects.ProviderObject provider = null)
         {
             return AbstractMessageObjectFactory.CreateDocumentMessageByLink<MessageObject>(whatsAppId, fileName, documentLink, caption, provider);
         }
@@ -52,7 +47,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects
             return AbstractMessageObjectFactory.CreateAudioMessageByMediaId<MessageObject>(whatsAppId, mediaId);
         }
 
-        public static MessageObject CreateAudioMessageByLink(string whatsAppId, string audioLink, ProviderObject provider = null)
+        public static MessageObject CreateAudioMessageByLink(string whatsAppId, string audioLink, ONPREM.MediaObjects.ProviderObject provider = null)
         {
             return AbstractMessageObjectFactory.CreateAudioMessageByLink<MessageObject>(whatsAppId, audioLink, provider);
         }
@@ -62,17 +57,17 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects
             return AbstractMessageObjectFactory.CreateStickerMessageByMediaId<MessageObject>(whatsAppId, mediaId);
         }
 
-        public static MessageObject CreateStickerMessageByLink(string whatsAppId, string stickerLink, ProviderObject provider = null)
+        public static MessageObject CreateStickerMessageByLink(string whatsAppId, string stickerLink, ONPREM.MediaObjects.ProviderObject provider = null)
         {
             return AbstractMessageObjectFactory.CreateStickerMessageByLink<MessageObject>(whatsAppId, stickerLink, provider);
         }
 
-        public static MessageObject CreateTemplateMessage(string whatsAppId, string templateNamespace, string templateName, WhatsAppLanguage language, List<TemplateMessageComponentObject> components)
+        public static MessageObject CreateTemplateMessage(string whatsAppId, string templateNamespace, string templateName, WhatsAppLanguage language, List<ONPREM.InteractiveObjects.TemplateMessageComponentObject> components)
         {
             return AbstractMessageObjectFactory.CreateTemplateMessage<MessageObject>(whatsAppId, templateNamespace, templateName, language, components);
         }
 
-        public static MessageObject CreateInteractiveMessage(string whatsAppId, InteractiveObject interactiveObject)
+        public static MessageObject CreateInteractiveMessage(string whatsAppId, ONPREM.InteractiveObjects.InteractiveObject interactiveObject)
         {
             return AbstractMessageObjectFactory.CreateInteractiveMessage<MessageObject>(whatsAppId, interactiveObject);
         }
@@ -82,7 +77,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects
             return AbstractMessageObjectFactory.CreateSingleProductMessage<MessageObject>(whatsAppId, bodyText, footerText, catalogId, productRetailerId);
         }
 
-        public static MessageObject CreateMultiProductMessage(string whatsAppId, string bodyText, string footerText, IEnumerable<SectionObject> productSections)
+        public static MessageObject CreateMultiProductMessage(string whatsAppId, string bodyText, string footerText, IEnumerable<ONPREM.InteractiveObjects.SectionObject> productSections)
         {
             return AbstractMessageObjectFactory.CreateMultiProductMessage<MessageObject>(whatsAppId, bodyText, footerText, productSections);
         }
@@ -92,7 +87,7 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects
             return AbstractMessageObjectFactory.CreateLocationMessage<MessageObject>(whatsAppId, latitude, longitude, name, address);
         }
 
-        public static MessageObject CreateContactsMessage(string whatsAppId, ContactObject contact)
+        public static MessageObject CreateContactsMessage(string whatsAppId, ONPREM.ContactObjects.ContactObject contact)
         {
             return AbstractMessageObjectFactory.CreateContactsMessage<MessageObject>(whatsAppId, contact);
         }

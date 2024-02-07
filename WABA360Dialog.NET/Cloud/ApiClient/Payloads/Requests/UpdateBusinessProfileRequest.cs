@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Net.Http;
-using Newtonsoft.Json;
-using WABA360Dialog.ApiClient.Payloads.Base;
+using WABA360Dialog.Cloud.ApiClient.Payloads.Responses;
 
-namespace WABA360Dialog.ApiClient.Payloads
+namespace WABA360Dialog.Cloud.ApiClient.Payloads.Requests
 {
-    public class UpdateBusinessProfileRequest : ClientApiRequestBase<UpdateBusinessProfileResponse>
+    public class UpdateBusinessProfileRequest : WABA360Dialog.ApiClient.Payloads.Base.ClientApiRequestBase<UpdateBusinessProfileResponse>
     {
         public UpdateBusinessProfileRequest(IEnumerable<string> vertical,
             IEnumerable<string> websites,
             string email,
             string description,
-            string address) : base("v1/settings/business/profile", HttpMethod.Post)
+            string address) : base("whatsapp_business_profile", HttpMethod.Post)
         {
             Vertical = vertical;
             Websites = websites;
@@ -50,9 +50,5 @@ namespace WABA360Dialog.ApiClient.Payloads
         /// </summary>
         [JsonProperty("address")]
         public string Address { get; set; }
-    }
-
-    public class UpdateBusinessProfileResponse : ClientApiResponseBase
-    {
     }
 }

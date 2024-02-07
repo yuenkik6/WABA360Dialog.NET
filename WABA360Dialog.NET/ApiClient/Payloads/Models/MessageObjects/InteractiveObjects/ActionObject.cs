@@ -37,6 +37,8 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.InteractiveObje
         /// <summary>
         /// Required for Single Product Messages and Multi-Product Messages.
         /// Unique identifier of the product in a catalog.
+        /// OnPrem: Maximum 100 characters for both Single Product and Multi-Product messages
+        /// Cloud: Maximum characters not specified 
         /// </summary>
         [JsonProperty("product_retailer_id")]
         public string ProductRetailerId { get; set; }

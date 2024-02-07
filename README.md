@@ -1,7 +1,8 @@
 # WABA360Dialog.NET
-C# .NET API Wrapper Classes for 360Dialog WhatsApp Business APIs (On-Premises) and Partner APIs
+C# .NET API Wrapper Classes for 360Dialog WhatsApp Business APIs (On-Premises and Cloud API) and Partner APIs
 
  - 360Dialog WhatsApp Business API (On-Premises) Client
+ - 360Dialog WhatsApp Business API (Cloud API) Client
  - 360Dialog WhatsApp Business API Sandbox Client
  - 360Dialog Partner API
  - Webhook Models
@@ -9,7 +10,7 @@ C# .NET API Wrapper Classes for 360Dialog WhatsApp Business APIs (On-Premises) a
 ## Getting Started
 To get started, you must own an API Key managed by 360Dialog.
 
-- **WABA360DialogApiClient.cs / WABA360DialogApiSandboxClient.cs** (WhatsApp API Business API)
+- **WABA360DialogApiClient.cs / WABA360DialogCloudApiClient.cs / WABA360DialogApiSandboxClient.cs** (WhatsApp API Business API)
 ```c#
 var client = new WABA360DialogApiClient("your-api-key");
 var createMessageResposne = await client.SendMessageAsync(MessageObjectFactory.CreateTextMessage("whatsapp-id", "Hello World!"));
@@ -46,6 +47,23 @@ Task<UpdateProfileInfoAboutTextResponse> UpdateProfileInfoAboutTextAsync(string 
 Task<UpdateProfileInfoPhotoResponse> UpdateProfileInfoPhotoAsync(byte[] fileBytes, string contentType, CancellationToken cancellationToken = default);
 Task<CheckPhoneNumberResponse> CheckPhoneNumberAsync(CancellationToken cancellationToken = default);
 Task<HealthCheckResponse> HealthCheckAsync(CancellationToken cancellationToken = default);
+```
+
+- **WABA360DialogCloudApiClient.cs ** (WhatsApp API Business API (Cloud API))
+```c#
+Task<GetWebhookUrlResponse> GetWebhookUrlAsync(CancellationToken cancellationToken = default);
+Task<SetWebhookUrlResponse> SetWebhookUrlAsync(string url, Dictionary<string, string> headers, CancellationToken cancellationToken = default);
+Task<SendMessageResponse> SendMessageAsync(MessageObject message, CancellationToken cancellationToken = default);
+Task<SendMessageResponse> SendMessageAsync(object message, CancellationToken cancellationToken = default);
+Task<MarkMessagesAsReadResponse> MarkMessagesAsReadAsync(string messageId, CancellationToken cancellationToken = default);
+Task<GetMediaInformationResponse> GetMediaInformationAsync(string mediaId, CancellationToken cancellationToken = default);
+Task<GetMediaResponse> GetMediaAsync(string relativeUrl, CancellationToken cancellationToken = default);
+Task<GetMediaResponse> GetMediaAsync(string relativeUrl, Dictionary<string, string> queryParams, CancellationToken cancellationToken = default);
+Task<UploadMediaResponse> UploadMediaAsync(string fileName, byte[] fileBytes, string contentType, CancellationToken cancellationToken = default);
+Task<GetTemplateResponse> GetTemplateAsync(int limit = 1000, int offset = 0, string sort = null, CancellationToken cancellationToken = default);
+Task<CreateTemplateResponse> CreateTemplateAsync(CreateTemplateObject template, CancellationToken cancellationToken = default);
+Task<DeleteTemplateResponse> DeleteTemplateAsync(string templateName, CancellationToken cancellationToken = default);
+Task<UpdateBusinessProfileResponse> UpdateBusinessProfileAsync(IEnumerable<string> vertical, IEnumerable<string> websites, string email, string description, string address, CancellationToken cancellationToken = default);
 ```
 
 - **WABA360DialogPartnerClient.cs** (360Dialog Partner API)
@@ -99,6 +117,8 @@ The Enums definition, value, converters are located at these folders:
 ApiClient\Payloads\Converters\...
 ApiClient\Payloads\Enums\...
 
+Cloud\ApiClient\Payloads\Enums
+
 PartnerClient\Payloads\Converters\...
 PartnerClient\Payloads\Enums\...
 
@@ -113,9 +133,14 @@ However, once Facebook updated the enums string value may cause issues during JS
 ## Webhook Models
 Webhook Models classes (Recommend using Newtonsoft.Json >= 13.01 for JSON deserialization):
 
-- WhatsApp API Business API
+- WhatsApp API Business API (On-Premises)
 ```c#
 ApiClient\Payloads\Models\WABA360DialogWebhookPayload.cs
+```
+
+- WhatsApp API Business API (Cloud API)
+```c#
+Cloud\ApiClient\Payloads\Models\WebhookObjects\WebhookNotification.cs
 ```
 
 - 360Dialog Partner API

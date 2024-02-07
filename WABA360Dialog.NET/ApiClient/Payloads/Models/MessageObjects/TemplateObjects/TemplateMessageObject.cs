@@ -11,6 +11,8 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects
         /// <summary>
         /// Required.
         /// Namespace of the template.
+        /// OnPrem: Optional since WABA v2.41
+        /// Cloud: not used
         /// </summary>
         [JsonProperty("namespace")]
         public string Namespace { get; set; }

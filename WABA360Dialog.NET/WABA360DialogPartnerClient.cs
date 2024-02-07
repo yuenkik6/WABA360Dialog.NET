@@ -18,23 +18,16 @@ namespace WABA360Dialog
 {
     public class WABA360DialogPartnerClient : IWABA360DialogPartnerClient, IDisposable
     {
-        private const string BasePath = "https://hub.360dialog.io/api/v2/";
+        public const string BASEURL = "https://hub.360dialog.io/";
+        private const string BasePath = $"{BASEURL}api/v2/";
 
         private readonly PartnerInfo _partnerInfo;
         private string _accessToken;
         protected readonly HttpClient HttpClient;
 
-        public WABA360DialogPartnerClient(PartnerInfo partnerInfo)
+        public WABA360DialogPartnerClient(PartnerInfo partnerInfo) : this(partnerInfo, new HttpClient())
         {
-            if (partnerInfo == null)
-                throw new ArgumentNullException(nameof(partnerInfo), "Partner Info cannot be null.");
 
-            if (string.IsNullOrEmpty(partnerInfo.PartnerId) || string.IsNullOrEmpty(partnerInfo.Username) || string.IsNullOrEmpty(partnerInfo.Password))
-                throw new ArgumentException("Partner Info cannot be null.");
-
-            _partnerInfo = partnerInfo;
-
-            HttpClient = new HttpClient();
         }
 
         public WABA360DialogPartnerClient(PartnerInfo partnerInfo, HttpClient httpClient)
@@ -50,38 +43,17 @@ namespace WABA360Dialog
             HttpClient = httpClient;
         }
 
-        public WABA360DialogPartnerClient(PartnerInfo partnerInfo, string accessToken)
+        public WABA360DialogPartnerClient(PartnerInfo partnerInfo, string accessToken) : this(partnerInfo, accessToken, new HttpClient())
         {
-            if (partnerInfo == null)
-                throw new ArgumentNullException(nameof(partnerInfo), "Partner Info cannot be null.");
 
-            if (string.IsNullOrEmpty(partnerInfo.PartnerId))
-                throw new ArgumentNullException(nameof(partnerInfo.PartnerId), "Partner ID cannot be null.");
-
-            if (string.IsNullOrEmpty(accessToken))
-                throw new ArgumentNullException(nameof(accessToken), "Access Token cannot be null.");
-
-            _partnerInfo = partnerInfo;
-            _accessToken = accessToken;
-            
-            HttpClient = new HttpClient();
         }
 
-        public WABA360DialogPartnerClient(PartnerInfo partnerInfo, string accessToken, HttpClient httpClient)
+        public WABA360DialogPartnerClient(PartnerInfo partnerInfo, string accessToken, HttpClient httpClient) : this(partnerInfo, httpClient)
         {
-            if (partnerInfo == null)
-                throw new ArgumentNullException(nameof(partnerInfo), "Partner Info cannot be null.");
-
-            if (string.IsNullOrEmpty(partnerInfo.PartnerId))
-                throw new ArgumentNullException(nameof(partnerInfo.PartnerId), "Partner ID cannot be null.");
-
             if (string.IsNullOrEmpty(accessToken))
                 throw new ArgumentNullException(nameof(accessToken), "Access Token cannot be null.");
 
-            _partnerInfo = partnerInfo;
             _accessToken = accessToken;
-
-            HttpClient = httpClient;
         }
 
         public async Task<CreatePartnerWhatsAppBusinessApiTemplateResponse> CreatePartnerWhatsAppBusinessApiTemplateAsync(string whatsAppBusinessApiAccountId,
