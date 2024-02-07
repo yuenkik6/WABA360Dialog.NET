@@ -24,6 +24,8 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.MediaObjects
         /// Optional.
         /// Describes the specified document, image, or video media.
         /// Do not use with audio or sticker media.
+        /// OnPrem: Maximum 1024 characters
+        /// Cloud: Maximum characters not specified 
         /// </summary>
         [JsonProperty("caption")]
         public string Caption { get; set; }
@@ -38,6 +40,8 @@ namespace WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.MediaObjects
         /// <summary>
         /// Optional.
         /// This path is optionally used with a link when the HTTP/HTTPS link is not directly accessible and requires additional configurations like a bearer token.
+        /// OnPrem: Only
+        /// Cloud: Not supported
         /// </summary>
         [JsonProperty("provider")]
         public ProviderObject Provider { get; set; }

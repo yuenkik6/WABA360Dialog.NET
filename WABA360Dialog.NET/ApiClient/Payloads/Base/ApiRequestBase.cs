@@ -13,6 +13,11 @@ namespace WABA360Dialog.ApiClient.Payloads.Base
     public abstract class ClientApiRequestBase<TResponse> : IRequest<TResponse> where TResponse : ClientApiResponseBase
     {
 
+        protected ClientApiRequestBase(HttpMethod method)
+        {
+            Method = method;
+        }
+
         protected ClientApiRequestBase(string methodName, HttpMethod method)
         {
             MethodName = methodName;
@@ -37,7 +42,12 @@ namespace WABA360Dialog.ApiClient.Payloads.Base
 
         public virtual HttpContent ToHttpContent()
         {
-            var payload = JsonHelper.SerializeObjectToJson(this);
+            return ToHttpJsonContent(this);            
+        }
+
+        public virtual HttpContent ToHttpJsonContent(object model)
+        {
+            var payload = JsonHelper.SerializeObjectToJson(model);
 
             var content = new StringContent(payload, Encoding.UTF8, "application/json");
 

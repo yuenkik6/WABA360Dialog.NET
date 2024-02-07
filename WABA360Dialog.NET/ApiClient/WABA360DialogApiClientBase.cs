@@ -1,35 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
-using WABA360Dialog.ApiClient.Exceptions;
 using WABA360Dialog.ApiClient.Interfaces;
 using WABA360Dialog.ApiClient.Payloads;
-using WABA360Dialog.ApiClient.Payloads.Base;
 using WABA360Dialog.ApiClient.Payloads.Enums;
 using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects;
 using WABA360Dialog.ApiClient.Payloads.Models.MessageObjects.TemplateObjects;
-using WABA360Dialog.Common.Helpers;
 
 namespace WABA360Dialog.ApiClient
 {
-    public abstract class WABA360DialogApiClientBase : IWABA360DialogApiClient, IDisposable
+    public abstract class WABA360DialogApiClientBase : AbstractWABA360DialogApiClient, IWABA360DialogApiClient, IDisposable
     {
-        private string BasePath { get; }
-        private readonly string _apiKey;
-        protected readonly HttpClient HttpClient;
-
-        protected WABA360DialogApiClientBase(string apiKey, string basePath, HttpClient httpClient)
+        public WABA360DialogApiClientBase(string apiKey, HttpClient httpClient)
+            : base(apiKey, httpClient)
         {
-            if (string.IsNullOrWhiteSpace(apiKey))
-                throw new ArgumentNullException(nameof(apiKey), "API Key cannot be null.");
 
-            _apiKey = apiKey;
-            BasePath = basePath;
-            HttpClient = httpClient;
         }
 
         public async Task<GetWebhookUrlResponse> GetWebhookUrlAsync(CancellationToken cancellationToken = default)
@@ -117,112 +104,6 @@ namespace WABA360Dialog.ApiClient
         public async Task<HealthCheckResponse> HealthCheckAsync(CancellationToken cancellationToken = default)
         {
             return await MakeHttpRequestAsync(new HealthCheckRequest(), cancellationToken);
-        }
-
-        protected virtual async Task<TResponse> MakeHttpRequestAsync<TResponse>(ClientApiRequestBase<TResponse> request, CancellationToken cancellationToken = default) where TResponse : ClientApiResponseBase, new()
-        {
-            var requestPath = BasePath + request.MethodName;
-            var urlBuilder = new UriBuilder(requestPath);
-
-            if (request.QueryParams != null)
-            {
-                var query = HttpUtility.ParseQueryString(string.Empty);
-
-                foreach (var queryParam in request.QueryParams.Where(queryParam => queryParam.Value != null))
-                    query[queryParam.Key] = queryParam.Value;
-
-                urlBuilder.Query = query.ToString();
-            }
-
-            var httpRequestMessage = new HttpRequestMessage(request.Method, urlBuilder.Uri);
-
-            if (request.Method != HttpMethod.Get)
-            {
-                httpRequestMessage.Content = request.ToHttpContent();
-            }
-
-            httpRequestMessage.Headers.Add("D360-API-KEY", _apiKey);
-
-            var httpResponse = await HttpClient.SendAsync(httpRequestMessage, cancellationToken);
-
-            var responseAsString = await httpResponse.Content.ReadAsStringAsync();
-            JsonHelper.TryDeserializeJson<TResponse>(responseAsString, out var response);
-
-            if (!httpResponse.IsSuccessStatusCode || response == null)
-            {
-                if (!string.IsNullOrWhiteSpace(responseAsString))
-                {
-                    JsonHelper.TryDeserializeJson<ErrorClientApiResponse>(responseAsString, out var errorResponse);
-
-                    if (errorResponse != null)
-                        throw new ApiClientException(errorResponse.Error, errorResponse.Meta, urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
-                }
-
-                throw new ApiClientException(urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
-            }
-
-            response.ResponseBody = responseAsString;
-
-            return response;
-        }
-
-        protected virtual async Task<TResponse> MakeFileDownloadHttpRequestAsync<TResponse>(ClientApiRequestBase<TResponse> request, CancellationToken cancellationToken = default) where TResponse : BinaryApiResponseBase, new()
-        {
-            var requestPath = BasePath + request.MethodName;
-            var urlBuilder = new UriBuilder(requestPath);
-
-            if (request.QueryParams != null)
-            {
-                var query = HttpUtility.ParseQueryString(string.Empty);
-
-                foreach (var queryParam in request.QueryParams.Where(queryParam => queryParam.Value != null))
-                    query[queryParam.Key] = queryParam.Value;
-
-                urlBuilder.Query = query.ToString();
-            }
-
-            var httpRequestMessage = new HttpRequestMessage(request.Method, urlBuilder.Uri);
-
-            if (request.Method != HttpMethod.Get)
-            {
-                httpRequestMessage.Content = request.ToHttpContent();
-            }
-
-            httpRequestMessage.Headers.Add("D360-API-KEY", _apiKey);
-
-            var httpResponse = await HttpClient.SendAsync(httpRequestMessage, cancellationToken);
-
-            if (!httpResponse.IsSuccessStatusCode)
-            {
-                var responseAsString = await httpResponse.Content.ReadAsStringAsync();
-
-                if (!string.IsNullOrWhiteSpace(responseAsString))
-                {
-                    JsonHelper.TryDeserializeJson<ErrorClientApiResponse>(responseAsString, out var errorResponse);
-
-                    if (errorResponse != null)
-                        throw new ApiClientException(errorResponse.Error, errorResponse.Meta, urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
-                }
-
-                throw new ApiClientException(urlBuilder.ToString(), (int)httpResponse.StatusCode, await request.ToHttpContent().ReadAsStringAsync(), responseAsString);
-            }
-
-            var responseAsByte = await httpResponse.Content.ReadAsByteArrayAsync();
-
-            var result = new TResponse
-            {
-                FileBytes = responseAsByte,
-                ContentType = httpResponse.Content.Headers.ContentType,
-                ContentDisposition = httpResponse.Content.Headers.ContentDisposition,
-                ContentLength = httpResponse.Content.Headers.ContentLength ?? 0,
-            };
-
-            return result;
-        }
-
-        public void Dispose()
-        {
-            HttpClient.Dispose();
         }
     }
 }
